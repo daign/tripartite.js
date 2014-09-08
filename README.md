@@ -10,7 +10,8 @@ This project features simulations and visualizations of algorithms which use opt
 
 ![screenshot](./screenshot.png)
 
-Includes a [script for drawing box plots](https://github.com/daign/tripartite.js/blob/master/js/triplot/triplot.js)
+Includes a [script for drawing box plots](https://github.com/daign/tripartite.js/blob/master/js/triplot/triplot.js).
+
 [Box plot example](http://daign.github.com/tripartite.js/js/triplot/example.html) — [View example source](https://github.com/daign/tripartite.js/blob/master/js/triplot/example.html)
 
 ![screenshot](./js/triplot/screenshot.png)
