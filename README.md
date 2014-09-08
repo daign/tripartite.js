@@ -3,13 +3,15 @@ tripartite.js
 
 ### Tripartite matching of points in space ###
 
+The task is to find connections between points from three partitions so that the resulting triangles do not intersect.
+This project features simulations and visualizations of algorithms which use optimization strategies to obtain such satisfying solutions.
+
 [Try the simulation](http://daign.github.com/tripartite.js/)
 
 ![screenshot](./screenshot.png)
 
-Includes a script for drawing box plots.
-
-[View source](https://github.com/daign/tripartite.js/js/triplot/triplot.js) — [Example demo](http://daign.github.com/tripartite.js/js/triplot/example.html) — [View example source](https://github.com/daign/tripartite.js/js/triplot/example.html)
+Includes a [script for drawing box plots](https://github.com/daign/tripartite.js/blob/master/js/triplot/triplot.js)
+[Box plot example](http://daign.github.com/tripartite.js/js/triplot/example.html) — [View example source](https://github.com/daign/tripartite.js/blob/master/js/triplot/example.html)
 
 ![screenshot](./js/triplot/screenshot.png)
 
