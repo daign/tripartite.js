@@ -29,7 +29,7 @@ var GENERATOR = {
 
 	activate: function ( i ) {
 		POIS = this.pointSets[ i ];
-		VISU.scene.points = new THREE.Object3D();
+		VISU.scene.removeAll();
 		for ( var j = 0; j < POIS.length; j++ ) {
 			VISU.scene.points.add( POIS[ j ].mesh );
 		}

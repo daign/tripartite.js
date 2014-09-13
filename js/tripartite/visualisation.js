@@ -52,6 +52,12 @@ var VISU = {
 			s.lines = new THREE.Object3D();
 			s.scene.add( s.lines );
 
+			s.removeAll = function () {
+				while ( s.points.children.length > 0 ) {
+					s.points.remove( s.points.children[ s.points.children.length-1 ] );
+				}
+			};
+
 			return s;
 		} )();
 
