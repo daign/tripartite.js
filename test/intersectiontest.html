@@ -9,37 +9,101 @@
 	<script src="../js/tripartite/point.js"></script>
 	<script src="../js/tripartite/triangle.js"></script>
 
+	<style>
+		body { font-family: monospace; font-size: 16px; }
+		table { border: 2px solid #ccc; border-collapse: collapse; }
+		td { padding: 6px; border: 2px solid #ccc; background: #eee; }
+	</style>
+
 </head>
 <body>
 
 <table>
-<tr><td id="node1">1</td><td id="node2">2</td></tr>
+<tr><td id="node1"></td><td id="node2"></td><td id="node3"></td></tr>
 </table>
 
 <script>
 
 var addTest = function ( node, t1, t2 ) {
-	console.log( node, t1, t2 );
-	var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-	t1.points[ 0 ].buildMesh( material );
-	t1.points[ 1 ].buildMesh( material );
-	t1.points[ 2 ].buildMesh( material );
-	t2.points[ 0 ].buildMesh( material );
-	t2.points[ 1 ].buildMesh( material );
-	t2.points[ 2 ].buildMesh( material );
+
+	var scene = new THREE.Scene();
+	var camera = new THREE.PerspectiveCamera( 60, 400 / 300, 1, 100 );
+	camera.position = new THREE.Vector3( 5, 5, 20 );
+
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize( 400, 300 );
+	renderer.setClearColor( 0xffffff, 1 );
+	node.appendChild( renderer.domElement );
+
+	function render() {
+		renderer.render( scene, camera );
+	}
+
+	var controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.target = new THREE.Vector3( 5, 5, 5 );
+	controls.noZoom = true;
+	controls.noPan = true;
+	controls.addEventListener( 'change', render );
+	controls.update();
+
+	var material = new THREE.MeshBasicMaterial( { color: 0x666666 } );
+	scene.add( t1.points[ 0 ].buildMesh( material ) );
+	scene.add( t1.points[ 1 ].buildMesh( material ) );
+	scene.add( t1.points[ 2 ].buildMesh( material ) );
+	scene.add( t2.points[ 0 ].buildMesh( material ) );
+	scene.add( t2.points[ 1 ].buildMesh( material ) );
+	scene.add( t2.points[ 2 ].buildMesh( material ) );
+
+	scene.add( t1.mesh );
+	scene.add( t2.mesh );
+
+	render();
+
+	var result = document.createElement( 'div' );
+	result.innerHTML = 'triangles intersect: ' + t1.intersects( t2 );
+	node.appendChild( result );
+
 };
 
 addTest(
 	document.getElementById( 'node1' ),
 	new Triangle( [
-		new Point( new THREE.Vector3( 0, 0, 0 ) ),
-		new Point( new THREE.Vector3( 0, 0, 0 ) ),
-		new Point( new THREE.Vector3( 0, 0, 0 ) )
+		new Point( new THREE.Vector3(  0,  0,  0 ) ),
+		new Point( new THREE.Vector3(  0, 10,  0 ) ),
+		new Point( new THREE.Vector3( 10,  5, 10 ) )
 	] ),
 	new Triangle( [
-		new Point( new THREE.Vector3( 0, 0, 0 ) ),
-		new Point( new THREE.Vector3( 0, 0, 0 ) ),
-		new Point( new THREE.Vector3( 0, 0, 0 ) )
+		new Point( new THREE.Vector3(  5,  0,  0 ) ),
+		new Point( new THREE.Vector3(  5, 10, 10 ) ),
+		new Point( new THREE.Vector3( 10,  7, 10 ) )
+	] )
+);
+
+addTest(
+	document.getElementById( 'node2' ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  7,  7,  5 ) ),
+		new Point( new THREE.Vector3( 10,  3, 10 ) ),
+		new Point( new THREE.Vector3(  3,  5, 10 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3( 10,  0,  6 ) ),
+		new Point( new THREE.Vector3(  3,  3, 10 ) ),
+		new Point( new THREE.Vector3(  4, 10,  6 ) )
+	] )
+);
+
+addTest(
+	document.getElementById( 'node3' ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  0,  7,  0 ) ),
+		new Point( new THREE.Vector3(  7,  2, 10 ) ),
+		new Point( new THREE.Vector3( 10,  7,  3 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  6,  8,  8 ) ),
+		new Point( new THREE.Vector3( 11,  2,  1 ) ),
+		new Point( new THREE.Vector3(  3,  7, 10 ) )
 	] )
 );
 

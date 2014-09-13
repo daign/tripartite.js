@@ -21,6 +21,7 @@ Point.prototype = {
 		var geometry = new THREE.SphereGeometry( 0.5, 16, 16 );
 		this.mesh = new THREE.Mesh( geometry, material );
 		this.mesh.position = this.coords;
+		return this.mesh;
 	}
 };
 
