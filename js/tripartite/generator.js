@@ -15,7 +15,9 @@ var GENERATOR = {
 					var x = ( floats ) ? this.randomFloat() : this.randomInt();
 					var y = ( floats ) ? this.randomFloat() : this.randomInt();
 					var z = ( floats ) ? this.randomFloat() : this.randomInt();
-					var pnt = new Point( gi, [ x, y, z ] );
+					var pnt = new Point( new THREE.Vector3( x, y, z ) );
+					pnt.group = gi;
+					pnt.buildMesh( VISU.pointMaterials[ gi ] );
 					pnts.push( pnt );
 				}
 			}
@@ -27,6 +29,10 @@ var GENERATOR = {
 
 	activate: function ( i ) {
 		POIS = this.pointSets[ i ];
+		VISU.scene.points = new THREE.Object3D();
+		for ( var j = 0; j < POIS.length; j++ ) {
+			VISU.scene.points.add( POIS[ j ].mesh );
+		}
 	},
 
 	randomFloat: function () {

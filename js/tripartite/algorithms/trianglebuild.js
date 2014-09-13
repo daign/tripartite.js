@@ -18,6 +18,7 @@ ALGO.TRIANGLEBUILD = {
 
 			function build() {
 				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
+				VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				SIMULATION.update();
 
@@ -60,6 +61,7 @@ ALGO.TRIANGLEBUILD = {
 
 			function build() {
 				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
+				VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				SIMULATION.update();
 
@@ -119,6 +121,7 @@ ALGO.TRIANGLEBUILD = {
 				s.push( p );
 				if ( s.length >= 3 ) {
 					var tng = new Triangle( [ s.pop(), s.pop(), s.pop() ] );
+					VISU.scene.triangles.add( tng.mesh );
 					TRIS.push( tng );
 					SIMULATION.update();
 				}
@@ -230,6 +233,7 @@ ALGO.TRIANGLEBUILD = {
 				pa.push( getNext( pa ) );
 
 				var tng = new Triangle( pa );
+				VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				SIMULATION.update();
 

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Tripartite.js - Intersectiontest</title>
+	<meta charset="utf-8">
+
+	<script src="../js/lib/three.js"></script>
+	<script src="../js/lib/OrbitControls.js"></script>
+	<script src="../js/tripartite/point.js"></script>
+	<script src="../js/tripartite/triangle.js"></script>
+
+</head>
+<body>
+
+<table>
+<tr><td id="node1">1</td><td id="node2">2</td></tr>
+</table>
+
+<script>
+
+var addTest = function ( node, t1, t2 ) {
+	console.log( node, t1, t2 );
+	var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+	t1.points[ 0 ].buildMesh( material );
+	t1.points[ 1 ].buildMesh( material );
+	t1.points[ 2 ].buildMesh( material );
+	t2.points[ 0 ].buildMesh( material );
+	t2.points[ 1 ].buildMesh( material );
+	t2.points[ 2 ].buildMesh( material );
+};
+
+addTest(
+	document.getElementById( 'node1' ),
+	new Triangle( [
+		new Point( new THREE.Vector3( 0, 0, 0 ) ),
+		new Point( new THREE.Vector3( 0, 0, 0 ) ),
+		new Point( new THREE.Vector3( 0, 0, 0 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3( 0, 0, 0 ) ),
+		new Point( new THREE.Vector3( 0, 0, 0 ) ),
+		new Point( new THREE.Vector3( 0, 0, 0 ) )
+	] )
+);
+
+</script>
+
+</body>
+</html>
+

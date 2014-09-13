@@ -13,16 +13,18 @@ var Triangle = function ( points ) {
 	this.geom.faces.push( new THREE.Face3( 2, 1, 0 ) );
 	this.geom.dynamic = true;
 	this.geom.computeFaceNormals();
-	var mesh = new THREE.Mesh( this.geom, new THREE.MeshNormalMaterial() );
-	VISU.scene.triangles.add( mesh );
+	this.mesh = new THREE.Mesh( this.geom, new THREE.MeshNormalMaterial() );
 
 	this.updateTriangle();
 };
 Triangle.prototype = {
+
 	constructor: Triangle,
+
 	updateTriangle: function () {
 		this.math = new THREE.Triangle( this.points[ 0 ].getVector(), this.points[ 1 ].getVector(), this.points[ 2 ].getVector() );
 	},
+
 	updateVertices: function () {
 		this.geom.vertices[ 0 ] = this.points[ 0 ].getVector();
 		this.geom.vertices[ 1 ] = this.points[ 1 ].getVector();
@@ -30,6 +32,7 @@ Triangle.prototype = {
 		this.geom.verticesNeedUpdate = true;
 		this.geom.computeFaceNormals();
 	},
+
 	swapPoint: function ( t2, n ) {
 		var pt = this.points[ n ];
 		this.points[ n ] = t2.points[ n ];
@@ -43,11 +46,13 @@ Triangle.prototype = {
 		this.updateTriangle();
 		t2.updateTriangle();
 	},
+
 	isParallel: function ( t2 ) {
 		var n1 = this.math.normal();
 		var n2 = t2.math.normal();
 		return n1.equals( n2 );
 	},
+
 	isSameLayer: function ( t2 ) {
 		var e1 = new THREE.Plane();
 		e1.setFromNormalAndCoplanarPoint( this.math.normal(), this.points[ 0 ].getVector() );
@@ -55,6 +60,7 @@ Triangle.prototype = {
 		e2.setFromNormalAndCoplanarPoint( t2.math.normal(), t2.points[ 0 ].getVector() );
 		return e1.equals( e2 );
 	},
+
 	intersects: function ( t2 ) {
 		if ( this.isParallel( t2 ) ) {
 			if ( this.isSameLayer( t2 ) && (
@@ -84,6 +90,7 @@ Triangle.prototype = {
 			}
 		}
 	},
+
 	intersectsLine: function ( l ) {
 		if ( this.isPointInPlane( l.start ) && this.isPointInPlane( l.end ) ) {
 			if ( this.math.containsPoint( l.start ) || this.math.containsPoint( l.end ) ) {
@@ -111,10 +118,12 @@ Triangle.prototype = {
 			}
 		}
 	},
+
 	isPointInPlane: function ( p ) {
 		var e = this.math.plane();
 		return ( e.distanceToPoint( p ) === 0 );
 	},
+
 	longestEdge: function () {
 		var v0 = this.points[ 0 ].getVector();
 		var v1 = this.points[ 1 ].getVector();
@@ -124,6 +133,7 @@ Triangle.prototype = {
 		var e3 = v1.distanceTo( v2 );
 		return Math.max( e1, e2, e3 );
 	},
+
 	maximumAngle: function () {
 		var p0 = this.points[ 0 ].getVector();
 		var p1 = this.points[ 1 ].getVector();
@@ -137,6 +147,7 @@ Triangle.prototype = {
 		var aMax = Math.max( a0, Math.max( a1, a2 ) );
 		return aMax;
 	},
+
 	minimumAngle: function () {
 		var p0 = this.points[ 0 ].getVector();
 		var p1 = this.points[ 1 ].getVector();
@@ -150,5 +161,6 @@ Triangle.prototype = {
 		var aMin = Math.min( a0, Math.min( a1, a2 ) );
 		return aMin;
 	}
+
 };
 
