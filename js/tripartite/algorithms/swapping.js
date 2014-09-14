@@ -33,7 +33,7 @@ ALGO.SWAPPING = {
 					COUNTER.update();
 				}
 				if ( SIMULATION.QUALITY.countAllIntersections( true ) === 0 ) {
-					window.clearInterval( ALGO.interval );
+					TIMECONTROL.clear();
 					if ( ALGO.onFinish !== null ) {
 						ALGO.onFinish();
 					}
@@ -54,7 +54,7 @@ ALGO.SWAPPING = {
 			var n = TRIS.length;
 			var x = SIMULATION.QUALITY.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
-				window.clearInterval( ALGO.interval );
+				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
 					ALGO.onFinish();
 				}
@@ -100,7 +100,7 @@ ALGO.SWAPPING = {
 			var n = TRIS.length;
 			var x = SIMULATION.QUALITY.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
-				window.clearInterval( ALGO.interval );
+				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
 					ALGO.onFinish();
 				}
@@ -184,7 +184,7 @@ ALGO.SWAPPING = {
 			var n = TRIS.length;
 			var x = SIMULATION.QUALITY.getAllIntersectingPairs( true );
 			if ( x[ 0 ] === 0 ) {
-				window.clearInterval( ALGO.interval );
+				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
 					ALGO.onFinish();
 				}
@@ -284,7 +284,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.N',
 		init: function () { ; },
 		run: function () {
-			window.clearInterval( ALGO.interval );
+			TIMECONTROL.clear();
 			if ( ALGO.onFinish !== null ) {
 				ALGO.onFinish();
 			}

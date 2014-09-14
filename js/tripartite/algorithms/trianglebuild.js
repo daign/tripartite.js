@@ -23,13 +23,13 @@ ALGO.TRIANGLEBUILD = {
 				SIMULATION.update();
 
 				if ( stacks[ 0 ].length === 0 ) {
-					window.clearInterval( ivB );
+					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					ALGO.interval = setInterval( ALGO.SWAPPING[ swappingFunction ].run, ALGO.speedInterval );
+					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
 				}
 			}
 
-			var ivB = setInterval( build, ALGO.speedInterval );
+			TIMECONTROL.start( build );
 		}
 	},
 
@@ -66,13 +66,13 @@ ALGO.TRIANGLEBUILD = {
 				SIMULATION.update();
 
 				if ( stacks[ 0 ].length === 0 ) {
-					window.clearInterval( ivB );
+					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					ALGO.interval = setInterval( ALGO.SWAPPING[ swappingFunction ].run, ALGO.speedInterval );
+					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
 				}
 			}
 
-			var ivB = setInterval( build, ALGO.speedInterval );
+			TIMECONTROL.start( build );
 		}
 	},
 
@@ -90,6 +90,7 @@ ALGO.TRIANGLEBUILD = {
 			p.visited = true;
 			var s = [];
 			s.push( p );
+
 			function build() {
 				var ng = ( p.group + 1 ) % 3;
 				var nc = p.connections[ ng ];
@@ -126,12 +127,13 @@ ALGO.TRIANGLEBUILD = {
 					SIMULATION.update();
 				}
 				if ( TRIS.length*3 >= POIS.length ) {
-					window.clearInterval( ivB );
+					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					ALGO.interval = setInterval( ALGO.SWAPPING[ swappingFunction ].run, ALGO.speedInterval );
+					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
 				}
 			}
-			var ivB = setInterval( build, ALGO.speedInterval );
+
+			TIMECONTROL.start( build );
 		}
 	},
 
@@ -238,15 +240,16 @@ ALGO.TRIANGLEBUILD = {
 				SIMULATION.update();
 
 				if ( TRIS.length*3 >= POIS.length ) {
-					window.clearInterval( ivB );
+					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					ALGO.interval = setInterval( ALGO.SWAPPING[ swappingFunction ].run, ALGO.speedInterval );
+					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
 				} else {
 					while( POIS[ pi ].visited ) { pi++; }
 					p1 = POIS[ pi ];
 				}
 			}
-			var ivB = setInterval( build, ALGO.speedInterval );
+
+			TIMECONTROL.start( build );
 		}
 	}
 
