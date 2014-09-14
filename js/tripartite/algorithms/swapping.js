@@ -155,8 +155,8 @@ ALGO.SWAPPING = {
 
 					if ( cn <= c ) {
 						better = true;
-						SIMULATION.STATISTICS.discount( 'testswaps' ); // count testswap as real swap
-						SIMULATION.STATISTICS.count( 'swaps' );
+						STATISTICS.discount( 'testswaps' ); // count testswap as real swap
+						STATISTICS.count( 'swaps' );
 						SIMULATION.update();
 					} else {
 						SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap
@@ -243,8 +243,8 @@ ALGO.SWAPPING = {
 
 						if ( cn <= c ) {
 							better = true;
-							SIMULATION.STATISTICS.discount( 'testswaps' ); // count testswap as real swap
-							SIMULATION.STATISTICS.count( 'swaps' );
+							STATISTICS.discount( 'testswaps' ); // count testswap as real swap
+							STATISTICS.count( 'swaps' );
 							SIMULATION.update();
 						} else {
 							SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap

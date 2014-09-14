@@ -72,7 +72,7 @@ var COUNTER = {
 			median: '#36a',
 			mean: '#59c'
 		};
-		var returnArray = SIMULATION.STATISTICS.getData();
+		var returnArray = STATISTICS.getData();
 		var data = returnArray.data;
 		var labels = returnArray.labels;
 

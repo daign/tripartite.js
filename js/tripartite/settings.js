@@ -99,8 +99,8 @@ var SETTINGS = {
 			SETTINGS.hide();
 			SIMULATION.show( { visual: true } );
 
-			COUNTER.setSetUp( SIMULATION.STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
-			COUNTER.setRecord( SIMULATION.STATISTICS.startNewRecord() );
+			COUNTER.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
+			COUNTER.setRecord( STATISTICS.startNewRecord() );
 			GENERATOR.generate( 1, parseInt( self.sel0.node.value ) ).activate( 0 );
 			function onFinish() {
 				COUNTER.setPhase( 'finished' ).update();
@@ -243,7 +243,7 @@ var SETTINGS = {
 						}
 					}
 					COUNTER.setSetUp(
-						SIMULATION.STATISTICS.startNewSetUp( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ] )
+						STATISTICS.startNewSetUp( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ] )
 					);
 				}
 				GENERATOR.activate( psi );
@@ -251,7 +251,7 @@ var SETTINGS = {
 				ALGO.DATASTRUCTURE.GabrielGraph.reset();
 				ai++;
 
-				COUNTER.setRecord( SIMULATION.STATISTICS.startNewRecord() );
+				COUNTER.setRecord( STATISTICS.startNewRecord() );
 				COUNTER.setPass( ai + ' of ' + al );
 				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], 1, doNext );
 			}
