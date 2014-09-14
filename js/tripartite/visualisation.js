@@ -25,7 +25,7 @@ var VISU = {
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			SIMULATION.node.appendChild( renderer.domElement );
 			function render() {
-				if ( SIMULATION.enabled.visual ) {
+				if ( SIMULATION.visualEnabled ) {
 					renderer.render( s.scene, s.camera );
 				}
 			}

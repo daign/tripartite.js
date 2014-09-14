@@ -1,32 +1,34 @@
 var SIMULATION = {
 
-	enabled: undefined,
+	visible: false,
+	visualEnabled: undefined,
 
 	init: function () {
 		this.node = document.createElement( 'div' );
 		this.node.setAttribute( 'class', 'page' );
-		this.node.style.display = 'none';
 		document.body.appendChild( this.node );
+
+		var onSwitch = function ( r ) {
+			SIMULATION.visible = r;
+			onWindowResize();
+		};
+
+		PAGES.add( this.node, 'simulation', onSwitch );
 
 		VISU.init();
 		COUNTER.init();
-	},
-
-	show: function ( enabled ) {
-		this.enabled = enabled;
-		this.node.style.display = 'block';
 
 		function onWindowResize() {
-			if ( SIMULATION.enabled.visual ) {
+			if ( SIMULATION.visible && SIMULATION.visualEnabled ) {
 				VISU.scene.resize();
 			}
 		}
 		window.addEventListener( 'resize', onWindowResize, false );
-		onWindowResize();
+
 	},
 
 	update: function () {
-		if ( this.enabled.visual ) {
+		if ( this.visualEnabled ) {
 			VISU.update();
 		}
 		COUNTER.update();

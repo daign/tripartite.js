@@ -8,6 +8,8 @@ var SETTINGS = {
 		this.node.style.overflow = 'auto';
 		document.body.appendChild( this.node );
 
+		PAGES.add( this.node, 'settings', function () { ; } );
+
 		function onChange() {
 			self.updateDescriptions();
 		}
@@ -96,8 +98,8 @@ var SETTINGS = {
 			var swappingFunction = self.sel2.node.value;
 			var optimizationFunction = self.sel2b.node.value;
 
-			SETTINGS.hide();
-			SIMULATION.show( { visual: true } );
+			SIMULATION.visualEnabled = true;
+			PAGES.show( 'simulation' );
 
 			COUNTER.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			COUNTER.setRecord( STATISTICS.startNewRecord() );
@@ -214,8 +216,8 @@ var SETTINGS = {
 				return;
 			}
 
-			SETTINGS.hide();
-			SIMULATION.show( { visual: false } );
+			SIMULATION.visualEnabled = false;
+			PAGES.show( 'simulation' );
 
 			var iterations = parseInt( self.sel4.node.value );
 			GENERATOR.generate( iterations, parseInt( self.sel5.node.value ) );
@@ -294,10 +296,6 @@ var SETTINGS = {
 		this.menu3.appendChild( start3 );*/
 
 		this.updateDescriptions();
-	},
-
-	hide: function () {
-		this.node.style.display = 'none';
 	},
 
 	Select: function ( parent, multiple, defaultIndex, onChangeFunction, options ) {
