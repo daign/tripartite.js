@@ -27,7 +27,7 @@ canvas {
 	border-bottom-right-radius: 10px;
 	background: #124;
 }
-.counter {
+.absolute {
 	position: absolute;
 	left: 0px;
 	top: 0px;

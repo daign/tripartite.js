@@ -4,9 +4,9 @@ ALGO.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next randomly',
 		shortcut: 's.SR',
 		init: function () {
-			COUNTER.setPhase( 'swapping' );
-			VISU.showLines( false );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.VISU.showLines( false );
+			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -18,21 +18,21 @@ ALGO.SWAPPING = {
 				var c = ALGO.getMeasure();
 				var better = null;
 				for ( var i = 0; i < 3; i++ ) {
-					SIMULATION.swapPoints( t1, t2, i, true, true ); // testswap
+					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
 					var cn = ALGO.getMeasure();
 					if ( cn <= c ) {
 						better = i;
 						c = cn;
 					}
-					SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap
+					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 				}
 				if ( better !== null ) {
-					SIMULATION.swapPoints( t1, t2, better, true, false ); // real swap
-					SIMULATION.update();
+					ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+					PAGES.SIMULATION.update();
 				} else {
-					COUNTER.update();
+					PAGES.INFOBOX.update();
 				}
-				if ( SIMULATION.QUALITY.countAllIntersections( true ) === 0 ) {
+				if ( COUNTING.countAllIntersections( true ) === 0 ) {
 					TIMECONTROL.clear();
 					if ( ALGO.onFinish !== null ) {
 						ALGO.onFinish();
@@ -46,13 +46,13 @@ ALGO.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections',
 		shortcut: 's.SI',
 		init: function () {
-			COUNTER.setPhase( 'swapping' );
-			VISU.showLines( false );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.VISU.showLines( false );
+			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
-			var x = SIMULATION.QUALITY.getAllIntersectingTriangles( true );
+			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
@@ -69,19 +69,19 @@ ALGO.SWAPPING = {
 					var c = ALGO.getMeasure();
 					var better = null;
 					for ( var i = 0; i < 3; i++ ) {
-						SIMULATION.swapPoints( t1, t2, i, true, true ); // testswap
+						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
 						var cn = ALGO.getMeasure();
 						if ( cn <= c ) {
 							better = i;
 							c = cn;
 						}
-						SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap
+						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 					if ( better !== null ) {
-						SIMULATION.swapPoints( t1, t2, better, true, false ); // real swap
-						SIMULATION.update();
+						ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+						PAGES.SIMULATION.update();
 					} else {
-						COUNTER.update();
+						PAGES.INFOBOX.update();
 					}
 				}
 			}
@@ -92,13 +92,13 @@ ALGO.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB',
 		init: function () {
-			COUNTER.setPhase( 'swapping' );
-			VISU.showLines( false );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.VISU.showLines( false );
+			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
-			var x = SIMULATION.QUALITY.getAllIntersectingTriangles( true );
+			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
@@ -150,22 +150,22 @@ ALGO.SWAPPING = {
 
 					var t2 = getNext();
 
-					SIMULATION.swapPoints( t1, t2, i, true, true ); // testswap
+					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
 					var cn = ALGO.getMeasure();
 
 					if ( cn <= c ) {
 						better = true;
 						STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 						STATISTICS.count( 'swaps' );
-						SIMULATION.update();
+						PAGES.SIMULATION.update();
 					} else {
-						SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap
+						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 
 				}
 
 				if ( !better ) {
-					COUNTER.update();
+					PAGES.INFOBOX.update();
 				}
 
 			}
@@ -176,13 +176,13 @@ ALGO.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB2',
 		init: function () {
-			COUNTER.setPhase( 'swapping' );
-			VISU.showLines( false );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.VISU.showLines( false );
+			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
-			var x = SIMULATION.QUALITY.getAllIntersectingPairs( true );
+			var x = COUNTING.getAllIntersectingPairs( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
 				if ( ALGO.onFinish !== null ) {
@@ -238,23 +238,23 @@ ALGO.SWAPPING = {
 					var t2 = getNext();
 					if ( t1 !== t2 ) {
 
-						SIMULATION.swapPoints( t1, t2, i, true, true ); // testswap
+						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
 						var cn = ALGO.getMeasure();
 
 						if ( cn <= c ) {
 							better = true;
 							STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 							STATISTICS.count( 'swaps' );
-							SIMULATION.update();
+							PAGES.SIMULATION.update();
 						} else {
-							SIMULATION.swapPoints( t1, t2, i, true, true ); // undo testswap
+							ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 						}
 					}
 
 				}
 
 				if ( !better ) {
-					COUNTER.update();
+					PAGES.INFOBOX.update();
 				}
 
 			}
@@ -265,17 +265,17 @@ ALGO.SWAPPING = {
 		description: 'Random swapping without termination',
 		shortcut: 's.R',
 		init: function () {
-			COUNTER.setPhase( 'swapping' );
-			VISU.showLines( false );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.VISU.showLines( false );
+			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
 			var r1 = Math.round( Math.random()*(n-1) );
 			var r2 = Math.round( Math.random()*(n-1) );
 			var p = Math.round( Math.random()*2 );
-			SIMULATION.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
-			SIMULATION.update();
+			ALGO.SWAPPING.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
+			PAGES.SIMULATION.update();
 		}
 	},
 
@@ -287,6 +287,17 @@ ALGO.SWAPPING = {
 			TIMECONTROL.clear();
 			if ( ALGO.onFinish !== null ) {
 				ALGO.onFinish();
+			}
+		}
+	},
+
+	swapPoints: function ( triangle1, triangle2, pointGroup, counting, testSwap ) {
+		triangle1.swapPoint( triangle2, pointGroup );
+		if ( counting ) {
+			if ( testSwap ) {
+				STATISTICS.count( 'testswaps' );
+			} else {
+				STATISTICS.count( 'swaps' );
 			}
 		}
 	}

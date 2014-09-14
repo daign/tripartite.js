@@ -1,10 +1,11 @@
-var SETTINGS = {
+PAGES.SETTINGS = {
 
 	init: function () {
 		var self = this;
 
 		this.node = document.createElement( 'div' );
 		this.node.setAttribute( 'class', 'page' );
+		this.node.id = 'settings';
 		this.node.style.overflow = 'auto';
 		document.body.appendChild( this.node );
 
@@ -98,14 +99,14 @@ var SETTINGS = {
 			var swappingFunction = self.sel2.node.value;
 			var optimizationFunction = self.sel2b.node.value;
 
-			SIMULATION.visualEnabled = true;
+			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
 
-			COUNTER.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
-			COUNTER.setRecord( STATISTICS.startNewRecord() );
+			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
+			PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
 			GENERATOR.generate( 1, parseInt( self.sel0.node.value ) ).activate( 0 );
 			function onFinish() {
-				COUNTER.setPhase( 'finished' ).update();
+				PAGES.INFOBOX.setPhase( 'finished' ).update();
 			}
 			ALGO.run( triangleBuildFunction, swappingFunction, optimizationFunction, parseInt( self.sel3.node.value ), onFinish );
 		}
@@ -216,7 +217,7 @@ var SETTINGS = {
 				return;
 			}
 
-			SIMULATION.visualEnabled = false;
+			PAGES.SIMULATION.visualEnabled = false;
 			PAGES.show( 'simulation' );
 
 			var iterations = parseInt( self.sel4.node.value );
@@ -238,13 +239,13 @@ var SETTINGS = {
 						if ( swi === 0 ) {
 							tbi = tbi+1;
 							if ( tbi >= triangleBuildAlgos.length ) {
-								COUNTER.setPhase( 'finished' ).update();
-								COUNTER.showGraphs();
+								PAGES.INFOBOX.setPhase( 'finished' ).update();
+								PAGES.show( 'results' );
 								return;
 							}
 						}
 					}
-					COUNTER.setSetUp(
+					PAGES.INFOBOX.setSetUp(
 						STATISTICS.startNewSetUp( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ] )
 					);
 				}
@@ -253,8 +254,8 @@ var SETTINGS = {
 				ALGO.DATASTRUCTURE.GabrielGraph.reset();
 				ai++;
 
-				COUNTER.setRecord( STATISTICS.startNewRecord() );
-				COUNTER.setPass( ai + ' of ' + al );
+				PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
+				PAGES.INFOBOX.setPass( ai + ' of ' + al );
 				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], 1, doNext );
 			}
 			doNext();
@@ -285,12 +286,12 @@ var SETTINGS = {
 		start3.type = 'button';
 		start3.value = 'Voronoi Connectivity';
 		function start3fun() {
-			SETTINGS.hide();
-			SIMULATION.show( { visual: true } );
+			PAGES.SIMULATION.visualEnabled = true;
+			PAGES.show( 'PAGES.SIMULATION' );
 			GENERATOR.generate( 1, parseInt( self.sel8.node.value ) ).activate( 0 );
 			TRIS = [];
 			ALGO.DATASTRUCTURE.VoronoiConnectivity.setUp();
-			SIMULATION.update();
+			PAGES.SIMULATION.update();
 		}
 		start3.addEventListener( 'click', start3fun, false );
 		this.menu3.appendChild( start3 );*/

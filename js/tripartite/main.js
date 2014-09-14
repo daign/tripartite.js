@@ -1,7 +1,8 @@
 var main = function () {
 
-	SETTINGS.init();
-	SIMULATION.init();
+	PAGES.SETTINGS.init();
+	PAGES.SIMULATION.init();
+	PAGES.RESULTS.init();
 	PAGES.show( 'settings' );
 
 };

@@ -4,7 +4,7 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Counts all intersections',
 		shortcut: 'o.I',
 		get: function () {
-			var i = SIMULATION.QUALITY.countAllIntersections( true );
+			var i = COUNTING.countAllIntersections( true );
 			return i;
 		}
 	},
@@ -13,7 +13,7 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Sums triangle areas',
 		shortcut: 'o.A',
 		get: function () {
-			var a = SIMULATION.QUALITY.countAllAreas();
+			var a = COUNTING.countAllAreas();
 			return a;
 		}
 	},
@@ -22,8 +22,8 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Multiplies number of intersections with sum of triangle areas',
 		shortcut: 'o.IA',
 		get: function () {
-			var i = SIMULATION.QUALITY.countAllIntersections( true );
-			var a = SIMULATION.QUALITY.countAllAreas();
+			var i = COUNTING.countAllIntersections( true );
+			var a = COUNTING.countAllAreas();
 			return i*a;
 		}
 	},
@@ -32,7 +32,7 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Sums longest edge per triangle',
 		shortcut: 'o.L',
 		get: function () {
-			var l = SIMULATION.QUALITY.countAllLongestEdges();
+			var l = COUNTING.countAllLongestEdges();
 			return l;
 		}
 	},
@@ -41,8 +41,8 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Multiplies number of intersections with sum of longest edge per triangle',
 		shortcut: 'o.IL',
 		get: function () {
-			var i = SIMULATION.QUALITY.countAllIntersections( true );
-			var l = SIMULATION.QUALITY.countAllLongestEdges();
+			var i = COUNTING.countAllIntersections( true );
+			var l = COUNTING.countAllLongestEdges();
 			return i*l;
 		}
 	},
@@ -51,7 +51,7 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Sums maximum (Biggest) angle per triangle',
 		shortcut: 'o.B',
 		get: function () {
-			var b = SIMULATION.QUALITY.countAllMaximumAngles();
+			var b = COUNTING.countAllMaximumAngles();
 			return b;
 		}
 	},
@@ -60,8 +60,8 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Multiplies number of intersections with sum of maximum angle per triangle',
 		shortcut: 'o.IB',
 		get: function () {
-			var i = SIMULATION.QUALITY.countAllIntersections( true );
-			var b = SIMULATION.QUALITY.countAllMaximumAngles();
+			var i = COUNTING.countAllIntersections( true );
+			var b = COUNTING.countAllMaximumAngles();
 			return i*b;
 		}
 	},
@@ -70,7 +70,7 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Inverse sum of minimum (Smallest) angle per triangle',
 		shortcut: 'o.S',
 		get: function () {
-			var s = SIMULATION.QUALITY.countAllMinimumAngles();
+			var s = COUNTING.countAllMinimumAngles();
 			return 1/s;
 		}
 	},
@@ -79,8 +79,8 @@ ALGO.OPTIMIZATIONMEASURE = {
 		description: 'Multiplies number of intersections with inverse sum of minimum angle per triangle',
 		shortcut: 'o.IS',
 		get: function () {
-			var i = SIMULATION.QUALITY.countAllIntersections( true );
-			var s = SIMULATION.QUALITY.countAllMinimumAngles();
+			var i = COUNTING.countAllIntersections( true );
+			var s = COUNTING.countAllMinimumAngles();
 			return i*1/s;
 		}
 	}

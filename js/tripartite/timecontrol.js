@@ -57,8 +57,8 @@ var TIMECONTROL = {
 			this.node = document.createElement( 'input' );
 			this.node.type = 'button';
 			this.node.value = 'pause/play';
-			this.node.setAttribute( 'class', 'counter' );
-			SIMULATION.node.appendChild( this.node );
+			this.node.setAttribute( 'class', 'absolute' );
+			PAGES.SIMULATION.node.appendChild( this.node );
 			this.node.addEventListener( 'click', function () { TIMECONTROL.pauseplay(); }, false );
 		}
 	}

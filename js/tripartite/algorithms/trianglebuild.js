@@ -5,8 +5,8 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.R',
 		run: function ( swappingFunction ) {
 			TRIS = [];
-			COUNTER.setPhase( 'triangleBuild' );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'triangleBuild' );
+			PAGES.SIMULATION.update();
 
 			var stacks = [ [], [], [] ];
 			var poisCopy = POIS.slice();
@@ -18,9 +18,9 @@ ALGO.TRIANGLEBUILD = {
 
 			function build() {
 				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
-				VISU.scene.triangles.add( tng.mesh );
+				PAGES.VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
-				SIMULATION.update();
+				PAGES.SIMULATION.update();
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
@@ -38,8 +38,8 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.S',
 		run: function ( swappingFunction ) {
 			TRIS = [];
-			COUNTER.setPhase( 'triangleBuild' );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'triangleBuild' );
+			PAGES.SIMULATION.update();
 
 			var stacks = [ [], [], [] ];
 			for ( var i = 0; i < POIS.length; i++ ) {
@@ -61,9 +61,9 @@ ALGO.TRIANGLEBUILD = {
 
 			function build() {
 				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
-				VISU.scene.triangles.add( tng.mesh );
+				PAGES.VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
-				SIMULATION.update();
+				PAGES.SIMULATION.update();
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
@@ -81,8 +81,8 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.G',
 		run: function ( swappingFunction ) {
 			TRIS = [];
-			COUNTER.setPhase( 'triangleBuild' );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'triangleBuild' );
+			PAGES.SIMULATION.update();
 
 			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
 
@@ -122,9 +122,9 @@ ALGO.TRIANGLEBUILD = {
 				s.push( p );
 				if ( s.length >= 3 ) {
 					var tng = new Triangle( [ s.pop(), s.pop(), s.pop() ] );
-					VISU.scene.triangles.add( tng.mesh );
+					PAGES.VISU.scene.triangles.add( tng.mesh );
 					TRIS.push( tng );
-					SIMULATION.update();
+					PAGES.SIMULATION.update();
 				}
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();
@@ -142,8 +142,8 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.GIB',
 		run: function ( swappingFunction ) {
 			TRIS = [];
-			COUNTER.setPhase( 'triangleBuild' );
-			SIMULATION.update();
+			PAGES.INFOBOX.setPhase( 'triangleBuild' );
+			PAGES.SIMULATION.update();
 
 			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
 			ALGO.DATASTRUCTURE.DistanceToCenter.setUp();
@@ -235,9 +235,9 @@ ALGO.TRIANGLEBUILD = {
 				pa.push( getNext( pa ) );
 
 				var tng = new Triangle( pa );
-				VISU.scene.triangles.add( tng.mesh );
+				PAGES.VISU.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
-				SIMULATION.update();
+				PAGES.SIMULATION.update();
 
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();

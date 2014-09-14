@@ -1,4 +1,4 @@
-var VISU = {
+PAGES.VISU = {
 
 	pointMaterials: [
 		new THREE.MeshBasicMaterial( { color: 0xff0000 } ),
@@ -23,9 +23,9 @@ var VISU = {
 
 			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
-			SIMULATION.node.appendChild( renderer.domElement );
+			PAGES.SIMULATION.node.appendChild( renderer.domElement );
 			function render() {
-				if ( SIMULATION.visualEnabled ) {
+				if ( PAGES.SIMULATION.visualEnabled ) {
 					renderer.render( s.scene, s.camera );
 				}
 			}
