@@ -4,17 +4,17 @@ var TIMECONTROL = {
 	speed: undefined,
 	interval: undefined,
 
-	node: undefined,
+	listeners: [],
 
 	setSpeed: function ( s ) {
 		this.speed = s;
 	},
 
 	start: function ( f ) {
-		this.showNode();
 		if ( this.interval === undefined && this.func === undefined ) {
 			this.func = f;
 			this.interval = setInterval( this.func, this.speed );
+			this.notifyListeners();
 		}
 	},
 
@@ -22,12 +22,14 @@ var TIMECONTROL = {
 		if ( this.interval !== undefined ) {
 			window.clearInterval( this.interval );
 			this.interval = undefined;
+			this.notifyListeners();
 		}
 	},
 
 	resume: function () {
 		if ( this.interval === undefined && this.func !== undefined ) {
 			this.interval = setInterval( this.func, this.speed );
+			this.notifyListeners();
 		}
 	},
 
@@ -38,6 +40,7 @@ var TIMECONTROL = {
 			} else {
 				this.resume();
 			}
+			this.notifyListeners();
 		}
 	},
 
@@ -50,16 +53,24 @@ var TIMECONTROL = {
 	clear: function () {
 		this.stop();
 		this.func = undefined;
+		this.notifyListeners();
 	},
 
-	showNode: function () {
-		if ( this.node === undefined ) {
-			this.node = document.createElement( 'input' );
-			this.node.type = 'button';
-			this.node.value = 'pause/play';
-			this.node.setAttribute( 'class', 'absolute' );
-			PAGES.SIMULATION.node.appendChild( this.node );
-			this.node.addEventListener( 'click', function () { TIMECONTROL.pauseplay(); }, false );
+	addListener: function ( l ) {
+		this.listeners.push( l );
+	},
+
+	notifyListeners: function () {
+		var state = undefined;
+		if ( this.func === undefined ) {
+			state = 'clear';
+		} else if ( this.interval === undefined ) {
+			state = 'paused';
+		} else {
+			state = 'running';
+		}
+		for ( var i = 0; i < this.listeners.length; i++ ) {
+			this.listeners[ i ]( state );
 		}
 	}
 
