@@ -20,6 +20,7 @@
 
 <table>
 <tr><td id="node1"></td><td id="node2"></td><td id="node3"></td></tr>
+<tr><td id="node4"></td><td id="node5"></td><td id="node6"></td></tr>
 </table>
 
 <script>
@@ -107,6 +108,47 @@ addTest(
 	] )
 );
 
+addTest(
+	document.getElementById( 'node4' ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  0,  0,  0 ) ),
+		new Point( new THREE.Vector3(  6,  5, 10 ) ),
+		new Point( new THREE.Vector3(  6, 10,  5 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  3,  0,  0 ) ),
+		new Point( new THREE.Vector3(  9,  5, 10 ) ),
+		new Point( new THREE.Vector3(  9, 10,  5 ) )
+	] )
+);
+
+addTest(
+	document.getElementById( 'node5' ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  2,  0,  4 ) ),
+		new Point( new THREE.Vector3(  7,  3,  4 ) ),
+		new Point( new THREE.Vector3(  5, 10,  4 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3( 10,  7,  4 ) ),
+		new Point( new THREE.Vector3(  0,  8,  4 ) ),
+		new Point( new THREE.Vector3(  8,  0,  4 ) )
+	] )
+);
+
+addTest(
+	document.getElementById( 'node6' ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  5,  3, 10 ) ),
+		new Point( new THREE.Vector3(  5,  7,  0 ) ),
+		new Point( new THREE.Vector3(  0,  9,  8 ) )
+	] ),
+	new Triangle( [
+		new Point( new THREE.Vector3(  5,  3, 10 ) ),
+		new Point( new THREE.Vector3(  5,  7,  0 ) ),
+		new Point( new THREE.Vector3( 10,  9,  8 ) )
+	] )
+);
 </script>
 
 </body>
