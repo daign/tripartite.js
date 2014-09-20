@@ -68,9 +68,9 @@ ALGO.DATASTRUCTURE = {
 			var sy = 0;
 			var sz = 0;
 			for ( var i = 0; i < l; i++ ) {
-				sx += POIS[ i ].x;
-				sy += POIS[ i ].y;
-				sz += POIS[ i ].z;
+				sx += POIS[ i ].coords.x;
+				sy += POIS[ i ].coords.y;
+				sz += POIS[ i ].coords.z;
 			}
 			var center = new THREE.Vector3( sx/l, sy/l, sz/l );
 			for ( var i = 0; i < l; i++ ) {

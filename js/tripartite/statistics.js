@@ -4,6 +4,12 @@ STATISTICS = {
 	setUp: -1,
 	record: -1,
 
+	clear: function () {
+		this.results = [];
+		this.setUp = -1;
+		this.record = -1;
+	},
+
 	startNewSetUp: function ( triangleBuild, swapping, optimization ) {
 		var label = (
 			  ALGO.TRIANGLEBUILD[ triangleBuild ].shortcut + ' '

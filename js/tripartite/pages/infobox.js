@@ -15,7 +15,7 @@ PAGES.INFOBOX = {
 		this.content1 = document.createElement( 'div' );
 		this.node.appendChild( this.content1 );
 
-		/*this.homeButton = document.createElement( 'input' );
+		this.homeButton = document.createElement( 'input' );
 		this.homeButton.type = 'button';
 		this.homeButton.value = 'home';
 		this.content1.appendChild( this.homeButton );
@@ -23,7 +23,8 @@ PAGES.INFOBOX = {
 			event.preventDefault();
 			event.stopPropagation();
 			TIMECONTROL.clear();
-		}, false );*/
+			PAGES.show( 'settings' );
+		}, false );
 
 		this.pauseButton = document.createElement( 'input' );
 		this.pauseButton.type = 'button';

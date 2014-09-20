@@ -56,6 +56,12 @@ PAGES.VISU = {
 				while ( s.points.children.length > 0 ) {
 					s.points.remove( s.points.children[ s.points.children.length-1 ] );
 				}
+				while ( s.triangles.children.length > 0 ) {
+					s.triangles.remove( s.triangles.children[ s.triangles.children.length-1 ] );
+				}
+				while ( s.lines.children.length > 0 ) {
+					s.lines.remove( s.lines.children[ s.lines.children.length-1 ] );
+				}
 			};
 
 			return s;

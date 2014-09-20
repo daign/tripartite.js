@@ -4,7 +4,7 @@ var ALGO = {
 	getMeasure: undefined,
 
 	run: function ( triangleBuildFunction, swappingFunction, optimizationFunction, speedInterval, onFinish ) {
-		TIMECONTROL.setSpeed( ALGO.speedInterval );
+		TIMECONTROL.setSpeed( speedInterval );
 		ALGO.onFinish = onFinish;
 		ALGO.getMeasure = ALGO.OPTIMIZATIONMEASURE[ optimizationFunction ].get;
 		ALGO.TRIANGLEBUILD[ triangleBuildFunction ].run( swappingFunction );

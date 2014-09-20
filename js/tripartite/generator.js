@@ -6,7 +6,8 @@ var GENERATOR = {
 	pointSets: [],
 
 	generate: function ( a, n ) {
-		var floats = false;
+		var floats = true;
+		this.pointSets = [];
 
 		for ( var ai = 0; ai < a; ai++ ) {
 			var pnts = [];
@@ -28,8 +29,11 @@ var GENERATOR = {
 	},
 
 	activate: function ( i ) {
-		POIS = this.pointSets[ i ];
 		PAGES.VISU.scene.removeAll();
+		TRIS = [];
+		POIS = this.pointSets[ i ];
+		ALGO.DATASTRUCTURE.resetVisited();
+		ALGO.DATASTRUCTURE.GabrielGraph.reset();
 		for ( var j = 0; j < POIS.length; j++ ) {
 			PAGES.VISU.scene.points.add( POIS[ j ].mesh );
 		}

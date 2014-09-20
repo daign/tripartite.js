@@ -102,6 +102,7 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
 
+			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
 			GENERATOR.generate( 1, parseInt( self.sel0.node.value ) ).activate( 0 );
@@ -220,6 +221,8 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = false;
 			PAGES.show( 'simulation' );
 
+			STATISTICS.clear();
+
 			var iterations = parseInt( self.sel4.node.value );
 			GENERATOR.generate( iterations, parseInt( self.sel5.node.value ) );
 
@@ -250,8 +253,6 @@ PAGES.SETTINGS = {
 					);
 				}
 				GENERATOR.activate( psi );
-				ALGO.DATASTRUCTURE.resetVisited();
-				ALGO.DATASTRUCTURE.GabrielGraph.reset();
 				ai++;
 
 				PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );

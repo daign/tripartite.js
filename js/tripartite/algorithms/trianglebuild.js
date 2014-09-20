@@ -4,7 +4,6 @@ ALGO.TRIANGLEBUILD = {
 		description: 'Randomly connects points to triangles on startup',
 		shortcut: 't.R',
 		run: function ( swappingFunction ) {
-			TRIS = [];
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 			PAGES.SIMULATION.update();
 
@@ -37,7 +36,6 @@ ALGO.TRIANGLEBUILD = {
 		description: 'Sorts points before connecting them to triangles on startup',
 		shortcut: 't.S',
 		run: function ( swappingFunction ) {
-			TRIS = [];
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 			PAGES.SIMULATION.update();
 
@@ -47,9 +45,9 @@ ALGO.TRIANGLEBUILD = {
 			}
 
 			function pointSort( a, b ) {
-				if ( a.y > b.y ) {
+				if ( a.coords.y > b.coords.y ) {
 					return -1;
-				} else if ( a.y < b.y ) {
+				} else if ( a.coords.y < b.coords.y ) {
 					return 1;
 				} else {
 					return 0;
@@ -80,7 +78,6 @@ ALGO.TRIANGLEBUILD = {
 		description: 'Connects points to triangles on startup using proximity information from Gabriel graph',
 		shortcut: 't.G',
 		run: function ( swappingFunction ) {
-			TRIS = [];
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 			PAGES.SIMULATION.update();
 
@@ -141,7 +138,6 @@ ALGO.TRIANGLEBUILD = {
 		description: 'Connects points to triangles progressing inwards using Gabriel graph and breadth-first search',
 		shortcut: 't.GIB',
 		run: function ( swappingFunction ) {
-			TRIS = [];
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 			PAGES.SIMULATION.update();
 
