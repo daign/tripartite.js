@@ -24,11 +24,11 @@ ALGO.TRIANGLEBUILD = {
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
+					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
-			TIMECONTROL.start( build );
+			TIMECONTROL.setTask( build ).start();
 		}
 	},
 
@@ -66,11 +66,11 @@ ALGO.TRIANGLEBUILD = {
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
+					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
-			TIMECONTROL.start( build );
+			TIMECONTROL.setTask( build ).start();
 		}
 	},
 
@@ -126,11 +126,11 @@ ALGO.TRIANGLEBUILD = {
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
+					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
-			TIMECONTROL.start( build );
+			TIMECONTROL.setTask( build ).start();
 		}
 	},
 
@@ -238,14 +238,14 @@ ALGO.TRIANGLEBUILD = {
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();
 					ALGO.SWAPPING[ swappingFunction ].init();
-					TIMECONTROL.start( ALGO.SWAPPING[ swappingFunction ].run );
+					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				} else {
 					while( POIS[ pi ].visited ) { pi++; }
 					p1 = POIS[ pi ];
 				}
 			}
 
-			TIMECONTROL.start( build );
+			TIMECONTROL.setTask( build ).start();
 		}
 	}
 

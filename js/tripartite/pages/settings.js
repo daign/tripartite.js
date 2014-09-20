@@ -101,6 +101,8 @@ PAGES.SETTINGS = {
 
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
+			TIMECONTROL.setSpeed( parseInt( self.sel3.node.value ) ).setPaused( false );
+			PAGES.INFOBOX.setPass( undefined );
 
 			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
@@ -109,7 +111,7 @@ PAGES.SETTINGS = {
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' ).update();
 			}
-			ALGO.run( triangleBuildFunction, swappingFunction, optimizationFunction, parseInt( self.sel3.node.value ), onFinish );
+			ALGO.run( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish );
 		}
 		start1.addEventListener( 'click', start1fun, false );
 		this.menu1.appendChild( start1 );
@@ -220,6 +222,7 @@ PAGES.SETTINGS = {
 
 			PAGES.SIMULATION.visualEnabled = false;
 			PAGES.show( 'simulation' );
+			TIMECONTROL.setSpeed( 1 ).setPaused( false );
 
 			STATISTICS.clear();
 
@@ -257,7 +260,7 @@ PAGES.SETTINGS = {
 
 				PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
 				PAGES.INFOBOX.setPass( ai + ' of ' + al );
-				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], 1, doNext );
+				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], doNext );
 			}
 			doNext();
 

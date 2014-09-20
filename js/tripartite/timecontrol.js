@@ -1,20 +1,44 @@
 var TIMECONTROL = {
 
-	func: undefined,
+	task: undefined,
 	speed: undefined,
 	interval: undefined,
+	paused: false,
 
 	listeners: [],
 
 	setSpeed: function ( s ) {
-		this.speed = s;
+		if ( this.interval === undefined && this.task === undefined ) {
+			this.speed = s;
+		}
+		return this;
 	},
 
-	start: function ( f ) {
-		if ( this.interval === undefined && this.func === undefined ) {
-			this.func = f;
-			this.interval = setInterval( this.func, this.speed );
+	setPaused: function ( p ) {
+		if ( this.interval === undefined && this.task === undefined ) {
+			this.paused = p;
+		}
+		return this;
+	},
+
+	setTask: function ( t ) {
+		if ( this.interval === undefined && this.task === undefined ) {
+			this.task = t;
 			this.notifyListeners();
+		}
+		return this;
+	},
+
+	start: function () {
+		if ( this.interval === undefined && this.task !== undefined && !this.paused ) {
+			this.interval = setInterval( this.task, this.speed );
+			this.notifyListeners();
+		}
+	},
+
+	stepForward: function () {
+		if ( this.interval === undefined && this.task !== undefined ) {
+			this.task();
 		}
 	},
 
@@ -26,33 +50,21 @@ var TIMECONTROL = {
 		}
 	},
 
-	resume: function () {
-		if ( this.interval === undefined && this.func !== undefined ) {
-			this.interval = setInterval( this.func, this.speed );
-			this.notifyListeners();
-		}
-	},
-
 	pauseplay: function () {
-		if ( this.func !== undefined ) {
+		if ( this.task !== undefined ) {
 			if ( this.interval !== undefined ) {
+				this.paused = true;
 				this.stop();
 			} else {
-				this.resume();
+				this.paused = false;
+				this.start();
 			}
-			this.notifyListeners();
-		}
-	},
-
-	stepForward: function () {
-		if ( this.interval === undefined && this.func !== undefined ) {
-			this.func();
 		}
 	},
 
 	clear: function () {
 		this.stop();
-		this.func = undefined;
+		this.task = undefined;
 		this.notifyListeners();
 	},
 
@@ -62,7 +74,7 @@ var TIMECONTROL = {
 
 	notifyListeners: function () {
 		var state = undefined;
-		if ( this.func === undefined ) {
+		if ( this.task === undefined ) {
 			state = 'clear';
 		} else if ( this.interval === undefined ) {
 			state = 'paused';
