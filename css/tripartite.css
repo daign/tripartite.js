@@ -50,4 +50,13 @@ tr {
 td {
 	padding-right: 8px;
 }
+.radioinput {
+	margin-left: 20px;
+}
+input {
+	cursor: pointer;
+}
+label {
+	cursor: pointer;
+}
 

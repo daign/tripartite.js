@@ -40,32 +40,66 @@ PAGES.RESULTS = {
 		this.box.appendChild( home );
 
 		var graph1 = document.createElement( 'input' );
-		graph1.type = 'button';
-		graph1.value = 'Swaps';
-		function showGraph1() { self.plot.setData( self.data.swaps ); }
-		graph1.addEventListener( 'click', showGraph1, false );
+		graph1.id = 'graph1radio';
+		graph1.type = 'radio';
+		graph1.name = 'graphSwitch';
+		graph1.checked = true;
+		graph1.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph1 );
+		var graph1Label = document.createElement( 'label' );
+		graph1Label.innerHTML = 'Swaps';
+		graph1Label.htmlFor = graph1.id;
+		this.box.appendChild( graph1Label );
 
 		var graph2 = document.createElement( 'input' );
-		graph2.type = 'button';
-		graph2.value = 'Testswaps';
-		function showGraph2() { self.plot.setData( self.data.testswaps ); }
-		graph2.addEventListener( 'click', showGraph2, false );
+		graph2.id = 'graph2radio';
+		graph2.type = 'radio';
+		graph2.name = 'graphSwitch';
+		graph2.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph2 );
+		var graph2Label = document.createElement( 'label' );
+		graph2Label.innerHTML = 'Testswaps';
+		graph2Label.htmlFor = graph2.id;
+		this.box.appendChild( graph2Label );
 
 		var graph3 = document.createElement( 'input' );
-		graph3.type = 'button';
-		graph3.value = 'Swaps + Testswaps';
-		function showGraph3() { self.plot.setData( self.data.allswaps ); }
-		graph3.addEventListener( 'click', showGraph3, false );
+		graph3.id = 'graph3radio';
+		graph3.type = 'radio';
+		graph3.name = 'graphSwitch';
+		graph3.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph3 );
+		var graph3Label = document.createElement( 'label' );
+		graph3Label.innerHTML = 'Swaps + Testswaps';
+		graph3Label.htmlFor = graph3.id;
+		this.box.appendChild( graph3Label );
 
 		var graph4 = document.createElement( 'input' );
-		graph4.type = 'button';
-		graph4.value = 'Intersectiontests';
-		function showGraph4() { self.plot.setData( self.data.intersectiontests ); }
-		graph4.addEventListener( 'click', showGraph4, false );
+		graph4.id = 'graph4radio';
+		graph4.type = 'radio';
+		graph4.name = 'graphSwitch';
+		graph4.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph4 );
+		var graph4Label = document.createElement( 'label' );
+		graph4Label.innerHTML = 'Intersectiontests';
+		graph4Label.htmlFor = graph4.id;
+		this.box.appendChild( graph4Label );
+
+		var onGraphSwitch = function () {
+			if ( graph1.checked ) {
+				self.plot.setData( self.data.swaps );
+			} else if ( graph2.checked ) {
+				self.plot.setData( self.data.testswaps );
+			} else if ( graph3.checked ) {
+				self.plot.setData( self.data.allswaps );
+			} else if ( graph4.checked ) {
+				self.plot.setData( self.data.intersectiontests );
+			}
+		}
+
+		graph1.addEventListener( 'change', onGraphSwitch, false );
+		graph2.addEventListener( 'change', onGraphSwitch, false );
+		graph3.addEventListener( 'change', onGraphSwitch, false );
+		graph4.addEventListener( 'change', onGraphSwitch, false );
 
 		this.box.appendChild( document.createElement( 'br' ) );
 
