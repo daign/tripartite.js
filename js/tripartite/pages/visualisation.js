@@ -13,7 +13,7 @@ PAGES.VISU = {
 		new THREE.LineBasicMaterial( { color: 0x999999, linewidth: 1 } )
 	],
 
-	init: function () {
+	init: function ( canvas ) {
 
 		this.scene = ( function () {
 			var s = {};
@@ -21,7 +21,7 @@ PAGES.VISU = {
 			s.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 			s.camera.position = new THREE.Vector3( 50, 50, 150 );
 
-			var renderer = new THREE.WebGLRenderer();
+			var renderer = new THREE.WebGLRenderer( { canvas: canvas } );
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			PAGES.SIMULATION.node.appendChild( renderer.domElement );
 			function render() {

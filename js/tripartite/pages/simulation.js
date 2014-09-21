@@ -9,14 +9,20 @@ PAGES.SIMULATION = {
 		this.node.id = 'simulation';
 		document.body.appendChild( this.node );
 
+		this.canvas = document.createElement( 'canvas' );
+		this.canvas.style.display = 'none';
+		this.node.appendChild( this.canvas );
+
+		var self = this;
+
 		var onSwitch = function ( r ) {
-			PAGES.SIMULATION.visible = r;
+			self.visible = r;
+			self.canvas.style.display = self.visualEnabled ? 'block' : 'none';
 			onWindowResize();
 		};
-
 		PAGES.add( this.node, 'simulation', onSwitch );
 
-		PAGES.VISU.init();
+		PAGES.VISU.init( this.canvas );
 		PAGES.INFOBOX.init();
 
 		function onWindowResize() {
