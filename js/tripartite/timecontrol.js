@@ -24,6 +24,7 @@ var TIMECONTROL = {
 	setTask: function ( t ) {
 		if ( this.interval === undefined && this.task === undefined ) {
 			this.task = t;
+			PAGES.INFOSTATS.update();
 			this.notifyListeners();
 		}
 		return this;
@@ -31,7 +32,11 @@ var TIMECONTROL = {
 
 	start: function () {
 		if ( this.interval === undefined && this.task !== undefined && !this.paused ) {
-			this.interval = setInterval( this.task, this.speed );
+			var self = this;
+			this.interval = setInterval( function () {
+				self.task();
+				PAGES.INFOSTATS.update();
+			}, this.speed );
 			this.notifyListeners();
 		}
 	},
@@ -39,6 +44,7 @@ var TIMECONTROL = {
 	stepForward: function () {
 		if ( this.interval === undefined && this.task !== undefined ) {
 			this.task();
+			PAGES.INFOSTATS.update();
 		}
 	},
 

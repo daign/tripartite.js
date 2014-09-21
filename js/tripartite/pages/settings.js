@@ -102,14 +102,14 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( parseInt( self.sel3.node.value ) ).setPaused( false );
-			PAGES.INFOBOX.setPass( undefined );
+			PAGES.INFOBOX.reset();
 
 			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
-			PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
+			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
 			GENERATOR.generate( 1, parseInt( self.sel0.node.value ) ).activate( 0 );
 			function onFinish() {
-				PAGES.INFOBOX.setPhase( 'finished' ).update();
+				PAGES.INFOBOX.setPhase( 'finished' );
 			}
 			ALGO.run( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish );
 		}
@@ -223,6 +223,7 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = false;
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( 1 ).setPaused( false );
+			PAGES.INFOBOX.reset();
 
 			STATISTICS.clear();
 
@@ -245,7 +246,7 @@ PAGES.SETTINGS = {
 						if ( swi === 0 ) {
 							tbi = tbi+1;
 							if ( tbi >= triangleBuildAlgos.length ) {
-								PAGES.INFOBOX.setPhase( 'finished' ).update();
+								PAGES.INFOBOX.setPhase( 'finished' );
 								PAGES.show( 'results' );
 								return;
 							}
@@ -258,7 +259,7 @@ PAGES.SETTINGS = {
 				GENERATOR.activate( psi );
 				ai++;
 
-				PAGES.INFOBOX.setRecord( STATISTICS.startNewRecord() );
+				PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
 				PAGES.INFOBOX.setPass( ai + ' of ' + al );
 				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], doNext );
 			}

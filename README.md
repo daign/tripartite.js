@@ -10,7 +10,11 @@ This project features simulations and visualizations of algorithms which use opt
 
 ![screenshot](./screenshot.png)
 
-Includes a [script for drawing box plots](https://github.com/daign/tripartite.js/blob/master/js/triplot/triplot.js).
+[Test cases](http://daign.github.com/tripartite.js/test/intersectiontest.html) for the triangle intersection test algorithm.
+
+### triplot.js ###
+
+Part of this project is triplot.js, a stand-alone [script for drawing box plots](https://github.com/daign/tripartite.js/blob/master/js/triplot/triplot.js).
 
 [Box plot example](http://daign.github.com/tripartite.js/js/triplot/example.html) — [View example source](https://github.com/daign/tripartite.js/blob/master/js/triplot/example.html)
 

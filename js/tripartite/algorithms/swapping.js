@@ -6,7 +6,6 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.VISU.showLines( false );
-			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -29,8 +28,6 @@ ALGO.SWAPPING = {
 				if ( better !== null ) {
 					ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
 					PAGES.SIMULATION.update();
-				} else {
-					PAGES.INFOBOX.update();
 				}
 				if ( COUNTING.countAllIntersections( true ) === 0 ) {
 					TIMECONTROL.clear();
@@ -48,7 +45,6 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.VISU.showLines( false );
-			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -80,8 +76,6 @@ ALGO.SWAPPING = {
 					if ( better !== null ) {
 						ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
 						PAGES.SIMULATION.update();
-					} else {
-						PAGES.INFOBOX.update();
 					}
 				}
 			}
@@ -94,7 +88,6 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.VISU.showLines( false );
-			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -164,10 +157,6 @@ ALGO.SWAPPING = {
 
 				}
 
-				if ( !better ) {
-					PAGES.INFOBOX.update();
-				}
-
 			}
 		}
 	},
@@ -178,7 +167,6 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.VISU.showLines( false );
-			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -253,10 +241,6 @@ ALGO.SWAPPING = {
 
 				}
 
-				if ( !better ) {
-					PAGES.INFOBOX.update();
-				}
-
 			}
 		}
 	},
@@ -267,7 +251,6 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.VISU.showLines( false );
-			PAGES.SIMULATION.update();
 		},
 		run: function () {
 			var n = TRIS.length;

@@ -26,7 +26,7 @@ PAGES.SIMULATION = {
 		PAGES.INFOBOX.init();
 
 		function onWindowResize() {
-			if ( PAGES.SIMULATION.visible && PAGES.SIMULATION.visualEnabled ) {
+			if ( self.visible && self.visualEnabled ) {
 				PAGES.VISU.scene.resize();
 			}
 		}
@@ -35,10 +35,9 @@ PAGES.SIMULATION = {
 	},
 
 	update: function () {
-		if ( this.visualEnabled ) {
+		if ( this.visible && this.visualEnabled ) {
 			PAGES.VISU.update();
 		}
-		PAGES.INFOBOX.update();
 	}
 
 };

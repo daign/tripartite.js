@@ -1,24 +1,23 @@
 PAGES.INFOBOX = {
 
-	open: true,
+	open: 1,
 
-	pass: undefined,
-	phase: undefined,
+	pass:  undefined,
 	setUp: undefined,
-	record: undefined,
+	phase: undefined,
 
 	init: function () {
 		this.node = document.createElement( 'div' );
 		this.node.setAttribute( 'class', 'box absolute' );
 		PAGES.SIMULATION.node.appendChild( this.node );
 
-		this.content1 = document.createElement( 'div' );
-		this.node.appendChild( this.content1 );
+		this.playControls = document.createElement( 'div' );
+		this.node.appendChild( this.playControls );
 
 		this.homeButton = document.createElement( 'input' );
 		this.homeButton.type = 'button';
 		this.homeButton.value = 'home';
-		this.content1.appendChild( this.homeButton );
+		this.playControls.appendChild( this.homeButton );
 		this.homeButton.addEventListener( 'click', function ( event ) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -28,7 +27,7 @@ PAGES.INFOBOX = {
 
 		this.pauseButton = document.createElement( 'input' );
 		this.pauseButton.type = 'button';
-		this.content1.appendChild( this.pauseButton );
+		this.playControls.appendChild( this.pauseButton );
 		this.pauseButton.addEventListener( 'click', function ( event ) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -38,7 +37,7 @@ PAGES.INFOBOX = {
 		this.stepButton = document.createElement( 'input' );
 		this.stepButton.type = 'button';
 		this.stepButton.value = 'step forward';
-		this.content1.appendChild( this.stepButton );
+		this.playControls.appendChild( this.stepButton );
 		this.stepButton.addEventListener( 'click', function ( event ) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -63,11 +62,18 @@ PAGES.INFOBOX = {
 		};
 		TIMECONTROL.addListener( updateButtons );
 
-		this.content2 = document.createElement( 'div' );
-		this.node.appendChild( this.content2 );
+		this.permanentContent = document.createElement( 'div' );
+		this.node.appendChild( this.permanentContent );
 
-		this.content3 = document.createElement( 'div' );
-		this.node.appendChild( this.content3 );
+		this.variableContent1 = document.createElement( 'div' );
+		this.variableContent1.style.display = 'none';
+		this.node.appendChild( this.variableContent1 );
+		PAGES.INFOSTATS.init( this.variableContent1 );
+
+		this.variableContent2 = document.createElement( 'div' );
+		this.variableContent2.style.display = 'none';
+		this.variableContent2.innerHTML = '<hr>Settings to come soon';
+		this.node.appendChild( this.variableContent2 );
 
 		var self = this;
 		function onClick() {
@@ -77,43 +83,43 @@ PAGES.INFOBOX = {
 	},
 
 	update: function () {
-		this.content2.innerHTML = (
+		this.permanentContent.innerHTML = (
 			  '<hr>'
-			+ ( ( this.pass !== undefined ) ? 'pass: ' + this.pass + '<br>' : '' )
-			+ 'algorithm: ' + this.setUp + '<br>'
-			+ 'phase: ' + this.phase
+			+ ( ( this.pass  !== undefined ) ?      'pass: ' + this.pass  + '<br>' : '' )
+			+ ( ( this.setUp !== undefined ) ? 'algorithm: ' + this.setUp + '<br>' : '' )
+			+ ( ( this.phase !== undefined ) ?     'phase: ' + this.phase : '' )
 		);
-		if ( this.open ) {
-			this.content3.innerHTML = (
-				  '<hr>'
-				+ 'intersections: ' + COUNTING.countAllIntersections( false ) + '<br>'
-				+ 'area: ' + Math.round( COUNTING.countAllAreas() ) + '<br>'
-				+ 'longest edges: ' + Math.round( COUNTING.countAllLongestEdges() ) + '<hr>'
-				+ 'swaps: ' + this.record.swaps + '<br>'
-				+ 'testswaps: ' + this.record.testswaps + '<br>'
-				+ 'intersectiontests: ' + this.record.intersectiontests
-			);
-		} else {
-			this.content3.innerHTML = '';
+		this.variableContent1.style.display = 'none';
+		this.variableContent2.style.display = 'none';
+		if ( this.open === 1 ) {
+			this.variableContent1.style.display = 'block';
+		} else if ( this.open === 2 ) {
+			this.variableContent2.style.display = 'block';
 		}
 	},
 
 	setPass: function ( p ) {
 		this.pass = p;
-	},
-	setPhase: function ( p ) {
-		this.phase = p;
-		return this;
+		this.update();
 	},
 	setSetUp: function ( l ) {
 		this.setUp = l;
+		this.update();
 	},
-	setRecord: function ( r ) {
-		this.record = r;
+	setPhase: function ( p ) {
+		this.phase = p;
+		this.update();
+	},
+
+	reset: function () {
+		this.open = 1;
+		this.pass = undefined;
+		this.setUp = undefined;
+		this.phase = undefined;
 	},
 
 	toggle: function () {
-		this.open = !this.open;
+		this.open = ( this.open + 1 ) % 2;
 		this.update();
 	}
 

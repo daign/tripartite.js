@@ -5,7 +5,6 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.R',
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
-			PAGES.SIMULATION.update();
 
 			var stacks = [ [], [], [] ];
 			var poisCopy = POIS.slice();
@@ -37,7 +36,6 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.S',
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
-			PAGES.SIMULATION.update();
 
 			var stacks = [ [], [], [] ];
 			for ( var i = 0; i < POIS.length; i++ ) {
@@ -79,7 +77,6 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.G',
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
-			PAGES.SIMULATION.update();
 
 			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
 
@@ -139,7 +136,6 @@ ALGO.TRIANGLEBUILD = {
 		shortcut: 't.GIB',
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
-			PAGES.SIMULATION.update();
 
 			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
 			ALGO.DATASTRUCTURE.DistanceToCenter.setUp();

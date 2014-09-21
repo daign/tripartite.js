@@ -77,6 +77,7 @@ PAGES.VISU = {
 		for ( var i = 0; i < this.scene.lines.children.length; i++ ) {
 			this.scene.lines.children[ i ].visible = b;
 		}
+		this.scene.callrender();
 	}
 
 };
