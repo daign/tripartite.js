@@ -40,8 +40,12 @@ PAGES.INFOSTATS = {
 		this.node.appendChild( this.statsCanvas );
 		this.ctx = this.statsCanvas.getContext( '2d' );
 
-		this.statsDiv = document.createElement( 'div' );
-		this.node.appendChild( this.statsDiv );
+		this.statsDiv1 = document.createElement( 'div' );
+		this.node.appendChild( this.statsDiv1 );
+
+		this.statsDiv2 = document.createElement( 'div' );
+		this.statsDiv2.style.color = '#36a';
+		this.node.appendChild( this.statsDiv2 );
 
 	},
 
@@ -77,9 +81,11 @@ PAGES.INFOSTATS = {
 			return self.data[ id ].values[ self.data[ id ].values.length-1 ];
 		};
 
-		this.statsDiv.innerHTML = (
-			  'intersections: '     + getLast( 'intersections'     ) + '<br>'
-			+ 'swaps: '             + getLast( 'swaps'             ) + '<br>'
+		this.statsDiv1.innerHTML = (
+			  'intersections: '     + getLast( 'intersections'     )
+		);
+		this.statsDiv2.innerHTML = (
+			  'swaps: '             + getLast( 'swaps'             ) + '<br>'
 			+ 'testswaps: '         + getLast( 'testswaps'         ) + '<br>'
 			+ 'intersectiontests: ' + getLast( 'intersectiontests' )
 		);
@@ -95,20 +101,31 @@ PAGES.INFOSTATS = {
 
 		ctx.setTransform( 1, 0, 0, 1, 0, 0 );
 		ctx.clearRect( 0, 0, width, height );
-		ctx.lineWidth = 2;
-		ctx.lineCap = 'round';
-		ctx.strokeStyle = '#ffffff';
 
-		var drawDataLine = function ( dataId ) {
+		ctx.beginPath();
+		ctx.rect( 0, 0, width, height );
+		ctx.fillStyle = '#235';
+		ctx.fill();
+
+		ctx.lineWidth = 3;
+		ctx.lineCap = 'round';
+
+		var drawDataLine = function ( dataId, color ) {
 
 			var max = self.data[ dataId ].max;
+			max = ( max === 0 ? 1 : max );
 			var length = self.data[ dataId ].values.length;
 
+			ctx.strokeStyle = color;
 			ctx.beginPath();
-			ctx.moveTo( 0, height - self.data[ dataId ].values[ 0 ] * height / max );
+			var x = 5;
+			var y = height - 5 - self.data[ dataId ].values[ 0 ] * ( height - 10 ) / max;
+			ctx.moveTo( x, y );
 
 			for ( var i = 1; i < length; i++ ) {
-				ctx.lineTo( i * width / ( length - 1 ) , height - self.data[ dataId ].values[ i ] * height / max );
+				x = 5 + i * ( width - 10 ) / ( length - 1 );
+				y = height - 5 - self.data[ dataId ].values[ i ] * ( height - 10 ) / max;
+				ctx.lineTo( x, y );
 			}
 
 			ctx.stroke();
@@ -116,8 +133,8 @@ PAGES.INFOSTATS = {
 
 		};
 
-		drawDataLine( 'intersections' );
-		drawDataLine( 'intersectiontests' );
+		drawDataLine( 'intersectiontests', '#36a' );
+		drawDataLine( 'intersections',     '#59c' );
 
 	}
 
