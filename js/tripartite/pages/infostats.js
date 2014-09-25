@@ -7,6 +7,8 @@ PAGES.INFOSTATS = {
 	canvasWidth: 300,
 	canvasHeight: 100,
 
+	secondValue: 'intersectiontests',
+
 	setRecord: function ( r ) {
 
 		this.record = r;
@@ -28,7 +30,7 @@ PAGES.INFOSTATS = {
 			minimumAngles:     { max: 0, values: [], get: function () { return COUNTING.countAllMinimumAngles(); } },
 			swaps:             { max: 0, values: [], get: function () { return self.record.swaps; } },
 			testswaps:         { max: 0, values: [], get: function () { return self.record.testswaps; } },
-			allswaps:          { max: 0, values: [], get: function () { return self.record.allswaps; } },
+			allswaps:          { max: 0, values: [], get: function () { return self.record.swaps + self.record.testswaps; } },
 			intersectiontests: { max: 0, values: [], get: function () { return self.record.intersectiontests; } }
 		};
 
@@ -42,6 +44,26 @@ PAGES.INFOSTATS = {
 
 		this.statsDiv1 = document.createElement( 'div' );
 		this.node.appendChild( this.statsDiv1 );
+
+		var selectText = document.createElement( 'span' );
+		selectText.innerHTML = 'second value: ';
+		selectText.style.color = '#36a';
+		this.node.appendChild( selectText );
+
+		var onSelect = function ( event ) {
+			self.secondValue = self.select.get();
+			self.updateChart();
+		};
+		this.select = new PAGES.SELECT( this.node, false, 7, onSelect, [
+			[ 'area',              'area' ],
+			[ 'longestEdges',      'longest edges' ],
+			[ 'maximumAngles',     'maximum angles' ],
+			[ 'minimumAngles',     'minimum angles' ],
+			[ 'swaps',             'swaps' ],
+			[ 'testswaps',         'testswaps' ],
+			[ 'allswaps',          'swaps + testswaps' ],
+			[ 'intersectiontests', 'intersectiontests' ]
+		] );
 
 		this.statsDiv2 = document.createElement( 'div' );
 		this.statsDiv2.style.color = '#36a';
@@ -85,7 +107,8 @@ PAGES.INFOSTATS = {
 			  'intersections: '     + getLast( 'intersections'     )
 		);
 		this.statsDiv2.innerHTML = (
-			  'swaps: '             + getLast( 'swaps'             ) + '<br>'
+			  '<hr>'
+			+ 'swaps: '             + getLast( 'swaps'             ) + '<br>'
 			+ 'testswaps: '         + getLast( 'testswaps'         ) + '<br>'
 			+ 'intersectiontests: ' + getLast( 'intersectiontests' )
 		);
@@ -133,8 +156,8 @@ PAGES.INFOSTATS = {
 
 		};
 
-		drawDataLine( 'intersectiontests', '#36a' );
-		drawDataLine( 'intersections',     '#59c' );
+		drawDataLine( this.secondValue, '#36a' );
+		drawDataLine( 'intersections',  '#59c' );
 
 	}
 

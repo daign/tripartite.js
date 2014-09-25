@@ -76,9 +76,9 @@ PAGES.INFOBOX = {
 		this.node.appendChild( this.variableContent2 );
 
 		var self = this;
-		function onClick() {
+		var onClick = function () {
 			self.toggle();
-		}
+		};
 		this.node.addEventListener( 'click', onClick, false );
 	},
 

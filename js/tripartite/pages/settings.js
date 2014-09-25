@@ -24,7 +24,7 @@ PAGES.SETTINGS = {
 
 		// number of points
 		this.menu1.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel0 = new this.Select( this.menu1, false, 1, null, [
+		this.sel0 = new PAGES.SELECT( this.menu1, false, 1, null, [
 			[ '10', '3x10' ],
 			[ '30', '3x30' ],
 			[ '60', '3x60' ]
@@ -33,7 +33,7 @@ PAGES.SETTINGS = {
 		// triangle build algorithm
 		this.menu1.appendChild( document.createElement( 'br' ) );
 		this.menu1.appendChild( document.createTextNode( 'Triangle Build: ' ) );
-		this.sel1 = new this.Select( this.menu1, false, 1, onChange, [
+		this.sel1 = new PAGES.SELECT( this.menu1, false, 1, onChange, [
 			[ 'triangleBuildRandom',                 'Random' ],
 			[ 'triangleBuildSorted',                 'Sorted' ],
 			[ 'triangleBuildGabrielGraph',           'Gabriel Graph' ],
@@ -47,7 +47,7 @@ PAGES.SETTINGS = {
 
 		// swapping algorithm
 		this.menu1.appendChild( document.createTextNode( 'Swapping: ' ) );
-		this.sel2 = new this.Select( this.menu1, false, 0, onChange, [
+		this.sel2 = new PAGES.SELECT( this.menu1, false, 0, onChange, [
 			[ 'strategySwapRandom',           'Strategy Swap Random' ],
 			[ 'strategySwapIntersecting',     'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',  'Strategy Swap Intersecting BFS' ],
@@ -63,7 +63,7 @@ PAGES.SETTINGS = {
 
 		// optimization measure
 		this.menu1.appendChild( document.createTextNode( 'Optimization Measure: ' ) );
-		this.sel2b = new this.Select( this.menu1, false, 1, onChange, [
+		this.sel2b = new PAGES.SELECT( this.menu1, false, 1, onChange, [
 			[ 'intersections',                 'Intersections' ],
 			[ 'intersectionsAndArea',          'Intersections and Area' ],
 			[ 'intersectionsAndLongestEdges',  'Intersections and Longest Edges' ],
@@ -82,7 +82,7 @@ PAGES.SETTINGS = {
 
 		// speed
 		this.menu1.appendChild( document.createTextNode( 'Speed: ' ) );
-		this.sel3 = new this.Select( this.menu1, false, 1, null, [
+		this.sel3 = new PAGES.SELECT( this.menu1, false, 1, null, [
 			[ '500', 'Slow'     ],
 			[ '100', 'Moderate' ],
 			[ '50',  'Fast'     ],
@@ -95,19 +95,19 @@ PAGES.SETTINGS = {
 		start1.type = 'button';
 		start1.value = 'Start';
 		function start1fun() {
-			var triangleBuildFunction = self.sel1.node.value;
-			var swappingFunction = self.sel2.node.value;
-			var optimizationFunction = self.sel2b.node.value;
+			var triangleBuildFunction = self.sel1.get();
+			var swappingFunction = self.sel2.get();
+			var optimizationFunction = self.sel2b.get();
 
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
-			TIMECONTROL.setSpeed( parseInt( self.sel3.node.value ) ).setPaused( false );
+			TIMECONTROL.setSpeed( parseInt( self.sel3.get() ) ).setPaused( false );
 			PAGES.INFOBOX.reset();
 
 			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
-			GENERATOR.generate( 1, parseInt( self.sel0.node.value ) ).activate( 0 );
+			GENERATOR.generate( 1, parseInt( self.sel0.get() ) ).activate( 0 );
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' );
 			}
@@ -126,7 +126,7 @@ PAGES.SETTINGS = {
 
 		// number of iterations
 		this.menu2.appendChild( document.createTextNode( 'Iterations: ' ) );
-		this.sel4 = new this.Select( this.menu2, false, 1, onChange, [
+		this.sel4 = new PAGES.SELECT( this.menu2, false, 1, onChange, [
 			[  '3',  '3' ],
 			[ '10', '10' ],
 			[ '30', '30' ]
@@ -135,7 +135,7 @@ PAGES.SETTINGS = {
 
 		// number of points
 		this.menu2.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel5 = new this.Select( this.menu2, false, 1, onChange, [
+		this.sel5 = new PAGES.SELECT( this.menu2, false, 1, onChange, [
 			[ '10', '3x10' ],
 			[ '30', '3x30' ],
 			[ '60', '3x60' ]
@@ -152,7 +152,7 @@ PAGES.SETTINGS = {
 		td1.appendChild( document.createTextNode( 'Triangle Build: ' ) );
 		var td2 = document.createElement( 'td' );
 		tr1.appendChild( td2 );
-		this.sel6 = new this.Select( td2, true, 0, onChange, [
+		this.sel6 = new PAGES.SELECT( td2, true, 0, onChange, [
 			[ 'triangleBuildRandom',                 'Random' ],
 			[ 'triangleBuildSorted',                 'Sorted' ],
 			[ 'triangleBuildGabrielGraph',           'Gabriel Graph' ],
@@ -166,11 +166,11 @@ PAGES.SETTINGS = {
 		td3.appendChild( document.createTextNode( 'Swapping: ' ) );
 		var td4 = document.createElement( 'td' );
 		tr1.appendChild( td4 );
-		this.sel7 = new this.Select( td4, true, 0, onChange, [
+		this.sel7 = new PAGES.SELECT( td4, true, 0, onChange, [
 			[ 'strategySwapRandom',           'Strategy Swap Random' ],
 			[ 'strategySwapIntersecting',     'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',  'Strategy Swap Intersecting BFS' ],
-			[ 'strategySwapIntersectingBFS2', 'Strategy Swap Intersecting BFS 2' ],
+			[ 'strategySwapIntersectingBFS2', 'Strategy Swap Intersecting BFS 2' ]
 		] );
 		this.sel7.node.style.height = '100px';
 
@@ -180,7 +180,7 @@ PAGES.SETTINGS = {
 		td5.appendChild( document.createTextNode( 'Optimization Measure: ' ) );
 		var td6 = document.createElement( 'td' );
 		tr1.appendChild( td6 );
-		this.sel8 = new this.Select( td6, true, 0, onChange, [
+		this.sel8 = new PAGES.SELECT( td6, true, 0, onChange, [
 			[ 'intersections',                 'Intersections' ],
 			[ 'intersectionsAndArea',          'Intersections and Area' ],
 			[ 'intersectionsAndLongestEdges',  'Intersections and Longest Edges' ],
@@ -227,8 +227,8 @@ PAGES.SETTINGS = {
 
 			STATISTICS.clear();
 
-			var iterations = parseInt( self.sel4.node.value );
-			GENERATOR.generate( iterations, parseInt( self.sel5.node.value ) );
+			var iterations = parseInt( self.sel4.get() );
+			GENERATOR.generate( iterations, parseInt( self.sel5.get() ) );
 
 			var tbi = -1;
 			var swi = -1;
@@ -281,7 +281,7 @@ PAGES.SETTINGS = {
 		this.menu3.appendChild( document.createTextNode( 'Datastructures' ) );
 		this.menu3.appendChild( document.createElement( 'br' ) );
 		this.menu3.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel8 = new this.Select( this.menu3, false, 1, null, [
+		this.sel8 = new PAGES.SELECT( this.menu3, false, 1, null, [
 			[ '10', '3x10' ],
 			[ '30', '3x30' ],
 			[ '60', '3x60' ]
@@ -293,7 +293,7 @@ PAGES.SETTINGS = {
 		function start3fun() {
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'PAGES.SIMULATION' );
-			GENERATOR.generate( 1, parseInt( self.sel8.node.value ) ).activate( 0 );
+			GENERATOR.generate( 1, parseInt( self.sel8.get() ) ).activate( 0 );
 			TRIS = [];
 			ALGO.DATASTRUCTURE.VoronoiConnectivity.setUp();
 			PAGES.SIMULATION.update();
@@ -304,28 +304,10 @@ PAGES.SETTINGS = {
 		this.updateDescriptions();
 	},
 
-	Select: function ( parent, multiple, defaultIndex, onChangeFunction, options ) {
-		this.node = document.createElement( 'select' );
-		this.node.multiple = multiple;
-		parent.appendChild( this.node );
-		for ( var i = 0; i < options.length; i++ ) {
-			var op = document.createElement( 'option' );
-			op.value = options[ i ][ 0 ];
-			op.innerHTML = options[ i ][ 1 ];
-			this.node.appendChild( op );
-		}
-		if ( !multiple ) {
-			this.node.selectedIndex = defaultIndex;
-		}
-		if ( onChangeFunction !== null ) {
-			this.node.addEventListener( 'change', onChangeFunction, false );
-		}
-	},
-
 	updateDescriptions: function () {
-		var d1 = ALGO.TRIANGLEBUILD[ this.sel1.node.value ];
-		var d2 = ALGO.SWAPPING[ this.sel2.node.value ];
-		var d3 = ALGO.OPTIMIZATIONMEASURE[ this.sel2b.node.value ];
+		var d1 = ALGO.TRIANGLEBUILD[ this.sel1.get() ];
+		var d2 = ALGO.SWAPPING[ this.sel2.get() ];
+		var d3 = ALGO.OPTIMIZATIONMEASURE[ this.sel2b.get() ];
 		this.sel1des.innerHTML = '(' + d1.description + ') [' + d1.shortcut + ']';
 		this.sel2des.innerHTML = '(' + d2.description + ') [' + d2.shortcut + ']';
 		this.sel2bdes.innerHTML = '(' + d3.description + ') [' + d3.shortcut + ']';
@@ -345,8 +327,8 @@ PAGES.SETTINGS = {
 		for ( var i = 0; i < o3.length; i++ ) {
 			if ( o3[ i ].selected ) { s3++; }
 		}
-		var s4 = parseInt( this.sel4.node.value );
-		var ps = parseInt( this.sel5.node.value );
+		var s4 = parseInt( this.sel4.get() );
+		var ps = parseInt( this.sel5.get() );
 		this.start2help.innerHTML = '(' + (s1*s2*s3*s4) + ' passes at ' + ps + ' points)';
 	}
 

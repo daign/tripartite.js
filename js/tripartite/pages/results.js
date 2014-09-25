@@ -47,7 +47,7 @@ PAGES.RESULTS = {
 		graph1.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph1 );
 		var graph1Label = document.createElement( 'label' );
-		graph1Label.innerHTML = 'Swaps';
+		graph1Label.innerHTML = 'swaps';
 		graph1Label.htmlFor = graph1.id;
 		this.box.appendChild( graph1Label );
 
@@ -58,7 +58,7 @@ PAGES.RESULTS = {
 		graph2.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph2 );
 		var graph2Label = document.createElement( 'label' );
-		graph2Label.innerHTML = 'Testswaps';
+		graph2Label.innerHTML = 'testswaps';
 		graph2Label.htmlFor = graph2.id;
 		this.box.appendChild( graph2Label );
 
@@ -69,7 +69,7 @@ PAGES.RESULTS = {
 		graph3.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph3 );
 		var graph3Label = document.createElement( 'label' );
-		graph3Label.innerHTML = 'Swaps + Testswaps';
+		graph3Label.innerHTML = 'swaps + testswaps';
 		graph3Label.htmlFor = graph3.id;
 		this.box.appendChild( graph3Label );
 
@@ -80,7 +80,7 @@ PAGES.RESULTS = {
 		graph4.setAttribute( 'class', 'radioinput' );
 		this.box.appendChild( graph4 );
 		var graph4Label = document.createElement( 'label' );
-		graph4Label.innerHTML = 'Intersectiontests';
+		graph4Label.innerHTML = 'intersectiontests';
 		graph4Label.htmlFor = graph4.id;
 		this.box.appendChild( graph4Label );
 
