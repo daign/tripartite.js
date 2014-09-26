@@ -1,5 +1,7 @@
 PAGES.VISU = {
 
+	showIntersections: false,
+
 	pointMaterials: [
 		new THREE.MeshBasicMaterial( { color: 0xff0000 } ),
 		new THREE.MeshBasicMaterial( { color: 0xffff00 } ),
@@ -12,6 +14,11 @@ PAGES.VISU = {
 		new THREE.LineBasicMaterial( { color: 0x0000ff, linewidth: 1 } ),
 		new THREE.LineBasicMaterial( { color: 0x999999, linewidth: 1 } )
 	],
+
+	triangleMaterials: {
+		normal:      new THREE.MeshNormalMaterial(),
+		highlighted: new THREE.MeshBasicMaterial( { color: 0xff0000 } )
+	},
 
 	init: function ( canvas ) {
 
@@ -70,6 +77,15 @@ PAGES.VISU = {
 	},
 
 	update: function () {
+		if ( this.showIntersections ) {
+			for ( var i = 0; i < TRIS.length; i++ ) {
+				TRIS[ i ].setMaterial( false );
+			}
+			var intersects = COUNTING.getAllIntersectingTriangles( false )[ 1 ];
+			for ( var i = 0; i < intersects.length; i++ ) {
+				intersects[ i ].setMaterial( true );
+			}
+		}
 		this.scene.callrender();
 	},
 
@@ -78,6 +94,18 @@ PAGES.VISU = {
 			this.scene.lines.children[ i ].visible = b;
 		}
 		this.scene.callrender();
+	},
+
+	setShowIntersections: function ( b ) {
+		this.showIntersections = b;
+		if ( b ) {
+			this.update();
+		} else {
+			for ( var i = 0; i < TRIS.length; i++ ) {
+				TRIS[ i ].setMaterial( false );
+			}
+			this.scene.callrender();
+		}
 	}
 
 };

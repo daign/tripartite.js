@@ -13,7 +13,7 @@ var Triangle = function ( points ) {
 	this.geom.faces.push( new THREE.Face3( 2, 1, 0 ) );
 	this.geom.dynamic = true;
 	this.geom.computeFaceNormals();
-	this.mesh = new THREE.Mesh( this.geom, new THREE.MeshNormalMaterial() );
+	this.mesh = new THREE.Mesh( this.geom, PAGES.VISU.triangleMaterials.normal );
 
 	this.updateTriangle();
 };
@@ -45,6 +45,11 @@ Triangle.prototype = {
 		t2.updateVertices();
 		this.updateTriangle();
 		t2.updateTriangle();
+	},
+
+	setMaterial: function ( highlighted ) {
+		this.mesh.material = PAGES.VISU.triangleMaterials[ highlighted ? 'highlighted' : 'normal' ];
+		this.mesh.material.needsUpdate = true;
 	},
 
 	isParallel: function ( t2 ) {

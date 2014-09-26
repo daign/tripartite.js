@@ -72,8 +72,23 @@ PAGES.INFOBOX = {
 
 		this.variableContent2 = document.createElement( 'div' );
 		this.variableContent2.style.display = 'none';
-		this.variableContent2.innerHTML = '<hr>Settings to come soon';
 		this.node.appendChild( this.variableContent2 );
+
+		this.variableContent2.appendChild( document.createElement( 'hr' ) );
+		var showIntersections = document.createElement( 'input' );
+		showIntersections.id = 'showIntersectionsInput';
+		showIntersections.type = 'checkbox';
+		this.variableContent2.appendChild( showIntersections );
+		var showIntersectionsLabel = document.createElement( 'label' );
+		showIntersectionsLabel.innerHTML = ' show intersections';
+		showIntersectionsLabel.htmlFor = showIntersections.id;
+		this.variableContent2.appendChild( showIntersectionsLabel );
+		var onShowIntersections = function () {
+			event.stopPropagation();
+			PAGES.VISU.setShowIntersections( showIntersections.checked );
+		};
+		showIntersections.addEventListener( 'click', onShowIntersections, false );
+		showIntersectionsLabel.addEventListener( 'click', onShowIntersections, false );
 
 		var self = this;
 		var onClick = function () {
@@ -119,7 +134,7 @@ PAGES.INFOBOX = {
 	},
 
 	toggle: function () {
-		this.open = ( this.open + 1 ) % 2;
+		this.open = ( this.open + 1 ) % 3;
 		this.update();
 	}
 
