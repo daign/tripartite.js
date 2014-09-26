@@ -43,8 +43,8 @@ ALGO.DATASTRUCTURE = {
 						lineGeometry.vertices.push( conns[ g ][ i ][ 0 ], conns[ g ][ i ][ 1 ] );
 						lineGeometry.computeLineDistances();
 
-						var line = new THREE.Line( lineGeometry, PAGES.VISU.lineMaterials[ g ], THREE.LinePieces );
-						PAGES.VISU.scene.lines.add( line );
+						var line = new THREE.Line( lineGeometry, VISUALISATION.MATERIALS.lineMaterials[ g ], THREE.LinePieces );
+						VISUALISATION.scene.lines.add( line );
 					}
 				}
 				PAGES.SIMULATION.update()

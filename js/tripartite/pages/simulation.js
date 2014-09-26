@@ -22,12 +22,12 @@ PAGES.SIMULATION = {
 		};
 		PAGES.add( this.node, 'simulation', onSwitch );
 
-		PAGES.VISU.init( this.canvas );
+		VISUALISATION.init( this.canvas );
 		PAGES.INFOBOX.init();
 
 		function onWindowResize() {
 			if ( self.visible && self.visualEnabled ) {
-				PAGES.VISU.scene.resize();
+				VISUALISATION.scene.resize();
 			}
 		}
 		window.addEventListener( 'resize', onWindowResize, false );
@@ -36,7 +36,7 @@ PAGES.SIMULATION = {
 
 	update: function () {
 		if ( this.visible && this.visualEnabled ) {
-			PAGES.VISU.update();
+			VISUALISATION.update();
 		}
 	}
 

@@ -18,7 +18,7 @@ var GENERATOR = {
 					var z = ( floats ) ? this.randomFloat() : this.randomInt();
 					var pnt = new Point( new THREE.Vector3( x, y, z ) );
 					pnt.group = gi;
-					pnt.buildMesh( PAGES.VISU.pointMaterials[ gi ] );
+					pnt.buildMesh( VISUALISATION.MATERIALS.pointMaterials[ gi ] );
 					pnts.push( pnt );
 				}
 			}
@@ -29,13 +29,13 @@ var GENERATOR = {
 	},
 
 	activate: function ( i ) {
-		PAGES.VISU.scene.removeAll();
+		VISUALISATION.scene.removeAll();
 		TRIS = [];
 		POIS = this.pointSets[ i ];
 		ALGO.DATASTRUCTURE.resetVisited();
 		ALGO.DATASTRUCTURE.GabrielGraph.reset();
 		for ( var j = 0; j < POIS.length; j++ ) {
-			PAGES.VISU.scene.points.add( POIS[ j ].mesh );
+			VISUALISATION.scene.points.add( POIS[ j ].mesh );
 		}
 	},
 

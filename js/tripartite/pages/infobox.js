@@ -85,7 +85,7 @@ PAGES.INFOBOX = {
 		this.variableContent2.appendChild( showIntersectionsLabel );
 		var onShowIntersections = function () {
 			event.stopPropagation();
-			PAGES.VISU.setShowIntersections( showIntersections.checked );
+			VISUALISATION.setShowIntersections( showIntersections.checked );
 		};
 		showIntersections.addEventListener( 'click', onShowIntersections, false );
 		showIntersectionsLabel.addEventListener( 'click', onShowIntersections, false );

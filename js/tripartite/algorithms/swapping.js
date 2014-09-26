@@ -6,7 +6,7 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.INFOSTATS.setPhaseChange();
-			PAGES.VISU.showLines( false );
+			VISUALISATION.showLines( false );
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -46,7 +46,7 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.INFOSTATS.setPhaseChange();
-			PAGES.VISU.showLines( false );
+			VISUALISATION.showLines( false );
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -90,7 +90,7 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.INFOSTATS.setPhaseChange();
-			PAGES.VISU.showLines( false );
+			VISUALISATION.showLines( false );
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -170,7 +170,7 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.INFOSTATS.setPhaseChange();
-			PAGES.VISU.showLines( false );
+			VISUALISATION.showLines( false );
 		},
 		run: function () {
 			var n = TRIS.length;
@@ -255,7 +255,7 @@ ALGO.SWAPPING = {
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
 			PAGES.INFOSTATS.setPhaseChange();
-			PAGES.VISU.showLines( false );
+			VISUALISATION.showLines( false );
 		},
 		run: function () {
 			var n = TRIS.length;
