@@ -5,6 +5,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.SR',
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.INFOSTATS.setPhaseChange();
 			PAGES.VISU.showLines( false );
 		},
 		run: function () {
@@ -44,6 +45,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.SI',
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.INFOSTATS.setPhaseChange();
 			PAGES.VISU.showLines( false );
 		},
 		run: function () {
@@ -87,6 +89,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.SIB',
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.INFOSTATS.setPhaseChange();
 			PAGES.VISU.showLines( false );
 		},
 		run: function () {
@@ -166,6 +169,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.SIB2',
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.INFOSTATS.setPhaseChange();
 			PAGES.VISU.showLines( false );
 		},
 		run: function () {
@@ -250,6 +254,7 @@ ALGO.SWAPPING = {
 		shortcut: 's.R',
 		init: function () {
 			PAGES.INFOBOX.setPhase( 'swapping' );
+			PAGES.INFOSTATS.setPhaseChange();
 			PAGES.VISU.showLines( false );
 		},
 		run: function () {

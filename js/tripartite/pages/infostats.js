@@ -2,6 +2,7 @@ PAGES.INFOSTATS = {
 
 	data:   undefined,
 	record: undefined,
+	phaseChange: undefined,
 
 	ctx: undefined,
 	canvasWidth: 300,
@@ -13,6 +14,12 @@ PAGES.INFOSTATS = {
 
 		this.record = r;
 		this.clear();
+
+	},
+
+	setPhaseChange: function () {
+
+		this.phaseChange = this.data.intersections.values.length - 1;
 
 	},
 
@@ -78,6 +85,8 @@ PAGES.INFOSTATS = {
 			this.data[ x ].values = [];
 		}
 
+		this.phaseChange = undefined;
+
 	},
 
 	update: function () {
@@ -129,9 +138,23 @@ PAGES.INFOSTATS = {
 		ctx.rect( 0, 0, width, height );
 		ctx.fillStyle = '#235';
 		ctx.fill();
+		ctx.closePath();
 
-		ctx.lineWidth = 3;
+		ctx.lineWidth = 2;
 		ctx.lineCap = 'round';
+
+		if ( this.phaseChange !== undefined ) {
+
+			ctx.strokeStyle = '#124';
+			ctx.beginPath();
+			var length = self.data.intersections.values.length;
+			var	x = 5 + this.phaseChange * ( width - 10 ) / ( length - 1 );
+			ctx.moveTo( x, 0 );
+			ctx.lineTo( x, height );
+			ctx.stroke();
+			ctx.closePath();
+
+		}
 
 		var drawDataLine = function ( dataId, color ) {
 
