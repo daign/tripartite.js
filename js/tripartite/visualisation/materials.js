@@ -14,8 +14,8 @@ VISUALISATION.MATERIALS = {
 	],
 
 	triangleMaterials: {
-		normal:      new THREE.MeshNormalMaterial(),
-		highlighted: new THREE.MeshBasicMaterial( { color: 0xff0000 } )
+		normal:      new VISUALISATION.ShaderMaterial( new THREE.Color( 0x0000ff ), 1.0 ),
+		highlighted: new VISUALISATION.ShaderMaterial( new THREE.Color( 0xff0000 ), 1.0 )
 	}
 
 };
