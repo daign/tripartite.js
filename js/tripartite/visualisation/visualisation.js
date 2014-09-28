@@ -1,6 +1,6 @@
 VISUALISATION = {
 
-	showIntersections: false,
+	materialMode: 'standard',
 
 	init: function ( canvas ) {
 
@@ -59,13 +59,13 @@ VISUALISATION = {
 	},
 
 	update: function () {
-		if ( this.showIntersections ) {
+		if ( this.materialMode === 'intersections' ) {
 			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( false );
+				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
 			}
 			var intersects = COUNTING.getAllIntersectingTriangles( false )[ 1 ];
 			for ( var i = 0; i < intersects.length; i++ ) {
-				intersects[ i ].setMaterial( true );
+				intersects[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.red.shader );
 			}
 		}
 		this.scene.callrender();
@@ -78,13 +78,18 @@ VISUALISATION = {
 		this.scene.callrender();
 	},
 
-	setShowIntersections: function ( b ) {
-		this.showIntersections = b;
-		if ( b ) {
+	setMaterialMode: function ( m ) {
+		this.materialMode = m;
+		if ( m === 'intersections' ) {
 			this.update();
+		} else if ( m === 'normal' ) {
+			for ( var i = 0; i < TRIS.length; i++ ) {
+				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.normal.shader );
+			}
+			this.scene.callrender();
 		} else {
 			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( false );
+				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
 			}
 			this.scene.callrender();
 		}

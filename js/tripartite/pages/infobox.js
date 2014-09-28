@@ -80,12 +80,12 @@ PAGES.INFOBOX = {
 		this.variableContent2.appendChild( materialText );
 
 		var onMaterial = function ( event ) {
-			VISUALISATION.setShowIntersections( self.materialSelect.get() === 'intersections' );
+			VISUALISATION.setMaterialMode( self.materialSelect.get() );
 		};
 		this.materialSelect = new PAGES.SELECT( this.variableContent2, false, 0, onMaterial, [
-			[ 'blue',          'standard blue' ],
-			[ 'intersections', 'show intersections' ]
-			//[ 'normal',        'normal material' ]
+			[ 'standard',      'standard blue' ],
+			[ 'intersections', 'show intersections' ],
+			[ 'normal',        'normal material' ]
 		] );
 
 		var self = this;

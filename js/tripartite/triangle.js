@@ -47,8 +47,8 @@ Triangle.prototype = {
 		t2.updateTriangle();
 	},
 
-	setMaterial: function ( highlighted ) {
-		this.mesh.material = VISUALISATION.MATERIALS.triangleMaterials[ highlighted ? 'red' : 'blue' ].shader;
+	setMaterial: function ( material ) {
+		this.mesh.material = material;
 		this.mesh.material.needsUpdate = true;
 	},
 
