@@ -1,8 +1,9 @@
-VISUALISATION.ShaderMaterial = function ( color, transparency ) {
+VISUALISATION.ShaderMaterial = function ( normalMaterial, color, transparency ) {
 
 	var uniforms = {
-		color:        { type: "c", value: color },
-		transparency: { type: "f", value: transparency }
+		normalMaterial: { type: "i", value: normalMaterial }, 
+		color:          { type: "c", value: color },
+		transparency:   { type: "f", value: transparency }
 	};
 	this.uniforms = uniforms;
 

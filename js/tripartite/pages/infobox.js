@@ -75,20 +75,18 @@ PAGES.INFOBOX = {
 		this.node.appendChild( this.variableContent2 );
 
 		this.variableContent2.appendChild( document.createElement( 'hr' ) );
-		var showIntersections = document.createElement( 'input' );
-		showIntersections.id = 'showIntersectionsInput';
-		showIntersections.type = 'checkbox';
-		this.variableContent2.appendChild( showIntersections );
-		var showIntersectionsLabel = document.createElement( 'label' );
-		showIntersectionsLabel.innerHTML = ' show intersections';
-		showIntersectionsLabel.htmlFor = showIntersections.id;
-		this.variableContent2.appendChild( showIntersectionsLabel );
-		var onShowIntersections = function () {
-			event.stopPropagation();
-			VISUALISATION.setShowIntersections( showIntersections.checked );
+		var materialText = document.createElement( 'span' );
+		materialText.innerHTML = 'material: ';
+		this.variableContent2.appendChild( materialText );
+
+		var onMaterial = function ( event ) {
+			VISUALISATION.setShowIntersections( self.materialSelect.get() === 'intersections' );
 		};
-		showIntersections.addEventListener( 'click', onShowIntersections, false );
-		showIntersectionsLabel.addEventListener( 'click', onShowIntersections, false );
+		this.materialSelect = new PAGES.SELECT( this.variableContent2, false, 0, onMaterial, [
+			[ 'blue',          'standard blue' ],
+			[ 'intersections', 'show intersections' ]
+			//[ 'normal',        'normal material' ]
+		] );
 
 		var self = this;
 		var onClick = function () {
