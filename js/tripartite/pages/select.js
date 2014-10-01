@@ -32,6 +32,10 @@ PAGES.SELECT.prototype = {
 
 	get: function () {
 		return this.node.value;
+	},
+
+	setActivation: function ( b ) {
+		this.node.disabled = !b;
 	}
 
 };

@@ -37,17 +37,24 @@ ALGO.DATASTRUCTURE = {
 				}
 
 				// add lines to visualisation
-				for ( var g = 0; g < conns.length; g++ ) {
-					for ( var i = 0; i < conns[ g ].length; i++ ) {
-						var lineGeometry = new THREE.Geometry();
-						lineGeometry.vertices.push( conns[ g ][ i ][ 0 ], conns[ g ][ i ][ 1 ] );
-						lineGeometry.computeLineDistances();
+				if ( PAGES.SIMULATION.visualEnabled ) {
 
-						var line = new THREE.Line( lineGeometry, VISUALISATION.MATERIALS.lineMaterials[ g ], THREE.LinePieces );
-						VISUALISATION.scene.lines.add( line );
+					for ( var g = 0; g < conns.length; g++ ) {
+						for ( var i = 0; i < conns[ g ].length; i++ ) {
+							var lineGeometry = new THREE.Geometry();
+							lineGeometry.vertices.push( conns[ g ][ i ][ 0 ], conns[ g ][ i ][ 1 ] );
+							lineGeometry.computeLineDistances();
+
+							var line = new THREE.Line( lineGeometry, VISUALISATION.MATERIALS.lineMaterials[ g ], THREE.LinePieces );
+							VISUALISATION.scene.lines[ g ].add( line );
+						}
 					}
+
+					VISUALISATION.applyGabrielMode();
+					PAGES.INFOBOX.gabrielSelect.setActivation( true );
+
 				}
-				PAGES.SIMULATION.update()
+
 			}
 		},
 		reset: function () {
@@ -56,6 +63,7 @@ ALGO.DATASTRUCTURE = {
 					POIS[ i ].connections = [ [], [], [] ];
 				}
 				ALGO.DATASTRUCTURE.GabrielGraph.computed = false;
+				PAGES.INFOBOX.gabrielSelect.setActivation( false );
 			}
 		}
 	},

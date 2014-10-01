@@ -22,7 +22,8 @@ ALGO.TRIANGLEBUILD = {
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
-					ALGO.SWAPPING[ swappingFunction ].init();
+					PAGES.INFOBOX.setPhase( 'swapping' );
+					PAGES.INFOSTATS.setPhaseChange();
 					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -63,7 +64,8 @@ ALGO.TRIANGLEBUILD = {
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
-					ALGO.SWAPPING[ swappingFunction ].init();
+					PAGES.INFOBOX.setPhase( 'swapping' );
+					PAGES.INFOSTATS.setPhaseChange();
 					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -122,7 +124,8 @@ ALGO.TRIANGLEBUILD = {
 				}
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();
-					ALGO.SWAPPING[ swappingFunction ].init();
+					PAGES.INFOBOX.setPhase( 'swapping' );
+					PAGES.INFOSTATS.setPhaseChange();
 					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -233,7 +236,8 @@ ALGO.TRIANGLEBUILD = {
 
 				if ( TRIS.length*3 >= POIS.length ) {
 					TIMECONTROL.clear();
-					ALGO.SWAPPING[ swappingFunction ].init();
+					PAGES.INFOBOX.setPhase( 'swapping' );
+					PAGES.INFOSTATS.setPhaseChange();
 					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
 				} else {
 					while( POIS[ pi ].visited ) { pi++; }

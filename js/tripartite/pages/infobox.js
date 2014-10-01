@@ -88,6 +88,24 @@ PAGES.INFOBOX = {
 			[ 'normal',        'normal material' ]
 		] );
 
+		this.variableContent2.appendChild( document.createElement( 'br' ) );
+		var gabrielText = document.createElement( 'span' );
+		gabrielText.innerHTML = 'gabriel graph: ';
+		this.variableContent2.appendChild( gabrielText );
+
+		var onGabriel = function ( event ) {
+			VISUALISATION.setGabrielMode( self.gabrielSelect.get() );
+		};
+		this.gabrielSelect = new PAGES.SELECT( this.variableContent2, false, 1, onGabriel, [
+			[ 'nothing', "don't show"  ],
+			[ 'all',     'show all'    ],
+			[ 'red',     'only red'    ],
+			[ 'yellow',  'only yellow' ],
+			[ 'green',   'only green'  ],
+			[ 'grey',    'only grey'   ]
+		] );
+		this.gabrielSelect.setActivation( false );
+
 		var self = this;
 		var onClick = function () {
 			self.toggle();

@@ -1,6 +1,7 @@
 VISUALISATION = {
 
 	materialMode: 'standard',
+	gabrielMode:  'all',
 
 	init: function ( canvas ) {
 
@@ -38,8 +39,14 @@ VISUALISATION = {
 			s.scene.add( s.points );
 			s.triangles = new THREE.Object3D();
 			s.scene.add( s.triangles );
-			s.lines = new THREE.Object3D();
-			s.scene.add( s.lines );
+
+			s.lines = [
+				new THREE.Object3D(),
+				new THREE.Object3D(),
+				new THREE.Object3D(),
+				new THREE.Object3D()
+			];
+			s.lines.forEach( function ( element ) { s.scene.add( element ); } );
 
 			s.removeAll = function () {
 				while ( s.points.children.length > 0 ) {
@@ -48,9 +55,11 @@ VISUALISATION = {
 				while ( s.triangles.children.length > 0 ) {
 					s.triangles.remove( s.triangles.children[ s.triangles.children.length-1 ] );
 				}
-				while ( s.lines.children.length > 0 ) {
-					s.lines.remove( s.lines.children[ s.lines.children.length-1 ] );
-				}
+				s.lines.forEach( function ( element ) {
+					while ( element.children.length > 0 ) {
+						element.remove( element.children[ element.children.length-1 ] );
+					}
+				} );
 			};
 
 			return s;
@@ -71,13 +80,6 @@ VISUALISATION = {
 		this.scene.callrender();
 	},
 
-	showLines: function ( b ) {
-		for ( var i = 0; i < this.scene.lines.children.length; i++ ) {
-			this.scene.lines.children[ i ].visible = b;
-		}
-		this.scene.callrender();
-	},
-
 	setMaterialMode: function ( m ) {
 		this.materialMode = m;
 		if ( m === 'intersections' ) {
@@ -93,6 +95,36 @@ VISUALISATION = {
 			}
 			this.scene.callrender();
 		}
+	},
+
+	setGabrielMode: function ( m ) {
+
+		if ( m !== this.gabrielMode ) {
+			this.gabrielMode = m;
+			this.applyGabrielMode();
+		}
+
+	},
+
+	applyGabrielMode: function () {
+
+		var m = this.gabrielMode;
+
+		this.scene.lines.forEach( function ( element ) {
+			element.children.forEach( function ( line ) {
+				line.visible = ( m === 'all' );
+			} );
+		} );
+
+		var x = { red: 0, yellow: 1, green: 2, grey: 3, all: undefined, nothing: undefined }[ m ];
+		if ( x !== undefined ) {
+			this.scene.lines[ x ].children.forEach( function ( line ) {
+				line.visible = true;
+			} );
+		}
+
+		this.scene.callrender();
+
 	}
 
 };

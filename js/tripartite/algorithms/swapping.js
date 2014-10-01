@@ -3,11 +3,6 @@ ALGO.SWAPPING = {
 	strategySwapRandom: {
 		description: 'Swapping with optimization strategy, choosing next randomly',
 		shortcut: 's.SR',
-		init: function () {
-			PAGES.INFOBOX.setPhase( 'swapping' );
-			PAGES.INFOSTATS.setPhaseChange();
-			VISUALISATION.showLines( false );
-		},
 		run: function () {
 			var n = TRIS.length;
 			var r1 = Math.round( Math.random()*(n-1) );
@@ -43,11 +38,6 @@ ALGO.SWAPPING = {
 	strategySwapIntersecting: {
 		description: 'Swapping with optimization strategy, choosing next from intersections',
 		shortcut: 's.SI',
-		init: function () {
-			PAGES.INFOBOX.setPhase( 'swapping' );
-			PAGES.INFOSTATS.setPhaseChange();
-			VISUALISATION.showLines( false );
-		},
 		run: function () {
 			var n = TRIS.length;
 			var x = COUNTING.getAllIntersectingTriangles( true );
@@ -87,11 +77,6 @@ ALGO.SWAPPING = {
 	strategySwapIntersectingBFS: {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB',
-		init: function () {
-			PAGES.INFOBOX.setPhase( 'swapping' );
-			PAGES.INFOSTATS.setPhaseChange();
-			VISUALISATION.showLines( false );
-		},
 		run: function () {
 			var n = TRIS.length;
 			var x = COUNTING.getAllIntersectingTriangles( true );
@@ -167,11 +152,6 @@ ALGO.SWAPPING = {
 	strategySwapIntersectingBFS2: {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB2',
-		init: function () {
-			PAGES.INFOBOX.setPhase( 'swapping' );
-			PAGES.INFOSTATS.setPhaseChange();
-			VISUALISATION.showLines( false );
-		},
 		run: function () {
 			var n = TRIS.length;
 			var x = COUNTING.getAllIntersectingPairs( true );
@@ -252,11 +232,6 @@ ALGO.SWAPPING = {
 	randomSwap: {
 		description: 'Random swapping without termination',
 		shortcut: 's.R',
-		init: function () {
-			PAGES.INFOBOX.setPhase( 'swapping' );
-			PAGES.INFOSTATS.setPhaseChange();
-			VISUALISATION.showLines( false );
-		},
 		run: function () {
 			var n = TRIS.length;
 			var r1 = Math.round( Math.random()*(n-1) );
@@ -270,7 +245,6 @@ ALGO.SWAPPING = {
 	none: {
 		description: 'Halts after startup triangle connection',
 		shortcut: 's.N',
-		init: function () { ; },
 		run: function () {
 			TIMECONTROL.clear();
 			if ( ALGO.onFinish !== null ) {
