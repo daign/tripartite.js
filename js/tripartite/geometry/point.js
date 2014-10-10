@@ -1,4 +1,4 @@
-var Point = function ( coords ) {
+GEOMETRY.Point = function ( coords ) {
 	this.coords = coords;
 
 	this.group = undefined;
@@ -12,8 +12,8 @@ var Point = function ( coords ) {
 
 };
 
-Point.prototype = {
-	constructor: Point,
+GEOMETRY.Point.prototype = {
+	constructor: GEOMETRY.Point,
 	getVector: function () {
 		return this.coords.clone();
 	},

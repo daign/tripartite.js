@@ -1,4 +1,4 @@
-ALGO.TRIANGLEBUILD = {
+ALGORITHMS.TRIANGLEBUILD = {
 
 	triangleBuildRandom: {
 		description: 'Randomly connects points to triangles on startup',
@@ -15,7 +15,7 @@ ALGO.TRIANGLEBUILD = {
 			}
 
 			function build() {
-				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
+				var tng = new GEOMETRY.Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
 				VISUALISATION.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				PAGES.SIMULATION.update();
@@ -24,7 +24,7 @@ ALGO.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
-					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
+					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
@@ -57,7 +57,7 @@ ALGO.TRIANGLEBUILD = {
 			stacks[ 2 ].sort( pointSort );
 
 			function build() {
-				var tng = new Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
+				var tng = new GEOMETRY.Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
 				VISUALISATION.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				PAGES.SIMULATION.update();
@@ -66,7 +66,7 @@ ALGO.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
-					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
+					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
@@ -80,7 +80,7 @@ ALGO.TRIANGLEBUILD = {
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 
-			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
+			ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
 
 			var p = POIS[ Math.round( Math.random()*(POIS.length-1) ) ];
 			p.visited = true;
@@ -117,7 +117,7 @@ ALGO.TRIANGLEBUILD = {
 				p.visited = true;
 				s.push( p );
 				if ( s.length >= 3 ) {
-					var tng = new Triangle( [ s.pop(), s.pop(), s.pop() ] );
+					var tng = new GEOMETRY.Triangle( [ s.pop(), s.pop(), s.pop() ] );
 					VISUALISATION.scene.triangles.add( tng.mesh );
 					TRIS.push( tng );
 					PAGES.SIMULATION.update();
@@ -126,7 +126,7 @@ ALGO.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
-					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
+					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
 
@@ -140,8 +140,8 @@ ALGO.TRIANGLEBUILD = {
 		run: function ( swappingFunction ) {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 
-			ALGO.DATASTRUCTURE.GabrielGraph.setUp();
-			ALGO.DATASTRUCTURE.DistanceToCenter.setUp();
+			ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
+			ALGORITHMS.DATASTRUCTURE.DistanceToCenter.setUp();
 			POIS.sort( function ( a, b ) {
 				if ( a.distanceToCenter > b.distanceToCenter ) {
 					return -1;
@@ -162,7 +162,7 @@ ALGO.TRIANGLEBUILD = {
 				function getNext( pa ) {
 					var l = pa.length;
 					var ng = ( pa[l-1].group + 1 ) % 3;
-					ALGO.DATASTRUCTURE.resetBFS();
+					ALGORITHMS.DATASTRUCTURE.resetBFS();
 
 					var SortedQueue = function () {
 						this.arr = [];
@@ -229,7 +229,7 @@ ALGO.TRIANGLEBUILD = {
 				pa.push( getNext( pa ) );
 				pa.push( getNext( pa ) );
 
-				var tng = new Triangle( pa );
+				var tng = new GEOMETRY.Triangle( pa );
 				VISUALISATION.scene.triangles.add( tng.mesh );
 				TRIS.push( tng );
 				PAGES.SIMULATION.update();
@@ -238,7 +238,7 @@ ALGO.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
-					TIMECONTROL.setTask( ALGO.SWAPPING[ swappingFunction ].run ).start();
+					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				} else {
 					while( POIS[ pi ].visited ) { pi++; }
 					p1 = POIS[ pi ];

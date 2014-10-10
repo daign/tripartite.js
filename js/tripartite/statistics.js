@@ -12,9 +12,9 @@ STATISTICS = {
 
 	startNewSetUp: function ( triangleBuild, swapping, optimization ) {
 		var label = (
-			  ALGO.TRIANGLEBUILD[ triangleBuild ].shortcut + ' '
-			+ ALGO.SWAPPING[ swapping ].shortcut + ' '
-			+ ALGO.OPTIMIZATIONMEASURE[ optimization ].shortcut
+			  ALGORITHMS.TRIANGLEBUILD[ triangleBuild ].shortcut + ' '
+			+ ALGORITHMS.SWAPPING[ swapping ].shortcut + ' '
+			+ ALGORITHMS.OPTIMIZATIONMEASURE[ optimization ].shortcut
 		);
 		this.setUp += 1;
 		this.record = -1;

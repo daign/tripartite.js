@@ -1,4 +1,4 @@
-ALGO.SWAPPING = {
+ALGORITHMS.SWAPPING = {
 
 	strategySwapRandom: {
 		description: 'Swapping with optimization strategy, choosing next randomly',
@@ -10,25 +10,25 @@ ALGO.SWAPPING = {
 			if ( r1 !== r2 ) {
 				var t1 = TRIS[ r1 ];
 				var t2 = TRIS[ r2 ];
-				var c = ALGO.getMeasure();
+				var c = ALGORITHMS.getMeasure();
 				var better = null;
 				for ( var i = 0; i < 3; i++ ) {
-					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
-					var cn = ALGO.getMeasure();
+					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+					var cn = ALGORITHMS.getMeasure();
 					if ( cn <= c ) {
 						better = i;
 						c = cn;
 					}
-					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 				}
 				if ( better !== null ) {
-					ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+					ALGORITHMS.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
 					PAGES.SIMULATION.update();
 				}
 				if ( COUNTING.countAllIntersections( true ) === 0 ) {
 					TIMECONTROL.clear();
-					if ( ALGO.onFinish !== null ) {
-						ALGO.onFinish();
+					if ( ALGORITHMS.onFinish !== null ) {
+						ALGORITHMS.onFinish();
 					}
 				}
 			}
@@ -43,8 +43,8 @@ ALGO.SWAPPING = {
 			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
-				if ( ALGO.onFinish !== null ) {
-					ALGO.onFinish();
+				if ( ALGORITHMS.onFinish !== null ) {
+					ALGORITHMS.onFinish();
 				}
 			} else {
 
@@ -54,19 +54,19 @@ ALGO.SWAPPING = {
 				var t2 = TRIS[ Math.round( Math.random() * ( n - 1 ) ) ];
 
 				if ( t1 !== t2 ) {
-					var c = ALGO.getMeasure();
+					var c = ALGORITHMS.getMeasure();
 					var better = null;
 					for ( var i = 0; i < 3; i++ ) {
-						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
-						var cn = ALGO.getMeasure();
+						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+						var cn = ALGORITHMS.getMeasure();
 						if ( cn <= c ) {
 							better = i;
 							c = cn;
 						}
-						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 					if ( better !== null ) {
-						ALGO.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+						ALGORITHMS.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
 						PAGES.SIMULATION.update();
 					}
 				}
@@ -82,8 +82,8 @@ ALGO.SWAPPING = {
 			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
-				if ( ALGO.onFinish !== null ) {
-					ALGO.onFinish();
+				if ( ALGORITHMS.onFinish !== null ) {
+					ALGORITHMS.onFinish();
 				}
 			} else {
 
@@ -91,15 +91,15 @@ ALGO.SWAPPING = {
 				var t1 = x[ 1 ][ Math.round( Math.random() * ( x[ 1 ].length - 1 ) ) ];
 
 				// second swap partner through breadth-first search on Gabriel Graph
-				ALGO.DATASTRUCTURE.GabrielGraph.setUp();
-				ALGO.DATASTRUCTURE.resetBFS();
+				ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
+				ALGORITHMS.DATASTRUCTURE.resetBFS();
 				var i = Math.round( Math.random()*2 );
 				var pv = t1.points[ i ];
 				pv.BFSVisited = true;
 				var vi = 1;
 
 				var better = false;
-				var c = ALGO.getMeasure();
+				var c = ALGORITHMS.getMeasure();
 
 				var Queue = function () {
 					this.arr = [];
@@ -131,8 +131,8 @@ ALGO.SWAPPING = {
 
 					var t2 = getNext();
 
-					ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
-					var cn = ALGO.getMeasure();
+					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+					var cn = ALGORITHMS.getMeasure();
 
 					if ( cn <= c ) {
 						better = true;
@@ -141,7 +141,7 @@ ALGO.SWAPPING = {
 						VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 						PAGES.SIMULATION.update();
 					} else {
-						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 
 				}
@@ -158,8 +158,8 @@ ALGO.SWAPPING = {
 			var x = COUNTING.getAllIntersectingPairs( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
-				if ( ALGO.onFinish !== null ) {
-					ALGO.onFinish();
+				if ( ALGORITHMS.onFinish !== null ) {
+					ALGORITHMS.onFinish();
 				}
 			} else {
 
@@ -170,14 +170,14 @@ ALGO.SWAPPING = {
 				var t1 = pair[ p1 ];
 
 				// second swap partner through breadth-first search on Gabriel Graph
-				ALGO.DATASTRUCTURE.GabrielGraph.setUp();
-				ALGO.DATASTRUCTURE.resetBFS();
+				ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
+				ALGORITHMS.DATASTRUCTURE.resetBFS();
 				var i = Math.round( Math.random()*2 );
 				var pv = pair[ p2 ].points[ i ]; // begin search with intersection partner
 				var vi = 0;
 
 				var better = false;
-				var c = ALGO.getMeasure();
+				var c = ALGORITHMS.getMeasure();
 
 				var Queue = function () {
 					this.arr = [];
@@ -211,8 +211,8 @@ ALGO.SWAPPING = {
 					var t2 = getNext();
 					if ( t1 !== t2 ) {
 
-						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
-						var cn = ALGO.getMeasure();
+						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+						var cn = ALGORITHMS.getMeasure();
 
 						if ( cn <= c ) {
 							better = true;
@@ -221,7 +221,7 @@ ALGO.SWAPPING = {
 							VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 							PAGES.SIMULATION.update();
 						} else {
-							ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+							ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
 						}
 					}
 
@@ -239,7 +239,7 @@ ALGO.SWAPPING = {
 			var r1 = Math.round( Math.random()*(n-1) );
 			var r2 = Math.round( Math.random()*(n-1) );
 			var p = Math.round( Math.random()*2 );
-			ALGO.SWAPPING.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
+			ALGORITHMS.SWAPPING.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
 			PAGES.SIMULATION.update();
 		}
 	},
@@ -249,8 +249,8 @@ ALGO.SWAPPING = {
 		shortcut: 's.N',
 		run: function () {
 			TIMECONTROL.clear();
-			if ( ALGO.onFinish !== null ) {
-				ALGO.onFinish();
+			if ( ALGORITHMS.onFinish !== null ) {
+				ALGORITHMS.onFinish();
 			}
 		}
 	},

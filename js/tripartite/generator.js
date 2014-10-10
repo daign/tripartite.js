@@ -16,7 +16,7 @@ var GENERATOR = {
 					var x = ( floats ) ? this.randomFloat() : this.randomInt();
 					var y = ( floats ) ? this.randomFloat() : this.randomInt();
 					var z = ( floats ) ? this.randomFloat() : this.randomInt();
-					var pnt = new Point( new THREE.Vector3( x, y, z ) );
+					var pnt = new GEOMETRY.Point( new THREE.Vector3( x, y, z ) );
 					pnt.group = gi;
 					pnt.buildMesh( VISUALISATION.MATERIALS.pointMaterials[ gi ] );
 					pnts.push( pnt );
@@ -32,8 +32,8 @@ var GENERATOR = {
 		VISUALISATION.scene.removeAll();
 		TRIS = [];
 		POIS = this.pointSets[ i ];
-		ALGO.DATASTRUCTURE.resetVisited();
-		ALGO.DATASTRUCTURE.GabrielGraph.reset();
+		ALGORITHMS.DATASTRUCTURE.resetVisited();
+		ALGORITHMS.DATASTRUCTURE.GabrielGraph.reset();
 		for ( var j = 0; j < POIS.length; j++ ) {
 			VISUALISATION.scene.points.add( POIS[ j ].mesh );
 		}

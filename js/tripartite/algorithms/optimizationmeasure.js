@@ -1,4 +1,4 @@
-ALGO.OPTIMIZATIONMEASURE = {
+ALGORITHMS.OPTIMIZATIONMEASURE = {
 
 	intersections: {
 		description: 'Counts all intersections',

@@ -1,4 +1,4 @@
-var Triangle = function ( points ) {
+GEOMETRY.Triangle = function ( points ) {
 	this.points = points;
 
 	points[ 0 ].triangle = this;
@@ -17,9 +17,9 @@ var Triangle = function ( points ) {
 
 	this.updateTriangle();
 };
-Triangle.prototype = {
+GEOMETRY.Triangle.prototype = {
 
-	constructor: Triangle,
+	constructor: GEOMETRY.Triangle,
 
 	updateTriangle: function () {
 		this.math = new THREE.Triangle( this.points[ 0 ].getVector(), this.points[ 1 ].getVector(), this.points[ 2 ].getVector() );

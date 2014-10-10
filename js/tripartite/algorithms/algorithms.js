@@ -1,12 +1,12 @@
-var ALGO = {
+var ALGORITHMS = {
 
 	onFinish: undefined,
 	getMeasure: undefined,
 
 	run: function ( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish ) {
-		ALGO.onFinish = onFinish;
-		ALGO.getMeasure = ALGO.OPTIMIZATIONMEASURE[ optimizationFunction ].get;
-		ALGO.TRIANGLEBUILD[ triangleBuildFunction ].run( swappingFunction );
+		ALGORITHMS.onFinish = onFinish;
+		ALGORITHMS.getMeasure = ALGORITHMS.OPTIMIZATIONMEASURE[ optimizationFunction ].get;
+		ALGORITHMS.TRIANGLEBUILD[ triangleBuildFunction ].run( swappingFunction );
 	}
 
 };

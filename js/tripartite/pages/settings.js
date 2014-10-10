@@ -111,7 +111,7 @@ PAGES.SETTINGS = {
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' );
 			}
-			ALGO.run( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish );
+			ALGORITHMS.run( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish );
 		}
 		start1.addEventListener( 'click', start1fun, false );
 		this.menu1.appendChild( start1 );
@@ -261,7 +261,7 @@ PAGES.SETTINGS = {
 
 				PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
 				PAGES.INFOBOX.setPass( ai + ' of ' + al );
-				ALGO.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], doNext );
+				ALGORITHMS.run( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ], doNext );
 			}
 			doNext();
 
@@ -295,7 +295,7 @@ PAGES.SETTINGS = {
 			PAGES.show( 'PAGES.SIMULATION' );
 			GENERATOR.generate( 1, parseInt( self.sel8.get() ) ).activate( 0 );
 			TRIS = [];
-			ALGO.DATASTRUCTURE.VoronoiConnectivity.setUp();
+			ALGORITHMS.DATASTRUCTURE.VoronoiConnectivity.setUp();
 			PAGES.SIMULATION.update();
 		}
 		start3.addEventListener( 'click', start3fun, false );
@@ -305,9 +305,9 @@ PAGES.SETTINGS = {
 	},
 
 	updateDescriptions: function () {
-		var d1 = ALGO.TRIANGLEBUILD[ this.sel1.get() ];
-		var d2 = ALGO.SWAPPING[ this.sel2.get() ];
-		var d3 = ALGO.OPTIMIZATIONMEASURE[ this.sel2b.get() ];
+		var d1 = ALGORITHMS.TRIANGLEBUILD[ this.sel1.get() ];
+		var d2 = ALGORITHMS.SWAPPING[ this.sel2.get() ];
+		var d3 = ALGORITHMS.OPTIMIZATIONMEASURE[ this.sel2b.get() ];
 		this.sel1des.innerHTML = '(' + d1.description + ') [' + d1.shortcut + ']';
 		this.sel2des.innerHTML = '(' + d2.description + ') [' + d2.shortcut + ']';
 		this.sel2bdes.innerHTML = '(' + d3.description + ') [' + d3.shortcut + ']';

@@ -1,11 +1,11 @@
-ALGO.DATASTRUCTURE = {
+ALGORITHMS.DATASTRUCTURE = {
 
 	GabrielGraph: {
 		description: 'Proximity information from Gabriel Graph',
 		computed: false,
 		setUp: function () {
-			if ( !ALGO.DATASTRUCTURE.GabrielGraph.computed ) {
-				ALGO.DATASTRUCTURE.GabrielGraph.computed = true;
+			if ( !ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed ) {
+				ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed = true;
 
 				var conns = [ [], [], [], [] ];
 
@@ -58,11 +58,11 @@ ALGO.DATASTRUCTURE = {
 			}
 		},
 		reset: function () {
-			if ( ALGO.DATASTRUCTURE.GabrielGraph.computed ) {
+			if ( ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed ) {
 				for ( var i = 0; i < POIS.length; i++ ) {
 					POIS[ i ].connections = [ [], [], [] ];
 				}
-				ALGO.DATASTRUCTURE.GabrielGraph.computed = false;
+				ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed = false;
 				PAGES.INFOBOX.gabrielSelect.setActivation( false );
 			}
 		}

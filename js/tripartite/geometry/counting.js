@@ -1,4 +1,4 @@
-COUNTING = {
+GEOMETRY.COUNTING = {
 	countAllIntersections: function ( countingStatistics ) {
 		var count = 0;
 		for ( var i = 0; i < TRIS.length; i++ ) {
@@ -75,4 +75,6 @@ COUNTING = {
 		return [ count, results ];
 	}
 };
+
+COUNTING = GEOMETRY.COUNTING;
 
