@@ -106,6 +106,11 @@ VISUALISATION = {
 				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.normal.shader );
 			}
 			this.scene.callrender();
+		} else if ( m === 'invisible' ) {
+			for ( var i = 0; i < TRIS.length; i++ ) {
+				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.invisible.shader );
+			}
+			this.scene.callrender();
 		} else {
 			for ( var i = 0; i < TRIS.length; i++ ) {
 				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );

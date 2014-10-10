@@ -85,7 +85,8 @@ PAGES.INFOBOX = {
 		this.materialSelect = new PAGES.SELECT( this.variableContent2, false, 0, onMaterial, [
 			[ 'standard',      'standard blue' ],
 			[ 'intersections', 'show intersections' ],
-			[ 'normal',        'normal material' ]
+			[ 'normal',        'normal material' ],
+			[ 'invisible',     'invisible' ]
 		] );
 
 		this.variableContent2.appendChild( document.createElement( 'br' ) );
