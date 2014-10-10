@@ -17,7 +17,9 @@ VISUALISATION.MATERIALS = {
 		blue:   new VISUALISATION.ShaderMaterial( 0, new THREE.Color( 0x0000ff ), 1.0 ),
 		red:    new VISUALISATION.ShaderMaterial( 0, new THREE.Color( 0xff0000 ), 1.0 ),
 		normal: new VISUALISATION.ShaderMaterial( 1, new THREE.Color( 0xffffff ), 1.0 )
-	}
+	},
+
+	swapLineMaterial: new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 2 } )
 
 };
 

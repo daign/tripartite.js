@@ -138,6 +138,7 @@ ALGO.SWAPPING = {
 						better = true;
 						STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 						STATISTICS.count( 'swaps' );
+						VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 						PAGES.SIMULATION.update();
 					} else {
 						ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
@@ -217,6 +218,7 @@ ALGO.SWAPPING = {
 							better = true;
 							STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 							STATISTICS.count( 'swaps' );
+							VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 							PAGES.SIMULATION.update();
 						} else {
 							ALGO.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
@@ -254,7 +256,16 @@ ALGO.SWAPPING = {
 	},
 
 	swapPoints: function ( triangle1, triangle2, pointGroup, counting, testSwap ) {
+
 		triangle1.swapPoint( triangle2, pointGroup );
+
+		if ( !testSwap ) {
+			VISUALISATION.scene.updateSwapLine(
+				triangle1.points[ pointGroup ].getVector(),
+				triangle2.points[ pointGroup ].getVector()
+			);
+		}
+
 		if ( counting ) {
 			if ( testSwap ) {
 				STATISTICS.count( 'testswaps' );
@@ -262,6 +273,7 @@ ALGO.SWAPPING = {
 				STATISTICS.count( 'swaps' );
 			}
 		}
+
 	}
 
 };

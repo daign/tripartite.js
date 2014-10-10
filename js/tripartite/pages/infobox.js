@@ -106,6 +106,22 @@ PAGES.INFOBOX = {
 		] );
 		this.gabrielSelect.setActivation( false );
 
+		this.variableContent2.appendChild( document.createElement( 'br' ) );
+		var showSwap = document.createElement( 'input' );
+		showSwap.id = 'showSwapInput';
+		showSwap.type = 'checkbox';
+		this.variableContent2.appendChild( showSwap );
+		var showSwapLabel = document.createElement( 'label' );
+		showSwapLabel.innerHTML = ' mark last swap';
+		showSwapLabel.htmlFor = showSwap.id;
+		this.variableContent2.appendChild( showSwapLabel );
+		var onShowSwap = function () {
+			event.stopPropagation();
+			VISUALISATION.setShowSwap( showSwap.checked );
+		};
+		showSwap.addEventListener( 'click', onShowSwap, false );
+		showSwapLabel.addEventListener( 'click', onShowSwap, false );
+
 		var self = this;
 		var onClick = function () {
 			self.toggle();

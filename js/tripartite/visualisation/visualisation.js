@@ -2,6 +2,7 @@ VISUALISATION = {
 
 	materialMode: 'standard',
 	gabrielMode:  'all',
+	showSwap: false,
 
 	init: function ( canvas ) {
 
@@ -48,6 +49,21 @@ VISUALISATION = {
 			];
 			s.lines.forEach( function ( element ) { s.scene.add( element ); } );
 
+			var swapLineGeometry = new THREE.Geometry();
+			swapLineGeometry.vertices.push( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, 0 ) );
+			swapLineGeometry.computeLineDistances();
+			s.swapLine = new THREE.Line( swapLineGeometry, VISUALISATION.MATERIALS.swapLineMaterial, THREE.LinePieces );
+			s.swapLine.visible = false;
+			s.scene.add( s.swapLine );
+
+			var updateSwapLine = function ( v0, v1 ) {
+				swapLineGeometry.vertices[ 0 ] = v0;
+				swapLineGeometry.vertices[ 1 ] = v1;
+				swapLineGeometry.verticesNeedUpdate = true;
+				swapLineGeometry.computeLineDistances();
+			};
+			s.updateSwapLine = updateSwapLine;
+
 			s.removeAll = function () {
 				while ( s.points.children.length > 0 ) {
 					s.points.remove( s.points.children[ s.points.children.length-1 ] );
@@ -60,6 +76,7 @@ VISUALISATION = {
 						element.remove( element.children[ element.children.length-1 ] );
 					}
 				} );
+				updateSwapLine( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, 0 ) );
 			};
 
 			return s;
@@ -124,6 +141,16 @@ VISUALISATION = {
 		}
 
 		this.scene.callrender();
+
+	},
+
+	setShowSwap: function ( b ) {
+
+		if ( b !== this.showSwap ) {
+			this.showSwap = b;
+			this.scene.swapLine.visible = b;
+			this.scene.callrender();
+		}
 
 	}
 
