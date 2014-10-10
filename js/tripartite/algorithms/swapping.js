@@ -13,16 +13,16 @@ ALGORITHMS.SWAPPING = {
 				var c = ALGORITHMS.getMeasure();
 				var better = null;
 				for ( var i = 0; i < 3; i++ ) {
-					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+					GEOMETRY.swapPoints( t1, t2, i, true, true ); // testswap
 					var cn = ALGORITHMS.getMeasure();
 					if ( cn <= c ) {
 						better = i;
 						c = cn;
 					}
-					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+					GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap
 				}
 				if ( better !== null ) {
-					ALGORITHMS.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+					GEOMETRY.swapPoints( t1, t2, better, true, false ); // real swap
 					PAGES.SIMULATION.update();
 				}
 				if ( COUNTING.countAllIntersections( true ) === 0 ) {
@@ -57,16 +57,16 @@ ALGORITHMS.SWAPPING = {
 					var c = ALGORITHMS.getMeasure();
 					var better = null;
 					for ( var i = 0; i < 3; i++ ) {
-						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // testswap
 						var cn = ALGORITHMS.getMeasure();
 						if ( cn <= c ) {
 							better = i;
 							c = cn;
 						}
-						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 					if ( better !== null ) {
-						ALGORITHMS.SWAPPING.swapPoints( t1, t2, better, true, false ); // real swap
+						GEOMETRY.swapPoints( t1, t2, better, true, false ); // real swap
 						PAGES.SIMULATION.update();
 					}
 				}
@@ -131,7 +131,7 @@ ALGORITHMS.SWAPPING = {
 
 					var t2 = getNext();
 
-					ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+					GEOMETRY.swapPoints( t1, t2, i, true, true ); // testswap
 					var cn = ALGORITHMS.getMeasure();
 
 					if ( cn <= c ) {
@@ -141,7 +141,7 @@ ALGORITHMS.SWAPPING = {
 						VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 						PAGES.SIMULATION.update();
 					} else {
-						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap
 					}
 
 				}
@@ -211,7 +211,7 @@ ALGORITHMS.SWAPPING = {
 					var t2 = getNext();
 					if ( t1 !== t2 ) {
 
-						ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // testswap
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // testswap
 						var cn = ALGORITHMS.getMeasure();
 
 						if ( cn <= c ) {
@@ -221,7 +221,7 @@ ALGORITHMS.SWAPPING = {
 							VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 							PAGES.SIMULATION.update();
 						} else {
-							ALGORITHMS.SWAPPING.swapPoints( t1, t2, i, true, true ); // undo testswap
+							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap
 						}
 					}
 
@@ -239,7 +239,7 @@ ALGORITHMS.SWAPPING = {
 			var r1 = Math.round( Math.random()*(n-1) );
 			var r2 = Math.round( Math.random()*(n-1) );
 			var p = Math.round( Math.random()*2 );
-			ALGORITHMS.SWAPPING.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
+			GEOMETRY.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
 			PAGES.SIMULATION.update();
 		}
 	},
@@ -253,27 +253,6 @@ ALGORITHMS.SWAPPING = {
 				ALGORITHMS.onFinish();
 			}
 		}
-	},
-
-	swapPoints: function ( triangle1, triangle2, pointGroup, counting, testSwap ) {
-
-		triangle1.swapPoint( triangle2, pointGroup );
-
-		if ( !testSwap ) {
-			VISUALISATION.scene.updateSwapLine(
-				triangle1.points[ pointGroup ].getVector(),
-				triangle2.points[ pointGroup ].getVector()
-			);
-		}
-
-		if ( counting ) {
-			if ( testSwap ) {
-				STATISTICS.count( 'testswaps' );
-			} else {
-				STATISTICS.count( 'swaps' );
-			}
-		}
-
 	}
 
 };
