@@ -1,4 +1,4 @@
-GEOMETRY = {
+var GEOMETRY = {
 
 	swapPoints: function ( triangle1, triangle2, pointGroup, counting, testSwap ) {
 

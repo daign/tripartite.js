@@ -294,7 +294,7 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'PAGES.SIMULATION' );
 			GENERATOR.generate( 1, parseInt( self.sel8.get() ) ).activate( 0 );
-			TRIS = [];
+			TRIANGLES.clear();
 			ALGORITHMS.DATASTRUCTURE.VoronoiConnectivity.setUp();
 			PAGES.SIMULATION.update();
 		}

@@ -1,4 +1,4 @@
-STATISTICS = {
+var STATISTICS = {
 
 	results: [],
 	setUp: -1,

@@ -1,9 +1,9 @@
 GEOMETRY.COUNTING = {
 	countAllIntersections: function ( countingStatistics ) {
 		var count = 0;
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			for ( var j = i+1; j < TRIS.length; j++ ) {
-				if ( TRIS[ i ].intersects( TRIS[ j ] ) ) {
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			for ( var j = i+1; j < TRIANGLES.getLength(); j++ ) {
+				if ( TRIANGLES.get( i ).intersects( TRIANGLES.get( j ) ) ) {
 					count++;
 				}
 				if ( countingStatistics ) {
@@ -15,41 +15,41 @@ GEOMETRY.COUNTING = {
 	},
 	countAllAreas: function () {
 		var a = 0;
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			a += TRIS[ i ].math.area();
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			a += TRIANGLES.get( i ).math.area();
 		}
 		return a;
 	},
 	countAllLongestEdges: function () {
 		var l = 0;
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			l += TRIS[ i ].longestEdge();
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			l += TRIANGLES.get( i ).longestEdge();
 		}
 		return l;
 	},
 	countAllMaximumAngles: function () {
 		var a = 0;
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			a += TRIS[ i ].maximumAngle();
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			a += TRIANGLES.get( i ).maximumAngle();
 		}
 		return a;
 	},
 	countAllMinimumAngles: function () {
 		var a = 0;
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			a += TRIS[ i ].minimumAngle();
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			a += TRIANGLES.get( i ).minimumAngle();
 		}
 		return a;
 	},
 	getAllIntersectingTriangles: function ( countingStatistics ) {
 		var count = 0;
 		var results = [];
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			for ( var j = i+1; j < TRIS.length; j++ ) {
-				if ( TRIS[ i ].intersects( TRIS[ j ] ) ) {
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			for ( var j = i+1; j < TRIANGLES.getLength(); j++ ) {
+				if ( TRIANGLES.get( i ).intersects( TRIANGLES.get( j ) ) ) {
 					count++;
-					if ( results.indexOf( TRIS[ i ] ) === -1 ) { results.push( TRIS[ i ] ); }
-					if ( results.indexOf( TRIS[ j ] ) === -1 ) { results.push( TRIS[ j ] ); }
+					if ( results.indexOf( TRIANGLES.get( i ) ) === -1 ) { results.push( TRIANGLES.get( i ) ); }
+					if ( results.indexOf( TRIANGLES.get( j ) ) === -1 ) { results.push( TRIANGLES.get( j ) ); }
 				}
 				if ( countingStatistics ) {
 					STATISTICS.count( 'intersectiontests' );
@@ -61,11 +61,11 @@ GEOMETRY.COUNTING = {
 	getAllIntersectingPairs: function ( countingStatistics ) {
 		var count = 0;
 		var results = [];
-		for ( var i = 0; i < TRIS.length; i++ ) {
-			for ( var j = i+1; j < TRIS.length; j++ ) {
-				if ( TRIS[ i ].intersects( TRIS[ j ] ) ) {
+		for ( var i = 0; i < TRIANGLES.getLength(); i++ ) {
+			for ( var j = i+1; j < TRIANGLES.getLength(); j++ ) {
+				if ( TRIANGLES.get( i ).intersects( TRIANGLES.get( j ) ) ) {
 					count++;
-					results.push( [ TRIS[ i ], TRIS[ j ] ] );
+					results.push( [ TRIANGLES.get( i ), TRIANGLES.get( j ) ] );
 				}
 				if ( countingStatistics ) {
 					STATISTICS.count( 'intersectiontests' );
@@ -76,5 +76,5 @@ GEOMETRY.COUNTING = {
 	}
 };
 
-COUNTING = GEOMETRY.COUNTING;
+var COUNTING = GEOMETRY.COUNTING;
 

@@ -15,10 +15,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 			}
 
 			function build() {
-				var tng = new GEOMETRY.Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
-				VISUALISATION.scene.triangles.add( tng.mesh );
-				TRIS.push( tng );
-				PAGES.SIMULATION.update();
+				TRIANGLES.addTriangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
@@ -57,10 +54,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 			stacks[ 2 ].sort( pointSort );
 
 			function build() {
-				var tng = new GEOMETRY.Triangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
-				VISUALISATION.scene.triangles.add( tng.mesh );
-				TRIS.push( tng );
-				PAGES.SIMULATION.update();
+				TRIANGLES.addTriangle( [ stacks[ 0 ].pop(), stacks[ 1 ].pop(), stacks[ 2 ].pop() ] );
 
 				if ( stacks[ 0 ].length === 0 ) {
 					TIMECONTROL.clear();
@@ -117,12 +111,9 @@ ALGORITHMS.TRIANGLEBUILD = {
 				p.visited = true;
 				s.push( p );
 				if ( s.length >= 3 ) {
-					var tng = new GEOMETRY.Triangle( [ s.pop(), s.pop(), s.pop() ] );
-					VISUALISATION.scene.triangles.add( tng.mesh );
-					TRIS.push( tng );
-					PAGES.SIMULATION.update();
+					TRIANGLES.addTriangle( [ s.pop(), s.pop(), s.pop() ] );
 				}
-				if ( TRIS.length*3 >= POIS.length ) {
+				if ( TRIANGLES.getLength()*3 >= POIS.length ) {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
@@ -229,12 +220,9 @@ ALGORITHMS.TRIANGLEBUILD = {
 				pa.push( getNext( pa ) );
 				pa.push( getNext( pa ) );
 
-				var tng = new GEOMETRY.Triangle( pa );
-				VISUALISATION.scene.triangles.add( tng.mesh );
-				TRIS.push( tng );
-				PAGES.SIMULATION.update();
+				TRIANGLES.addTriangle( pa );
 
-				if ( TRIS.length*3 >= POIS.length ) {
+				if ( TRIANGLES.getLength()*3 >= POIS.length ) {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();

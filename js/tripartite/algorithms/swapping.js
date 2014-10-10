@@ -4,12 +4,12 @@ ALGORITHMS.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next randomly',
 		shortcut: 's.SR',
 		run: function () {
-			var n = TRIS.length;
+			var n = TRIANGLES.getLength();
 			var r1 = Math.round( Math.random()*(n-1) );
 			var r2 = Math.round( Math.random()*(n-1) );
 			if ( r1 !== r2 ) {
-				var t1 = TRIS[ r1 ];
-				var t2 = TRIS[ r2 ];
+				var t1 = TRIANGLES.get( r1 );
+				var t2 = TRIANGLES.get( r2 );
 				var c = ALGORITHMS.getMeasure();
 				var better = null;
 				for ( var i = 0; i < 3; i++ ) {
@@ -39,7 +39,7 @@ ALGORITHMS.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections',
 		shortcut: 's.SI',
 		run: function () {
-			var n = TRIS.length;
+			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
@@ -51,7 +51,7 @@ ALGORITHMS.SWAPPING = {
 				// first swap partner from intersections
 				var t1 = x[ 1 ][ Math.round( Math.random() * ( x[ 1 ].length - 1 ) ) ];
 				// second swap partner random
-				var t2 = TRIS[ Math.round( Math.random() * ( n - 1 ) ) ];
+				var t2 = TRIANGLES.get( Math.round( Math.random() * ( n - 1 ) ) );
 
 				if ( t1 !== t2 ) {
 					var c = ALGORITHMS.getMeasure();
@@ -78,7 +78,7 @@ ALGORITHMS.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB',
 		run: function () {
-			var n = TRIS.length;
+			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingTriangles( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
@@ -154,7 +154,7 @@ ALGORITHMS.SWAPPING = {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB2',
 		run: function () {
-			var n = TRIS.length;
+			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingPairs( true );
 			if ( x[ 0 ] === 0 ) {
 				TIMECONTROL.clear();
@@ -235,11 +235,11 @@ ALGORITHMS.SWAPPING = {
 		description: 'Random swapping without termination',
 		shortcut: 's.R',
 		run: function () {
-			var n = TRIS.length;
+			var n = TRIANGLES.getLength();
 			var r1 = Math.round( Math.random()*(n-1) );
 			var r2 = Math.round( Math.random()*(n-1) );
 			var p = Math.round( Math.random()*2 );
-			GEOMETRY.swapPoints( TRIS[ r1 ], TRIS[ r2 ], p, true, false );
+			GEOMETRY.swapPoints( TRIANGLES.get( r1 ), TRIANGLES.get( r2 ), p, true, false );
 			PAGES.SIMULATION.update();
 		}
 	},

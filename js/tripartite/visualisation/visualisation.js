@@ -1,4 +1,4 @@
-VISUALISATION = {
+var VISUALISATION = {
 
 	materialMode: 'standard',
 	gabrielMode:  'all',
@@ -86,37 +86,49 @@ VISUALISATION = {
 
 	update: function () {
 		if ( this.materialMode === 'intersections' ) {
-			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
-			}
+			TRIANGLES.forEach( function ( triangle ) {
+				triangle.setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
+			} );
 			var intersects = COUNTING.getAllIntersectingTriangles( false )[ 1 ];
-			for ( var i = 0; i < intersects.length; i++ ) {
-				intersects[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.red.shader );
-			}
+			intersects.forEach( function ( triangle ) {
+				triangle.setMaterial( VISUALISATION.MATERIALS.triangleMaterials.red.shader );
+			} );
 		}
 		this.scene.callrender();
 	},
 
 	setMaterialMode: function ( m ) {
-		this.materialMode = m;
+
+		if ( m !== this.materialMode ) {
+			this.materialMode = m;
+			this.applyMaterialMode();
+		}
+
+	},
+
+	applyMaterialMode: function () {
+
+		var m = this.materialMode;
+
 		if ( m === 'intersections' ) {
 			this.update();
 		} else if ( m === 'normal' ) {
-			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.normal.shader );
-			}
+			TRIANGLES.forEach( function ( triangle ) {
+				triangle.setMaterial( VISUALISATION.MATERIALS.triangleMaterials.normal.shader );
+			} );
 			this.scene.callrender();
 		} else if ( m === 'invisible' ) {
-			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.invisible.shader );
-			}
+			TRIANGLES.forEach( function ( triangle ) {
+				triangle.setMaterial( VISUALISATION.MATERIALS.triangleMaterials.invisible.shader );
+			} );
 			this.scene.callrender();
 		} else {
-			for ( var i = 0; i < TRIS.length; i++ ) {
-				TRIS[ i ].setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
-			}
+			TRIANGLES.forEach( function ( triangle ) {
+				triangle.setMaterial( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
+			} );
 			this.scene.callrender();
 		}
+
 	},
 
 	setGabrielMode: function ( m ) {

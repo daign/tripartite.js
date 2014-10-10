@@ -1,4 +1,4 @@
-PAGES = {
+var PAGES = {
 
 	nodes: {},
 	listeners: {},

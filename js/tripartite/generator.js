@@ -30,7 +30,7 @@ var GENERATOR = {
 
 	activate: function ( i ) {
 		VISUALISATION.scene.removeAll();
-		TRIS = [];
+		TRIANGLES.clear();
 		POIS = this.pointSets[ i ];
 		ALGORITHMS.DATASTRUCTURE.resetVisited();
 		ALGORITHMS.DATASTRUCTURE.GabrielGraph.reset();
