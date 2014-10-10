@@ -13,13 +13,16 @@ GEOMETRY.Triangle = function ( points ) {
 	this.geom.faces.push( new THREE.Face3( 2, 1, 0 ) );
 	this.geom.dynamic = true;
 	this.geom.computeFaceNormals();
-	this.mesh = new THREE.Mesh( this.geom, VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
 
 	this.updateTriangle();
 };
 GEOMETRY.Triangle.prototype = {
 
 	constructor: GEOMETRY.Triangle,
+
+	buildMesh: function ( material ) {
+		this.mesh = new THREE.Mesh( this.geom, material );
+	},
 
 	updateTriangle: function () {
 		this.math = new THREE.Triangle( this.points[ 0 ].getVector(), this.points[ 1 ].getVector(), this.points[ 2 ].getVector() );

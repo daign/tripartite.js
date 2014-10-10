@@ -6,8 +6,10 @@
 
 	<script src="../js/lib/three.js"></script>
 	<script src="../js/lib/OrbitControls.js"></script>
-	<script src="../js/tripartite/point.js"></script>
-	<script src="../js/tripartite/triangle.js"></script>
+
+	<script src="../js/tripartite/geometry/geometry.js"></script>
+	<script src="../js/tripartite/geometry/point.js"></script>
+	<script src="../js/tripartite/geometry/triangle.js"></script>
 
 	<style>
 		body { font-family: monospace; font-size: 16px; }
@@ -55,6 +57,9 @@ var addTest = function ( node, t1, t2 ) {
 	scene.add( t2.points[ 1 ].buildMesh( material ) );
 	scene.add( t2.points[ 2 ].buildMesh( material ) );
 
+	var material2 = new THREE.MeshNormalMaterial();
+	t1.buildMesh( material2 );
+	t2.buildMesh( material2 );
 	scene.add( t1.mesh );
 	scene.add( t2.mesh );
 
@@ -68,85 +73,85 @@ var addTest = function ( node, t1, t2 ) {
 
 addTest(
 	document.getElementById( 'node1' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  0,  0,  0 ) ),
-		new Point( new THREE.Vector3(  0, 10,  0 ) ),
-		new Point( new THREE.Vector3( 10,  5, 10 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  0,  0,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  0, 10,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 10,  5, 10 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  5,  0,  0 ) ),
-		new Point( new THREE.Vector3(  5, 10, 10 ) ),
-		new Point( new THREE.Vector3( 10,  7, 10 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  5,  0,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  5, 10, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 10,  7, 10 ) )
 	] )
 );
 
 addTest(
 	document.getElementById( 'node2' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  7,  7,  5 ) ),
-		new Point( new THREE.Vector3( 10,  3, 10 ) ),
-		new Point( new THREE.Vector3(  3,  5, 10 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  7,  7,  5 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 10,  3, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  3,  5, 10 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3( 10,  0,  6 ) ),
-		new Point( new THREE.Vector3(  3,  3, 10 ) ),
-		new Point( new THREE.Vector3(  4, 10,  6 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3( 10,  0,  6 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  3,  3, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  4, 10,  6 ) )
 	] )
 );
 
 addTest(
 	document.getElementById( 'node3' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  0,  7,  0 ) ),
-		new Point( new THREE.Vector3(  7,  2, 10 ) ),
-		new Point( new THREE.Vector3( 10,  7,  3 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  0,  7,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  7,  2, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 10,  7,  3 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  6,  8,  8 ) ),
-		new Point( new THREE.Vector3( 11,  2,  1 ) ),
-		new Point( new THREE.Vector3(  3,  7, 10 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  6,  8,  8 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 11,  2,  1 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  3,  7, 10 ) )
 	] )
 );
 
 addTest(
 	document.getElementById( 'node4' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  0,  0,  0 ) ),
-		new Point( new THREE.Vector3(  6,  5, 10 ) ),
-		new Point( new THREE.Vector3(  6, 10,  5 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  0,  0,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  6,  5, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  6, 10,  5 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  3,  0,  0 ) ),
-		new Point( new THREE.Vector3(  9,  5, 10 ) ),
-		new Point( new THREE.Vector3(  9, 10,  5 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  3,  0,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  9,  5, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  9, 10,  5 ) )
 	] )
 );
 
 addTest(
 	document.getElementById( 'node5' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  2,  0,  4 ) ),
-		new Point( new THREE.Vector3(  7,  3,  4 ) ),
-		new Point( new THREE.Vector3(  5, 10,  4 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  2,  0,  4 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  7,  3,  4 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  5, 10,  4 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3( 10,  7,  4 ) ),
-		new Point( new THREE.Vector3(  0,  8,  4 ) ),
-		new Point( new THREE.Vector3(  8,  0,  4 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3( 10,  7,  4 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  0,  8,  4 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  8,  0,  4 ) )
 	] )
 );
 
 addTest(
 	document.getElementById( 'node6' ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  5,  3, 10 ) ),
-		new Point( new THREE.Vector3(  5,  7,  0 ) ),
-		new Point( new THREE.Vector3(  0,  9,  8 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  5,  3, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  5,  7,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  0,  9,  8 ) )
 	] ),
-	new Triangle( [
-		new Point( new THREE.Vector3(  5,  3, 10 ) ),
-		new Point( new THREE.Vector3(  5,  7,  0 ) ),
-		new Point( new THREE.Vector3( 10,  9,  8 ) )
+	new GEOMETRY.Triangle( [
+		new GEOMETRY.Point( new THREE.Vector3(  5,  3, 10 ) ),
+		new GEOMETRY.Point( new THREE.Vector3(  5,  7,  0 ) ),
+		new GEOMETRY.Point( new THREE.Vector3( 10,  9,  8 ) )
 	] )
 );
 </script>

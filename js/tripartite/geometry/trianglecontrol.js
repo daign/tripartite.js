@@ -13,6 +13,7 @@ GEOMETRY.TriangleControl = {
 	addTriangle: function ( points ) {
 		var tng = new GEOMETRY.Triangle( points );
 		this.triangles.push( tng );
+		tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
 		VISUALISATION.scene.triangles.add( tng.mesh );
 		VISUALISATION.applyMaterialMode();
 	},
