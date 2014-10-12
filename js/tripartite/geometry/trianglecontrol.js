@@ -1,29 +1,33 @@
 GEOMETRY.TriangleControl = {
 
-	triangles: [],
+	set: new GEOMETRY.TriangleSet(),
 
 	get: function ( i ) {
-		return this.triangles[ i ];
+		return this.set.get( i );
 	},
 
 	getLength: function () {
-		return this.triangles.length;
+		return this.set.getLength();
 	},
 
 	addTriangle: function ( points ) {
+
 		var tng = new GEOMETRY.Triangle( points );
-		this.triangles.push( tng );
+		tng.setPointsReference();
+		this.set.push( tng );
+
 		tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
 		VISUALISATION.scene.triangles.add( tng.mesh );
 		VISUALISATION.applyMaterialMode();
+
 	},
 
 	clear: function () {
-		this.triangles = [];
+		this.set.clear();
 	},
 
 	forEach: function ( f ) {
-		this.triangles.forEach( f );
+		this.set.forEach( f );
 	}
 
 };

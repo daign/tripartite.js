@@ -1,58 +1,87 @@
 GEOMETRY.Triangle = function ( points ) {
+
 	this.points = points;
 
-	points[ 0 ].triangle = this;
-	points[ 1 ].triangle = this;
-	points[ 2 ].triangle = this;
+	this.math = new THREE.Triangle();
+	this.updateMath();
 
-	this.geom = new THREE.Geometry();
-	this.geom.vertices.push( this.points[ 0 ].getVector() );
-	this.geom.vertices.push( this.points[ 1 ].getVector() );
-	this.geom.vertices.push( this.points[ 2 ].getVector() );
-	this.geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-	this.geom.faces.push( new THREE.Face3( 2, 1, 0 ) );
-	this.geom.dynamic = true;
-	this.geom.computeFaceNormals();
+	this.mesh = undefined;
+	this.geometry = undefined;
 
-	this.updateTriangle();
 };
+
 GEOMETRY.Triangle.prototype = {
 
 	constructor: GEOMETRY.Triangle,
 
+	clone: function () {
+
+		return new GEOMETRY.Triangle( this.points );
+
+	},
+
+	updateMath: function () {
+
+		this.math.set( this.points[ 0 ].coords, this.points[ 1 ].coords, this.points[ 2 ].coords );
+
+	},
+
 	buildMesh: function ( material ) {
-		this.mesh = new THREE.Mesh( this.geom, material );
+
+		this.geometry = new THREE.Geometry();
+		this.geometry.vertices.push( this.points[ 0 ].coords );
+		this.geometry.vertices.push( this.points[ 1 ].coords );
+		this.geometry.vertices.push( this.points[ 2 ].coords );
+		this.geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+		this.geometry.faces.push( new THREE.Face3( 2, 1, 0 ) );
+		this.geometry.dynamic = true;
+		this.geometry.computeFaceNormals();
+
+		this.mesh = new THREE.Mesh( this.geometry, material );
+
 	},
 
-	updateTriangle: function () {
-		this.math = new THREE.Triangle( this.points[ 0 ].getVector(), this.points[ 1 ].getVector(), this.points[ 2 ].getVector() );
+	updateGeometry: function () {
+
+		if ( this.geometry !== undefined ) {
+			this.geometry.vertices[ 0 ] = this.points[ 0 ].coords;
+			this.geometry.vertices[ 1 ] = this.points[ 1 ].coords;
+			this.geometry.vertices[ 2 ] = this.points[ 2 ].coords;
+			this.geometry.verticesNeedUpdate = true;
+			this.geometry.computeFaceNormals();
+		}
+
 	},
 
-	updateVertices: function () {
-		this.geom.vertices[ 0 ] = this.points[ 0 ].getVector();
-		this.geom.vertices[ 1 ] = this.points[ 1 ].getVector();
-		this.geom.vertices[ 2 ] = this.points[ 2 ].getVector();
-		this.geom.verticesNeedUpdate = true;
-		this.geom.computeFaceNormals();
+	setPointsReference: function () {
+
+		this.points[ 0 ].triangle = this;
+		this.points[ 1 ].triangle = this;
+		this.points[ 2 ].triangle = this;
+
 	},
 
 	swapPoint: function ( t2, n ) {
+
 		var pt = this.points[ n ];
 		this.points[ n ] = t2.points[ n ];
 		t2.points[ n ] = pt;
 
-		this.points[ n ].triangle = this;
-		t2.points[ n ].triangle = t2;
+		this.setPointsReference();
+		this.updateGeometry();
+		this.updateMath();
 
-		this.updateVertices();
-		t2.updateVertices();
-		this.updateTriangle();
-		t2.updateTriangle();
+		t2.setPointsReference();
+		t2.updateGeometry();
+		t2.updateMath();
+
 	},
 
 	setMaterial: function ( material ) {
+
 		this.mesh.material = material;
 		this.mesh.material.needsUpdate = true;
+
 	},
 
 	isParallel: function ( t2 ) {
