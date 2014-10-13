@@ -1,6 +1,7 @@
 GEOMETRY.TriangleControl = {
 
 	set: new GEOMETRY.TriangleSet(),
+	store: new GEOMETRY.TriangleStore(),
 
 	get: function ( i ) {
 		return this.set.get( i );
@@ -28,6 +29,25 @@ GEOMETRY.TriangleControl = {
 
 	forEach: function ( f ) {
 		this.set.forEach( f );
+	},
+
+	storeCurrent: function () {
+		this.store.storeCurrent();
+	},
+
+	activateNext: function () {
+		VISUALISATION.scene.removeTriangles();
+		this.set.forEach( function ( tng ) {
+			tng.removeMesh();
+		} );
+
+		this.set = this.store.withdrawBest();
+		this.set.forEach( function ( tng ) {
+			tng.setPointsReference();
+			tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
+			VISUALISATION.scene.triangles.add( tng.mesh );
+		} );
+		VISUALISATION.applyMaterialMode();
 	}
 
 };

@@ -79,6 +79,12 @@ var VISUALISATION = {
 				updateSwapLine( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, 0 ) );
 			};
 
+			s.removeTriangles = function () {
+				while ( s.triangles.children.length > 0 ) {
+					s.triangles.remove( s.triangles.children[ s.triangles.children.length-1 ] );
+				}
+			};
+
 			return s;
 		} )();
 

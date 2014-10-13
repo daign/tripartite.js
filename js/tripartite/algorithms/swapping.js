@@ -231,6 +231,51 @@ ALGORITHMS.SWAPPING = {
 		}
 	},
 
+	aStarRandomNeighbors: {
+		description: 'Swapping with A star search, choosing neighbors randomly',
+		shortcut: 's.AR',
+		run: ( function () {
+
+			var initialized = false;
+
+			return function () {
+
+				if ( !initialized ) {
+					initialized = true;
+					TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
+					TRIANGLES.storeCurrent();
+				}
+
+				TRIANGLES.activateNext();
+
+				if ( COUNTING.countAllIntersections( true ) === 0 ) {
+					TIMECONTROL.clear();
+					if ( ALGORITHMS.onFinish !== null ) {
+						ALGORITHMS.onFinish();
+					}
+				}
+
+				var n = TRIANGLES.getLength();
+				var neighbors = 0;
+				while ( neighbors < 4 ) {
+					var r1 = Math.round( Math.random()*(n-1) );
+					var r2 = Math.round( Math.random()*(n-1) );
+					if ( r1 !== r2 ) {
+						neighbors++;
+						var t1 = TRIANGLES.get( r1 );
+						var t2 = TRIANGLES.get( r2 );
+						var i = Math.round( Math.random()*2 );
+						GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
+						TRIANGLES.storeCurrent();
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
+					}
+				}
+
+			};
+
+		} )()
+	},
+
 	randomSwap: {
 		description: 'Random swapping without termination',
 		shortcut: 's.R',

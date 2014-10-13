@@ -41,6 +41,13 @@ GEOMETRY.Triangle.prototype = {
 
 	},
 
+	removeMesh: function () {
+
+		this.mesh = undefined;
+		this.geometry = undefined;
+
+	},
+
 	updateGeometry: function () {
 
 		if ( this.geometry !== undefined ) {
