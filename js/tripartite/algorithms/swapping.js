@@ -3,6 +3,7 @@ ALGORITHMS.SWAPPING = {
 	strategySwapRandom: {
 		description: 'Swapping with optimization strategy, choosing next randomly',
 		shortcut: 's.SR',
+		initialise: function () {},
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var r1 = Math.round( Math.random()*(n-1) );
@@ -38,6 +39,7 @@ ALGORITHMS.SWAPPING = {
 	strategySwapIntersecting: {
 		description: 'Swapping with optimization strategy, choosing next from intersections',
 		shortcut: 's.SI',
+		initialise: function () {},
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingTriangles( true );
@@ -77,6 +79,7 @@ ALGORITHMS.SWAPPING = {
 	strategySwapIntersectingBFS: {
 		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
 		shortcut: 's.SIB',
+		initialise: function () {},
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingTriangles( true );
@@ -153,6 +156,7 @@ ALGORITHMS.SWAPPING = {
 	strategySwapIntersectingPartnerBFS: {
 		description: 'Swapping with optimization strategy, choosing next from intersection partner with BFS',
 		shortcut: 's.SIP',
+		initialise: function () {},
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingPairs( true );
@@ -234,110 +238,95 @@ ALGORITHMS.SWAPPING = {
 	aStarRandomNeighbors: {
 		description: 'Swapping with A star search, choosing neighbors randomly',
 		shortcut: 's.AR',
-		run: ( function () {
+		initialise: function () {
+			TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
+			TRIANGLES.storeCurrent();
+		},
+		run: function () {
 
-			var initialized = false;
+			TRIANGLES.activateNext();
 
-			return function () {
+			if ( COUNTING.countAllIntersections( true ) === 0 ) {
 
-				if ( !initialized ) {
-					initialized = true;
-					TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
-					TRIANGLES.storeCurrent();
+				TIMECONTROL.clear();
+				if ( ALGORITHMS.onFinish !== null ) {
+					ALGORITHMS.onFinish();
 				}
 
-				TRIANGLES.activateNext();
+			} else {
 
-				if ( COUNTING.countAllIntersections( true ) === 0 ) {
+				var n = TRIANGLES.getLength();
+				var neighbors = 0;
 
-					TIMECONTROL.clear();
-					initialized = false;
-					if ( ALGORITHMS.onFinish !== null ) {
-						ALGORITHMS.onFinish();
+				while ( neighbors < 10 ) {
+					var r1 = Math.round( Math.random()*(n-1) );
+					var r2 = Math.round( Math.random()*(n-1) );
+					if ( r1 !== r2 ) {
+						neighbors++;
+						var t1 = TRIANGLES.get( r1 );
+						var t2 = TRIANGLES.get( r2 );
+						var i = Math.round( Math.random()*2 );
+						GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
+						TRIANGLES.storeCurrent();
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
 					}
-
-				} else {
-
-					var n = TRIANGLES.getLength();
-					var neighbors = 0;
-
-					while ( neighbors < 10 ) {
-						var r1 = Math.round( Math.random()*(n-1) );
-						var r2 = Math.round( Math.random()*(n-1) );
-						if ( r1 !== r2 ) {
-							neighbors++;
-							var t1 = TRIANGLES.get( r1 );
-							var t2 = TRIANGLES.get( r2 );
-							var i = Math.round( Math.random()*2 );
-							GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
-							TRIANGLES.storeCurrent();
-							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
-						}
-					}
-
 				}
 
-			};
+			}
 
-		} )()
+		}
+
 	},
 
 	aStarIntersectingNeighbors: {
 		description: 'Swapping with A star search, choosing neighbors from intersections',
 		shortcut: 's.AI',
-		run: ( function () {
+		initialise: function () {
+			TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
+			TRIANGLES.storeCurrent();
+		},
+		run: function () {
 
-			var initialized = false;
+			TRIANGLES.activateNext();
 
-			return function () {
+			if ( COUNTING.countAllIntersections( true ) === 0 ) {
 
-				if ( !initialized ) {
-					initialized = true;
-					TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
-					TRIANGLES.storeCurrent();
+				TIMECONTROL.clear();
+				if ( ALGORITHMS.onFinish !== null ) {
+					ALGORITHMS.onFinish();
 				}
 
-				TRIANGLES.activateNext();
+			} else {
 
-				if ( COUNTING.countAllIntersections( true ) === 0 ) {
+				var n = TRIANGLES.getLength();
+				var x = COUNTING.getAllIntersectingTriangles( true );
+				var neighbors = 0;
 
-					TIMECONTROL.clear();
-					initialized = false;
-					if ( ALGORITHMS.onFinish !== null ) {
-						ALGORITHMS.onFinish();
+				while ( neighbors < 10 ) {
+					// first swap partner from intersections
+					var t1 = x[ 1 ][ Math.round( Math.random() * ( x[ 1 ].length - 1 ) ) ];
+					// second swap partner random
+					var t2 = TRIANGLES.get( Math.round( Math.random() * ( n - 1 ) ) );
+
+					if ( t1 !== t2 ) {
+						neighbors++;
+						var i = Math.round( Math.random()*2 );
+						GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
+						TRIANGLES.storeCurrent();
+						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
 					}
-
-				} else {
-
-					var n = TRIANGLES.getLength();
-					var x = COUNTING.getAllIntersectingTriangles( true );
-					var neighbors = 0;
-
-					while ( neighbors < 10 ) {
-						// first swap partner from intersections
-						var t1 = x[ 1 ][ Math.round( Math.random() * ( x[ 1 ].length - 1 ) ) ];
-						// second swap partner random
-						var t2 = TRIANGLES.get( Math.round( Math.random() * ( n - 1 ) ) );
-
-						if ( t1 !== t2 ) {
-							neighbors++;
-							var i = Math.round( Math.random()*2 );
-							GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
-							TRIANGLES.storeCurrent();
-							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
-						}
-					}
-
 				}
 
-			};
+			}
 
-		} )()
+		}
+
 	},
 
 	randomSwap: {
 		description: 'Random swapping without termination',
 		shortcut: 's.R',
+		initialise: function () {},
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var r1 = Math.round( Math.random()*(n-1) );
@@ -351,6 +340,7 @@ ALGORITHMS.SWAPPING = {
 	none: {
 		description: 'Halts after startup triangle connection',
 		shortcut: 's.N',
+		initialise: function () {},
 		run: function () {
 			TIMECONTROL.clear();
 			if ( ALGORITHMS.onFinish !== null ) {

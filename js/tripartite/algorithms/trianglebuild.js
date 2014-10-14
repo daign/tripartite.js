@@ -21,6 +21,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
+					ALGORITHMS.SWAPPING[ swappingFunction ].initialise();
 					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -60,6 +61,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
+					ALGORITHMS.SWAPPING[ swappingFunction ].initialise();
 					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -117,6 +119,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
+					ALGORITHMS.SWAPPING[ swappingFunction ].initialise();
 					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				}
 			}
@@ -226,6 +229,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
+					ALGORITHMS.SWAPPING[ swappingFunction ].initialise();
 					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				} else {
 					while( POIS[ pi ].visited ) { pi++; }
