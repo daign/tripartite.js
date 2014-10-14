@@ -52,7 +52,7 @@ PAGES.SETTINGS = {
 			[ 'strategySwapIntersecting',     'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',  'Strategy Swap Intersecting BFS' ],
 			[ 'strategySwapIntersectingBFS2', 'Strategy Swap Intersecting BFS 2' ],
-			//[ 'aStarRandomNeighbors',         'A Star Random Neighbors' ],
+			[ 'aStarRandomNeighbors',         'A Star Random Neighbors' ],
 			[ 'randomSwap',                   'Random' ],
 			[ 'none',                         'None' ]
 		] );

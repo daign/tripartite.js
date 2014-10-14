@@ -21,6 +21,9 @@ GEOMETRY.TriangleSet.prototype = {
 	},
 
 	clear: function () {
+		this.forEach( function ( tng ) {
+			tng.removeMesh();
+		} );
 		this.triangles = [];
 	},
 

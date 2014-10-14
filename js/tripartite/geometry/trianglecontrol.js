@@ -25,6 +25,7 @@ GEOMETRY.TriangleControl = {
 
 	clear: function () {
 		this.set.clear();
+		this.store.clear();
 	},
 
 	forEach: function ( f ) {
@@ -37,11 +38,10 @@ GEOMETRY.TriangleControl = {
 
 	activateNext: function () {
 		VISUALISATION.scene.removeTriangles();
-		this.set.forEach( function ( tng ) {
-			tng.removeMesh();
-		} );
+		this.set.clear();
 
-		this.set = this.store.withdrawBest();
+		var entry = this.store.withdrawBest();
+		this.set = entry.set;
 		this.set.forEach( function ( tng ) {
 			tng.setPointsReference();
 			tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );

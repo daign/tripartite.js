@@ -1,6 +1,6 @@
 GEOMETRY.TriangleStore = function () {
 
-	this.sets = [];
+	this.entries = [];
 	this.hashes = [];
 	this.hashingFunction = undefined;
 
@@ -18,7 +18,7 @@ GEOMETRY.TriangleStore.prototype = {
 
 	sort: function () {
 
-		this.sets.sort( function ( a, b ) {
+		this.entries.sort( function ( a, b ) {
 			if ( a.value > b.value ) {
 				return 1;
 			} else if ( a.value < b.value ) {
@@ -36,7 +36,7 @@ GEOMETRY.TriangleStore.prototype = {
 
 		if ( !this.hashes.some( function ( h ) { return h === hash; } ) ) {
 			this.hashes.push( hash );
-			this.sets.push( { set: TRIANGLES.set.clone(), value: ALGORITHMS.getMeasure() } );
+			this.entries.push( { set: TRIANGLES.set.clone(), value: ALGORITHMS.getMeasure() } );
 			this.sort();
 		}
 
@@ -44,7 +44,18 @@ GEOMETRY.TriangleStore.prototype = {
 
 	withdrawBest: function () {
 
-		return this.sets.shift().set;
+		return this.entries.shift();
+
+	},
+
+	clear: function () {
+
+		this.entries.forEach( function ( entry ) {
+			entry.set.clear();
+		} );
+		this.entries = [];
+		this.hashes = [];
+		this.hashingFunction = undefined;
 
 	}
 

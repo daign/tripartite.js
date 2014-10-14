@@ -16,7 +16,7 @@ GEOMETRY.Triangle.prototype = {
 
 	clone: function () {
 
-		return new GEOMETRY.Triangle( this.points );
+		return new GEOMETRY.Triangle( this.points.slice() );
 
 	},
 

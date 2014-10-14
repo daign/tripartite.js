@@ -250,6 +250,7 @@ ALGORITHMS.SWAPPING = {
 
 				if ( COUNTING.countAllIntersections( true ) === 0 ) {
 					TIMECONTROL.clear();
+					initialized = false;
 					if ( ALGORITHMS.onFinish !== null ) {
 						ALGORITHMS.onFinish();
 					}
@@ -257,7 +258,7 @@ ALGORITHMS.SWAPPING = {
 
 				var n = TRIANGLES.getLength();
 				var neighbors = 0;
-				while ( neighbors < 4 ) {
+				while ( neighbors < 10 ) {
 					var r1 = Math.round( Math.random()*(n-1) );
 					var r2 = Math.round( Math.random()*(n-1) );
 					if ( r1 !== r2 ) {
