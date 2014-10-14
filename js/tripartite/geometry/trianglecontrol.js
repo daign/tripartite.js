@@ -37,17 +37,23 @@ GEOMETRY.TriangleControl = {
 	},
 
 	activateNext: function () {
-		VISUALISATION.scene.removeTriangles();
-		this.set.clear();
 
 		var entry = this.store.withdrawBest();
-		this.set = entry.set;
-		this.set.forEach( function ( tng ) {
-			tng.setPointsReference();
-			tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
-			VISUALISATION.scene.triangles.add( tng.mesh );
-		} );
-		VISUALISATION.applyMaterialMode();
+		if ( entry !== undefined ) {
+
+			VISUALISATION.scene.removeTriangles();
+			this.set.clear();
+
+			this.set = entry.set;
+			this.set.forEach( function ( tng ) {
+				tng.setPointsReference();
+				tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
+				VISUALISATION.scene.triangles.add( tng.mesh );
+			} );
+			VISUALISATION.applyMaterialMode();
+
+		}
+
 	}
 
 };

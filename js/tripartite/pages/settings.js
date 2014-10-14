@@ -48,13 +48,14 @@ PAGES.SETTINGS = {
 		// swapping algorithm
 		this.menu1.appendChild( document.createTextNode( 'Swapping: ' ) );
 		this.sel2 = new PAGES.SELECT( this.menu1, false, 0, onChange, [
-			[ 'strategySwapRandom',           'Strategy Swap Random' ],
-			[ 'strategySwapIntersecting',     'Strategy Swap Intersecting' ],
-			[ 'strategySwapIntersectingBFS',  'Strategy Swap Intersecting BFS' ],
-			[ 'strategySwapIntersectingBFS2', 'Strategy Swap Intersecting BFS 2' ],
-			[ 'aStarRandomNeighbors',         'A Star Random Neighbors' ],
-			[ 'randomSwap',                   'Random' ],
-			[ 'none',                         'None' ]
+			[ 'strategySwapRandom',                 'Strategy Swap Random' ],
+			[ 'strategySwapIntersecting',           'Strategy Swap Intersecting' ],
+			[ 'strategySwapIntersectingBFS',        'Strategy Swap Intersecting BFS' ],
+			[ 'strategySwapIntersectingPartnerBFS', 'Strategy Swap Intersecting Partner BFS' ],
+			[ 'aStarRandomNeighbors',               'A Star Random Neighbors' ],
+			[ 'aStarIntersectingNeighbors',         'A Star Intersecting Neighbors' ],
+			[ 'randomSwap',                         'Random' ],
+			[ 'none',                               'None' ]
 		] );
 		this.menu1.appendChild( document.createTextNode( '   ' ) );
 		this.sel2des = document.createElement( 'span' );
@@ -70,10 +71,8 @@ PAGES.SETTINGS = {
 			[ 'intersectionsAndLongestEdges',  'Intersections and Longest Edges' ],
 			[ 'intersectionsAndMaximumAngles', 'Intersections and Maximum Angles' ],
 			[ 'intersectionsAndMinimumAngles', 'Intersections and Inverse Minimum Angles' ],
-			[ 'area',                          'Area' ],
-			[ 'longestEdges',                  'Longest Edges' ],
-			[ 'maximumAngles',                 'Maximum Angles' ],
-			[ 'minimumAngles',                 'Inverse Minimum Angles' ]
+		//  [ 'area',                          'Area' ],
+			[ 'longestEdges',                  'Longest Edges' ]
 		] );
 		this.menu1.appendChild( document.createTextNode( '   ' ) );
 		this.sel2bdes = document.createElement( 'span' );
@@ -168,10 +167,12 @@ PAGES.SETTINGS = {
 		var td4 = document.createElement( 'td' );
 		tr1.appendChild( td4 );
 		this.sel7 = new PAGES.SELECT( td4, true, 0, onChange, [
-			[ 'strategySwapRandom',           'Strategy Swap Random' ],
-			[ 'strategySwapIntersecting',     'Strategy Swap Intersecting' ],
-			[ 'strategySwapIntersectingBFS',  'Strategy Swap Intersecting BFS' ],
-			[ 'strategySwapIntersectingBFS2', 'Strategy Swap Intersecting BFS 2' ]
+			[ 'strategySwapRandom',                 'Strategy Swap Random' ],
+			[ 'strategySwapIntersecting',           'Strategy Swap Intersecting' ],
+			[ 'strategySwapIntersectingBFS',        'Strategy Swap Intersecting BFS' ],
+			[ 'strategySwapIntersectingPartnerBFS', 'Strategy Swap Intersecting Partner BFS' ],
+		//  [ 'aStarRandomNeighbors',               'A Star Random Neighbors' ],
+			[ 'aStarIntersectingNeighbors',         'A Star Intersecting Neighbors' ]
 		] );
 		this.sel7.node.style.height = '100px';
 

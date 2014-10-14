@@ -150,9 +150,9 @@ ALGORITHMS.SWAPPING = {
 		}
 	},
 
-	strategySwapIntersectingBFS2: {
-		description: 'Swapping with optimization strategy, choosing next from intersections with BFS',
-		shortcut: 's.SIB2',
+	strategySwapIntersectingPartnerBFS: {
+		description: 'Swapping with optimization strategy, choosing next from intersection partner with BFS',
+		shortcut: 's.SIP',
 		run: function () {
 			var n = TRIANGLES.getLength();
 			var x = COUNTING.getAllIntersectingPairs( true );
@@ -249,27 +249,85 @@ ALGORITHMS.SWAPPING = {
 				TRIANGLES.activateNext();
 
 				if ( COUNTING.countAllIntersections( true ) === 0 ) {
+
 					TIMECONTROL.clear();
 					initialized = false;
 					if ( ALGORITHMS.onFinish !== null ) {
 						ALGORITHMS.onFinish();
 					}
+
+				} else {
+
+					var n = TRIANGLES.getLength();
+					var neighbors = 0;
+
+					while ( neighbors < 10 ) {
+						var r1 = Math.round( Math.random()*(n-1) );
+						var r2 = Math.round( Math.random()*(n-1) );
+						if ( r1 !== r2 ) {
+							neighbors++;
+							var t1 = TRIANGLES.get( r1 );
+							var t2 = TRIANGLES.get( r2 );
+							var i = Math.round( Math.random()*2 );
+							GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
+							TRIANGLES.storeCurrent();
+							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
+						}
+					}
+
 				}
 
-				var n = TRIANGLES.getLength();
-				var neighbors = 0;
-				while ( neighbors < 10 ) {
-					var r1 = Math.round( Math.random()*(n-1) );
-					var r2 = Math.round( Math.random()*(n-1) );
-					if ( r1 !== r2 ) {
-						neighbors++;
-						var t1 = TRIANGLES.get( r1 );
-						var t2 = TRIANGLES.get( r2 );
-						var i = Math.round( Math.random()*2 );
-						GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
-						TRIANGLES.storeCurrent();
-						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
+			};
+
+		} )()
+	},
+
+	aStarIntersectingNeighbors: {
+		description: 'Swapping with A star search, choosing neighbors from intersections',
+		shortcut: 's.AI',
+		run: ( function () {
+
+			var initialized = false;
+
+			return function () {
+
+				if ( !initialized ) {
+					initialized = true;
+					TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
+					TRIANGLES.storeCurrent();
+				}
+
+				TRIANGLES.activateNext();
+
+				if ( COUNTING.countAllIntersections( true ) === 0 ) {
+
+					TIMECONTROL.clear();
+					initialized = false;
+					if ( ALGORITHMS.onFinish !== null ) {
+						ALGORITHMS.onFinish();
 					}
+
+				} else {
+
+					var n = TRIANGLES.getLength();
+					var x = COUNTING.getAllIntersectingTriangles( true );
+					var neighbors = 0;
+
+					while ( neighbors < 10 ) {
+						// first swap partner from intersections
+						var t1 = x[ 1 ][ Math.round( Math.random() * ( x[ 1 ].length - 1 ) ) ];
+						// second swap partner random
+						var t2 = TRIANGLES.get( Math.round( Math.random() * ( n - 1 ) ) );
+
+						if ( t1 !== t2 ) {
+							neighbors++;
+							var i = Math.round( Math.random()*2 );
+							GEOMETRY.swapPoints( t1, t2, i, true, false ); // swap
+							TRIANGLES.storeCurrent();
+							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo swap
+						}
+					}
+
 				}
 
 			};
