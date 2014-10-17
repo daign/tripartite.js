@@ -27,6 +27,24 @@ canvas {
 	border-bottom-right-radius: 10px;
 	background: #124;
 }
+.halfbox {
+	vertical-align: top;
+	display: inline-block;
+	border: 2px solid #aaa;
+	padding: 10px;
+	background: #124;
+}
+.halfbox.left {
+	margin: 20px 0px 20px 20px;
+	border-top-left-radius:     10px;
+	border-bottom-left-radius:  10px;
+}
+.halfbox.right {
+	border-left-style: none;
+	margin: 20px 20px 20px 0px;
+	border-top-right-radius:    10px;
+	border-bottom-right-radius: 10px;
+}
 .absolute {
 	position: absolute;
 	left: 0px;

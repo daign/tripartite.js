@@ -30,10 +30,19 @@ PAGES.SETTINGS = {
 			[ '60', '3x60' ]
 		] );
 
+		var editorButton = document.createElement( 'input' );
+		editorButton.type = 'button';
+		editorButton.value = 'Editor';
+		var startEditor = function () {
+			PAGES.show( 'editor' );
+		};
+		editorButton.addEventListener( 'click', startEditor, false );
+		//this.menu1.appendChild( editorButton );
+
 		// triangle build algorithm
 		this.menu1.appendChild( document.createElement( 'br' ) );
 		this.menu1.appendChild( document.createTextNode( 'Triangle Build: ' ) );
-		this.sel1 = new PAGES.SELECT( this.menu1, false, 1, onChange, [
+		this.sel1 = new PAGES.SELECT( this.menu1, false, 3, onChange, [
 			[ 'triangleBuildRandom',                 'Random' ],
 			[ 'triangleBuildSorted',                 'Sorted' ],
 			[ 'triangleBuildGabrielGraph',           'Gabriel Graph' ],
@@ -47,7 +56,7 @@ PAGES.SETTINGS = {
 
 		// swapping algorithm
 		this.menu1.appendChild( document.createTextNode( 'Swapping: ' ) );
-		this.sel2 = new PAGES.SELECT( this.menu1, false, 0, onChange, [
+		this.sel2 = new PAGES.SELECT( this.menu1, false, 2, onChange, [
 			[ 'strategySwapRandom',                 'Strategy Swap Random' ],
 			[ 'strategySwapIntersecting',           'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',        'Strategy Swap Intersecting BFS' ],
@@ -274,34 +283,6 @@ PAGES.SETTINGS = {
 		this.start2help = document.createElement( 'span' );
 		this.start2help.setAttribute( 'class', 'description' );
 		this.menu2.appendChild( this.start2help );
-
-
-		// settings menu 3
-		/*this.menu3 = document.createElement( 'div' );
-		this.menu3.setAttribute( 'class', 'box' );
-		//this.node.appendChild( this.menu3 );
-		this.menu3.appendChild( document.createTextNode( 'Datastructures' ) );
-		this.menu3.appendChild( document.createElement( 'br' ) );
-		this.menu3.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel8 = new PAGES.SELECT( this.menu3, false, 1, null, [
-			[ '10', '3x10' ],
-			[ '30', '3x30' ],
-			[ '60', '3x60' ]
-		] );
-		this.menu3.appendChild( document.createElement( 'br' ) );
-		var start3 =  document.createElement( 'input' );
-		start3.type = 'button';
-		start3.value = 'Voronoi Connectivity';
-		function start3fun() {
-			PAGES.SIMULATION.visualEnabled = true;
-			PAGES.show( 'PAGES.SIMULATION' );
-			GENERATOR.generate( 1, parseInt( self.sel8.get() ) ).activate( 0 );
-			TRIANGLES.clear();
-			ALGORITHMS.DATASTRUCTURE.VoronoiConnectivity.setUp();
-			PAGES.SIMULATION.update();
-		}
-		start3.addEventListener( 'click', start3fun, false );
-		this.menu3.appendChild( start3 );*/
 
 		this.updateDescriptions();
 	},
