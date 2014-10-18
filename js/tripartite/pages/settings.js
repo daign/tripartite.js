@@ -15,12 +15,28 @@ PAGES.SETTINGS = {
 			self.updateDescriptions();
 		}
 
+		var header = document.createElement( 'div' );
+		header.setAttribute( 'class', 'header' );
+		header.appendChild( document.createTextNode( 'tripartite.js – Tripartite matching of points in space' ) );
+		this.node.appendChild( header );
+
+		var explanation = document.createElement( 'div' );
+		explanation.setAttribute( 'class', 'explanation' );
+		explanation.innerHTML = 'The task is to find connections between points from three partitions \
+			so that the resulting triangles do not intersect. This project features simulations and \
+			visualizations of algorithms which use optimization strategies to obtain such satisfying \
+			solutions. <a href="https://github.com/daign/tripartite.js">Visit the project homepage.</a>';
+		this.node.appendChild( explanation );
+
 		// settings for visualizations
 		this.menu1 = document.createElement( 'div' );
 		this.menu1.setAttribute( 'class', 'box' );
 		this.node.appendChild( this.menu1 );
-		this.menu1.appendChild( document.createTextNode( 'Algorithm Visualizations' ) );
-		this.menu1.appendChild( document.createElement( 'br' ) );
+
+		var menu1header = document.createElement( 'div' );
+		menu1header.setAttribute( 'class', 'boxheader' );
+		menu1header.innerHTML = 'Algorithm Visualizations';
+		this.menu1.appendChild( menu1header );
 
 		// number of points
 		this.menu1.appendChild( document.createTextNode( 'Points: ' ) );
@@ -130,8 +146,11 @@ PAGES.SETTINGS = {
 		this.menu2 = document.createElement( 'div' );
 		this.menu2.setAttribute( 'class', 'box' );
 		this.node.appendChild( this.menu2 );
-		this.menu2.appendChild( document.createTextNode( 'Algorithm Comparisons' ) );
-		this.menu2.appendChild( document.createElement( 'br' ) );
+
+		var menu2header = document.createElement( 'div' );
+		menu2header.setAttribute( 'class', 'boxheader' );
+		menu2header.innerHTML = 'Algorithm Comparisons';
+		this.menu2.appendChild( menu2header );
 
 		// number of iterations
 		this.menu2.appendChild( document.createTextNode( 'Iterations: ' ) );
