@@ -23,7 +23,6 @@ PAGES.RESULTS = {
 				PAGES.RESULTS.showGraphs();
 			}
 		};
-
 		PAGES.add( this.node, 'results', onSwitch );
 
 		this.box = document.createElement( 'div' );
@@ -35,7 +34,9 @@ PAGES.RESULTS = {
 		var home = document.createElement( 'input' );
 		home.type = 'button';
 		home.value = 'home';
-		function goHome() { PAGES.show( 'settings' ); }
+		var goHome = function () {
+			PAGES.show( 'settings' );
+		};
 		home.addEventListener( 'click', goHome, false );
 		this.box.appendChild( home );
 

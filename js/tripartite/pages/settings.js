@@ -9,7 +9,14 @@ PAGES.SETTINGS = {
 		this.node.style.overflow = 'auto';
 		document.body.appendChild( this.node );
 
-		PAGES.add( this.node, 'settings', function () { ; } );
+		var onSwitch = function ( visible ) {
+			if ( visible ) {
+				STATISTICS.clear();
+				POINTS.storeTemporary.clear();
+				PAGES.INFOBOX.reset();
+			}
+		};
+		PAGES.add( this.node, 'settings', onSwitch );
 
 		function onChange() {
 			self.updateDescriptions();
@@ -146,13 +153,10 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = true;
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( parseInt( self.sel3.get() ) ).setPaused( false );
-			PAGES.INFOBOX.reset();
 
-			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
 
-			POINTS.storeTemporary.clear();
 			if ( self.menu1pointsRadio2.checked ) {
 				POINTS.useTemporary = false;
 			} else {
@@ -306,12 +310,8 @@ PAGES.SETTINGS = {
 			PAGES.SIMULATION.visualEnabled = false;
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( 1 ).setPaused( false );
-			PAGES.INFOBOX.reset();
-
-			STATISTICS.clear();
 
 			var iterations = undefined;
-			POINTS.storeTemporary.clear();
 			if ( self.menu2pointsRadio2.checked ) {
 				POINTS.useTemporary = false;
 				iterations = POINTS.storePermanent.getNumberOfSelected();
