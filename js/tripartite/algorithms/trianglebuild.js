@@ -7,11 +7,11 @@ ALGORITHMS.TRIANGLEBUILD = {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 
 			var stacks = [ [], [], [] ];
-			var poisCopy = POIS.slice();
-			for ( var i = poisCopy.length; i > 0; i-- ) {
+			var pointsCopy = POINTS.getCopyOfPointsArray();
+			for ( var i = pointsCopy.length; i > 0; i-- ) {
 				var r = Math.round( Math.random() * (i-1) );
-				var g = poisCopy[ r ].group;
-				stacks[ g ].push( poisCopy.splice( r, 1 )[ 0 ] );
+				var g = pointsCopy[ r ].group;
+				stacks[ g ].push( pointsCopy.splice( r, 1 )[ 0 ] );
 			}
 
 			function build() {
@@ -37,9 +37,9 @@ ALGORITHMS.TRIANGLEBUILD = {
 			PAGES.INFOBOX.setPhase( 'triangleBuild' );
 
 			var stacks = [ [], [], [] ];
-			for ( var i = 0; i < POIS.length; i++ ) {
-				stacks[ POIS[ i ].group ].push( POIS[ i ] );
-			}
+			POINTS.forEach( function ( point ) {
+				stacks[ point.group ].push( point );
+			} );
 
 			function pointSort( a, b ) {
 				if ( a.coords.y > b.coords.y ) {
@@ -78,7 +78,8 @@ ALGORITHMS.TRIANGLEBUILD = {
 
 			ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
 
-			var p = POIS[ Math.round( Math.random()*(POIS.length-1) ) ];
+			var pointsCopy = POINTS.getCopyOfPointsArray();
+			var p = pointsCopy[ Math.round( Math.random()*(pointsCopy.length-1) ) ];
 			p.visited = true;
 			var s = [];
 			s.push( p );
@@ -104,8 +105,8 @@ ALGORITHMS.TRIANGLEBUILD = {
 				}
 				if ( mp === null ) {
 					pi = 0;
-					while ( pi < POIS.length && ( POIS[ pi ].group !== ng || POIS[ pi ].visited ) ) { pi++; }
-					p = POIS[ pi ];
+					while ( pi < pointsCopy.length && ( pointsCopy[ pi ].group !== ng || pointsCopy[ pi ].visited ) ) { pi++; }
+					p = pointsCopy[ pi ];
 				} else {
 					p = mp;
 				}
@@ -115,7 +116,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 				if ( s.length >= 3 ) {
 					TRIANGLES.addTriangle( [ s.pop(), s.pop(), s.pop() ] );
 				}
-				if ( TRIANGLES.getLength()*3 >= POIS.length ) {
+				if ( TRIANGLES.getLength()*3 >= pointsCopy.length ) {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
@@ -136,7 +137,9 @@ ALGORITHMS.TRIANGLEBUILD = {
 
 			ALGORITHMS.DATASTRUCTURE.GabrielGraph.setUp();
 			ALGORITHMS.DATASTRUCTURE.DistanceToCenter.setUp();
-			POIS.sort( function ( a, b ) {
+
+			var pointsCopy = POINTS.getCopyOfPointsArray();
+			pointsCopy.sort( function ( a, b ) {
 				if ( a.distanceToCenter > b.distanceToCenter ) {
 					return -1;
 				} else if ( a.distanceToCenter < b.distanceToCenter ) {
@@ -147,7 +150,7 @@ ALGORITHMS.TRIANGLEBUILD = {
 			} );
 
 			var pi = 0;
-			var p1 = POIS[ pi ];
+			var p1 = pointsCopy[ pi ];
 
 			function build() {
 				p1.visited = true;
@@ -225,15 +228,15 @@ ALGORITHMS.TRIANGLEBUILD = {
 
 				TRIANGLES.addTriangle( pa );
 
-				if ( TRIANGLES.getLength()*3 >= POIS.length ) {
+				if ( TRIANGLES.getLength()*3 >= pointsCopy.length ) {
 					TIMECONTROL.clear();
 					PAGES.INFOBOX.setPhase( 'swapping' );
 					PAGES.INFOSTATS.setPhaseChange();
 					ALGORITHMS.SWAPPING[ swappingFunction ].initialise();
 					TIMECONTROL.setTask( ALGORITHMS.SWAPPING[ swappingFunction ].run ).start();
 				} else {
-					while( POIS[ pi ].visited ) { pi++; }
-					p1 = POIS[ pi ];
+					while( pointsCopy[ pi ].visited ) { pi++; }
+					p1 = pointsCopy[ pi ];
 				}
 			}
 

@@ -132,7 +132,7 @@ PAGES.SETTINGS = {
 			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
-			GENERATOR.generate( 1, parseInt( self.sel0.get() ) ).activate( 0 );
+			POINTS.generate( 1, parseInt( self.sel0.get() ) ).activate( 0 );
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' );
 			}
@@ -258,7 +258,7 @@ PAGES.SETTINGS = {
 			STATISTICS.clear();
 
 			var iterations = parseInt( self.sel4.get() );
-			GENERATOR.generate( iterations, parseInt( self.sel5.get() ) );
+			POINTS.generate( iterations, parseInt( self.sel5.get() ) );
 
 			var tbi = -1;
 			var swi = -1;
@@ -286,7 +286,7 @@ PAGES.SETTINGS = {
 						STATISTICS.startNewSetUp( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ] )
 					);
 				}
-				GENERATOR.activate( psi );
+				POINTS.activate( psi );
 				ai++;
 
 				PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );

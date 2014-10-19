@@ -8,28 +8,29 @@ ALGORITHMS.DATASTRUCTURE = {
 				ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed = true;
 
 				var conns = [ [], [], [], [] ];
+				var pointsCopy = POINTS.getCopyOfPointsArray();
 
-				for ( var a = 0; a < POIS.length; a++ ) {
-					var gA = POIS[ a ].group;
-					for ( var b = 0; b < POIS.length; b++ ) {
+				for ( var a = 0; a < pointsCopy.length; a++ ) {
+					var gA = pointsCopy[ a ].group;
+					for ( var b = 0; b < pointsCopy.length; b++ ) {
 						if ( a !== b ) {
-							var gB = POIS[ b ].group;
-							var m = POIS[ a ].getVector().clone().add( POIS[ b ].getVector() ).divideScalar( 2 );
-							var d = POIS[ a ].getVector().distanceTo( m );
+							var gB = pointsCopy[ b ].group;
+							var m = pointsCopy[ a ].getVector().clone().add( pointsCopy[ b ].getVector() ).divideScalar( 2 );
+							var d = pointsCopy[ a ].getVector().distanceTo( m );
 							var shortest = true;
-							for ( var c = 0; c < POIS.length; c++ ) {
-								if ( c !== a && c !== b && POIS[ c ].group === gB ) {
-									if ( POIS[ c ].getVector().distanceTo( m ) < d ) {
+							for ( var c = 0; c < pointsCopy.length; c++ ) {
+								if ( c !== a && c !== b && pointsCopy[ c ].group === gB ) {
+									if ( pointsCopy[ c ].getVector().distanceTo( m ) < d ) {
 										shortest = false;
 									}
 								}
 							}
 							if ( shortest ) {
-								POIS[ a ].connections[ gB ].push( POIS[ b ] );
+								pointsCopy[ a ].connections[ gB ].push( pointsCopy[ b ] );
 								if ( gA === gB ) {
-									conns[ gA ].push( [ POIS[ a ].getVector(), POIS[ b ].getVector() ] );
+									conns[ gA ].push( [ pointsCopy[ a ].getVector(), pointsCopy[ b ].getVector() ] );
 								} else {
-									conns[ 3 ].push( [ POIS[ a ].getVector(), POIS[ b ].getVector() ] );
+									conns[ 3 ].push( [ pointsCopy[ a ].getVector(), pointsCopy[ b ].getVector() ] );
 								}
 							}
 						}
@@ -59,9 +60,9 @@ ALGORITHMS.DATASTRUCTURE = {
 		},
 		reset: function () {
 			if ( ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed ) {
-				for ( var i = 0; i < POIS.length; i++ ) {
-					POIS[ i ].connections = [ [], [], [] ];
-				}
+				POINTS.forEach( function ( point ) {
+					point.connections = [ [], [], [] ];
+				} );
 				ALGORITHMS.DATASTRUCTURE.GabrielGraph.computed = false;
 				PAGES.INFOBOX.gabrielSelect.setActivation( false );
 			}
@@ -71,31 +72,23 @@ ALGORITHMS.DATASTRUCTURE = {
 	DistanceToCenter: {
 		description: 'Giving each point its distance to the center',
 		setUp: function () {
-			var l = POIS.length;
-			var sx = 0;
-			var sy = 0;
-			var sz = 0;
-			for ( var i = 0; i < l; i++ ) {
-				sx += POIS[ i ].coords.x;
-				sy += POIS[ i ].coords.y;
-				sz += POIS[ i ].coords.z;
-			}
-			var center = new THREE.Vector3( sx/l, sy/l, sz/l );
-			for ( var i = 0; i < l; i++ ) {
-				POIS[ i ].distanceToCenter = POIS[ i ].getVector().distanceTo( center );
-			}
+			var center = POINTS.set.computeCenter();
+			POINTS.forEach( function ( point ) {
+				point.distanceToCenter = point.getVector().distanceTo( center );
+			} );
 		}
 	},
 
 	resetBFS: function () {
-		for ( var i = 0; i < POIS.length; i++ ) {
-			POIS[ i ].BFSVisited = false;
-		}
+		POINTS.forEach( function ( point ) {
+			point.BFSVisited = false;
+		} );
 	},
+
 	resetVisited: function () {
-		for ( var i = 0; i < POIS.length; i++ ) {
-			POIS[ i ].visited = false;
-		}
+		POINTS.forEach( function ( point ) {
+			point.visited = false;
+		} );
 	}
 
 };
