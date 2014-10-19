@@ -36,6 +36,11 @@ GEOMETRY.PointSet.prototype = {
 
 	},
 
+	clear: function () {
+		this.removeMeshes();
+		this.points = [];
+	},
+
 	buildMeshes: function ( materials ) {
 		this.points.forEach( function ( point ) {
 			var mesh = point.buildMesh( materials );

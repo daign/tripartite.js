@@ -94,7 +94,7 @@ PAGES.RESULTS = {
 			} else if ( graph4.checked ) {
 				self.plot.setData( self.data.intersectiontests );
 			}
-		}
+		};
 
 		graph1.addEventListener( 'change', onGraphSwitch, false );
 		graph2.addEventListener( 'change', onGraphSwitch, false );

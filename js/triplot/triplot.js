@@ -58,7 +58,6 @@ TRIPLOT.prototype = {
 				if ( (len-1) % 4 === 0 ) { // (4n+1)
 					var n = (len-1)/4;
 					if ( n > 0 ) {
-						console.log( n );
 						q1 = 0.25 * this.data[ i ][ n-1 ] + 0.75 * this.data[ i ][ n ];
 						q3 = 0.75 * this.data[ i ][ 3*n ] + 0.25 * this.data[ i ][ 3*n+1 ];
 					} else {

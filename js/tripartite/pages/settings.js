@@ -38,22 +38,41 @@ PAGES.SETTINGS = {
 		menu1header.innerHTML = 'Algorithm Visualizations';
 		this.menu1.appendChild( menu1header );
 
-		// number of points
+		// points selection
 		this.menu1.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel0 = new PAGES.SELECT( this.menu1, false, 1, null, [
-			[ '10', '3x10' ],
-			[ '30', '3x30' ],
-			[ '60', '3x60' ]
-		] );
 
-		var editorButton = document.createElement( 'input' );
-		editorButton.type = 'button';
-		editorButton.value = 'Editor';
-		var startEditor = function () {
+		var menu1pointsRadio1 = document.createElement( 'input' );
+		menu1pointsRadio1.id = 'menu1pointsRadio1';
+		menu1pointsRadio1.type = 'radio';
+		menu1pointsRadio1.name = 'menu1points';
+		menu1pointsRadio1.checked = true;
+		menu1pointsRadio1.setAttribute( 'class', 'radioinput' );
+		this.menu1.appendChild( menu1pointsRadio1 );
+		var menu1pointsLabel1 = document.createElement( 'label' );
+		menu1pointsLabel1.innerHTML = 'random 3x30';
+		menu1pointsLabel1.htmlFor = menu1pointsRadio1.id;
+		this.menu1.appendChild( menu1pointsLabel1 );
+
+		this.menu1pointsRadio2 = document.createElement( 'input' );
+		this.menu1pointsRadio2.id = 'menu1pointsRadio2';
+		this.menu1pointsRadio2.type = 'radio';
+		this.menu1pointsRadio2.name = 'menu1points';
+		this.menu1pointsRadio2.setAttribute( 'class', 'radioinput' );
+		//this.menu1.appendChild( this.menu1pointsRadio2 );
+		this.menu1pointsLabel2 = document.createElement( 'label' );
+		this.menu1pointsLabel2.innerHTML = '(selection empty)';
+		this.menu1pointsLabel2.htmlFor = this.menu1pointsRadio2.id;
+		//this.menu1.appendChild( this.menu1pointsLabel2 );
+
+		var menu1editorButton = document.createElement( 'input' );
+		menu1editorButton.type = 'button';
+		menu1editorButton.value = 'Editor';
+		menu1editorButton.style.marginLeft = '10px';
+		var menu1startEditor = function () {
 			PAGES.show( 'editor' );
 		};
-		editorButton.addEventListener( 'click', startEditor, false );
-		//this.menu1.appendChild( editorButton );
+		menu1editorButton.addEventListener( 'click', menu1startEditor, false );
+		//this.menu1.appendChild( menu1editorButton );
 
 		// triangle build algorithm
 		this.menu1.appendChild( document.createElement( 'br' ) );
@@ -132,7 +151,15 @@ PAGES.SETTINGS = {
 			STATISTICS.clear();
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
-			POINTS.generate( 1, parseInt( self.sel0.get() ) ).activate( 0 );
+
+			POINTS.storeTemporary.clear();
+			if ( self.menu1pointsRadio2.checked ) {
+				POINTS.useTemporary = false;
+			} else {
+				POINTS.useTemporary = true;
+			}
+			POINTS.activate( 0 );
+
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' );
 			}
@@ -152,22 +179,48 @@ PAGES.SETTINGS = {
 		menu2header.innerHTML = 'Algorithm Comparisons';
 		this.menu2.appendChild( menu2header );
 
-		// number of iterations
-		this.menu2.appendChild( document.createTextNode( 'Iterations: ' ) );
-		this.sel4 = new PAGES.SELECT( this.menu2, false, 1, onChange, [
-			[  '3',  '3' ],
-			[ '10', '10' ],
-			[ '30', '30' ]
-		] );
-		this.menu2.appendChild( document.createElement( 'br' ) );
-
-		// number of points
+		// points selection
 		this.menu2.appendChild( document.createTextNode( 'Points: ' ) );
-		this.sel5 = new PAGES.SELECT( this.menu2, false, 1, onChange, [
-			[ '10', '3x10' ],
-			[ '30', '3x30' ],
-			[ '60', '3x60' ]
-		] );
+
+		var menu2pointsRadio1 = document.createElement( 'input' );
+		menu2pointsRadio1.id = 'menu2pointsRadio1';
+		menu2pointsRadio1.type = 'radio';
+		menu2pointsRadio1.name = 'menu2points';
+		menu2pointsRadio1.checked = true;
+		menu2pointsRadio1.setAttribute( 'class', 'radioinput' );
+		this.menu2.appendChild( menu2pointsRadio1 );
+		var menu2pointsLabel1 = document.createElement( 'label' );
+		menu2pointsLabel1.innerHTML = 'random 5x(3x30)';
+		menu2pointsLabel1.htmlFor = menu2pointsRadio1.id;
+		this.menu2.appendChild( menu2pointsLabel1 );
+
+		this.menu2pointsRadio2 = document.createElement( 'input' );
+		this.menu2pointsRadio2.id = 'menu2pointsRadio2';
+		this.menu2pointsRadio2.type = 'radio';
+		this.menu2pointsRadio2.name = 'menu2points';
+		this.menu2pointsRadio2.setAttribute( 'class', 'radioinput' );
+		//this.menu2.appendChild( this.menu2pointsRadio2 );
+		this.menu2pointsLabel2 = document.createElement( 'label' );
+		this.menu2pointsLabel2.innerHTML = '(selection empty)';
+		this.menu2pointsLabel2.htmlFor = this.menu2pointsRadio2.id;
+		//this.menu2.appendChild( this.menu2pointsLabel2 );
+
+		var menu2pointsSwitch = function () {
+			self.updateDescriptions();
+		};
+		menu2pointsRadio1.addEventListener( 'change', menu2pointsSwitch, false );
+		this.menu2pointsRadio2.addEventListener( 'change', menu2pointsSwitch, false );
+
+		var menu2editorButton = document.createElement( 'input' );
+		menu2editorButton.type = 'button';
+		menu2editorButton.value = 'Editor';
+		menu2editorButton.style.marginLeft = '10px';
+		var menu2startEditor = function () {
+			PAGES.show( 'editor' );
+		};
+		menu2editorButton.addEventListener( 'click', menu2startEditor, false );
+		//this.menu2.appendChild( menu2editorButton );
+
 		this.menu2.appendChild( document.createElement( 'br' ) );
 		var table1 = document.createElement( 'table' );
 		this.menu2.appendChild( table1 );
@@ -257,8 +310,15 @@ PAGES.SETTINGS = {
 
 			STATISTICS.clear();
 
-			var iterations = parseInt( self.sel4.get() );
-			POINTS.generate( iterations, parseInt( self.sel5.get() ) );
+			var iterations = undefined;
+			POINTS.storeTemporary.clear();
+			if ( self.menu2pointsRadio2.checked ) {
+				POINTS.useTemporary = false;
+				iterations = POINTS.storePermanent.getNumberOfSelected();
+			} else {
+				POINTS.useTemporary = true;
+				iterations = 5;
+			}
 
 			var tbi = -1;
 			var swi = -1;
@@ -329,9 +389,13 @@ PAGES.SETTINGS = {
 		for ( var i = 0; i < o3.length; i++ ) {
 			if ( o3[ i ].selected ) { s3++; }
 		}
-		var s4 = parseInt( this.sel4.get() );
-		var ps = parseInt( this.sel5.get() );
-		this.start2help.innerHTML = '(' + (s1*s2*s3*s4) + ' passes at ' + ps + ' points)';
+
+		var s4 = 5;
+		if ( this.menu2pointsRadio2.checked ) {
+			s4 = POINTS.storePermanent.getNumberOfSelected();
+		}
+
+		this.start2help.innerHTML = '(' + (s1*s2*s3*s4) + ' passes)';
 	}
 
 };
