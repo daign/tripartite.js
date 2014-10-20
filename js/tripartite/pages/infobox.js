@@ -1,6 +1,7 @@
 PAGES.INFOBOX = {
 
 	open: 1,
+	visualEnabled: undefined,
 
 	pass:  undefined,
 	setUp: undefined,
@@ -80,7 +81,7 @@ PAGES.INFOBOX = {
 		this.variableContent2.appendChild( materialText );
 
 		var onMaterial = function ( event ) {
-			VISUALISATION.setMaterialMode( self.materialSelect.get() );
+			PAGES.SIMULATION.visualisation.setMaterialMode( self.materialSelect.get() );
 		};
 		this.materialSelect = new PAGES.SELECT( this.variableContent2, false, 0, onMaterial, [
 			[ 'standard',      'standard blue' ],
@@ -95,7 +96,7 @@ PAGES.INFOBOX = {
 		this.variableContent2.appendChild( gabrielText );
 
 		var onGabriel = function ( event ) {
-			VISUALISATION.setGabrielMode( self.gabrielSelect.get() );
+			PAGES.SIMULATION.visualisation.setGabrielMode( self.gabrielSelect.get() );
 		};
 		this.gabrielSelect = new PAGES.SELECT( this.variableContent2, false, 1, onGabriel, [
 			[ 'nothing', "don't show"  ],
@@ -118,7 +119,7 @@ PAGES.INFOBOX = {
 		this.variableContent2.appendChild( showSwapLabel );
 		var onShowSwap = function () {
 			event.stopPropagation();
-			VISUALISATION.setShowSwap( showSwap.checked );
+			PAGES.SIMULATION.visualisation.setShowSwap( showSwap.checked );
 		};
 		showSwap.addEventListener( 'click', onShowSwap, false );
 		showSwapLabel.addEventListener( 'click', onShowSwap, false );
@@ -166,9 +167,15 @@ PAGES.INFOBOX = {
 		this.phase = undefined;
 	},
 
+	setVisualEnabled: function ( b ) {
+		this.visualEnabled = b;
+	},
+
 	toggle: function () {
-		this.open = ( this.open + 1 ) % 3;
-		this.update();
+		if ( this.visualEnabled ) {
+			this.open = ( this.open + 1 ) % 3;
+			this.update();
+		}
 	}
 
 };

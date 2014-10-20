@@ -14,6 +14,7 @@ PAGES.SETTINGS = {
 				STATISTICS.clear();
 				POINTS.storeTemporary.clear();
 				PAGES.INFOBOX.reset();
+				PAGES.INFOSTATS.clear();
 			}
 		};
 		PAGES.add( this.node, 'settings', onSwitch );
@@ -150,7 +151,7 @@ PAGES.SETTINGS = {
 			var swappingFunction = self.sel2.get();
 			var optimizationFunction = self.sel2b.get();
 
-			PAGES.SIMULATION.visualEnabled = true;
+			PAGES.SIMULATION.setEnabled( { visual: true, progressDiagram: true } );
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( parseInt( self.sel3.get() ) ).setPaused( false );
 
@@ -303,11 +304,10 @@ PAGES.SETTINGS = {
 				}
 			}
 			if ( triangleBuildAlgos.length === 0 || swappingAlgos.length === 0 || optimizationAlgos.length === 0 ) {
-				console.log( 'Please select at least one of each.' );
 				return;
 			}
 
-			PAGES.SIMULATION.visualEnabled = false;
+			PAGES.SIMULATION.setEnabled( { visual: false, progressDiagram: false } );
 			PAGES.show( 'simulation' );
 			TIMECONTROL.setSpeed( 1 ).setPaused( false );
 
@@ -390,12 +390,18 @@ PAGES.SETTINGS = {
 			if ( o3[ i ].selected ) { s3++; }
 		}
 
-		var s4 = 5;
+		var iterations = 5;
 		if ( this.menu2pointsRadio2.checked ) {
-			s4 = POINTS.storePermanent.getNumberOfSelected();
+			iterations = POINTS.storePermanent.getNumberOfSelected();
 		}
 
-		this.start2help.innerHTML = '(' + (s1*s2*s3*s4) + ' passes)';
+		var passes = s1 * s2 * s3 * iterations;
+		if ( passes === 0 ) {
+			this.start2help.innerHTML = '(0 passes) Please select at least one of each!';
+		} else {
+			this.start2help.innerHTML = '(' + passes + ' passes)';
+		}
+
 	}
 
 };

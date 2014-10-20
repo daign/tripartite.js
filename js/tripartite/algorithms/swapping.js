@@ -141,7 +141,7 @@ ALGORITHMS.SWAPPING = {
 						better = true;
 						STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 						STATISTICS.count( 'swaps' );
-						VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
+						PAGES.SIMULATION.visualisation.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 						PAGES.SIMULATION.update();
 					} else {
 						GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap
@@ -222,7 +222,7 @@ ALGORITHMS.SWAPPING = {
 							better = true;
 							STATISTICS.discount( 'testswaps' ); // count testswap as real swap
 							STATISTICS.count( 'swaps' );
-							VISUALISATION.scene.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
+							PAGES.SIMULATION.visualisation.updateSwapLine( t1.points[ i ].getVector(), t2.points[ i ].getVector() );
 							PAGES.SIMULATION.update();
 						} else {
 							GEOMETRY.swapPoints( t1, t2, i, true, true ); // undo testswap

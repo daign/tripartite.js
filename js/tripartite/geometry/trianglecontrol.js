@@ -18,8 +18,8 @@ GEOMETRY.TriangleControl = {
 		this.set.push( tng );
 
 		tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
-		VISUALISATION.scene.triangles.add( tng.mesh );
-		VISUALISATION.applyMaterialMode();
+		PAGES.SIMULATION.visualisation.triangles.add( tng.mesh );
+		PAGES.SIMULATION.visualisation.applyMaterialMode();
 
 	},
 
@@ -41,16 +41,16 @@ GEOMETRY.TriangleControl = {
 		var entry = this.store.withdrawBest();
 		if ( entry !== undefined ) {
 
-			VISUALISATION.scene.removeTriangles();
+			PAGES.SIMULATION.visualisation.removeTriangles();
 			this.set.clear();
 
 			this.set = entry.set;
 			this.set.forEach( function ( tng ) {
 				tng.setPointsReference();
 				tng.buildMesh( VISUALISATION.MATERIALS.triangleMaterials.blue.shader );
-				VISUALISATION.scene.triangles.add( tng.mesh );
+				PAGES.SIMULATION.visualisation.triangles.add( tng.mesh );
 			} );
-			VISUALISATION.applyMaterialMode();
+			PAGES.SIMULATION.visualisation.applyMaterialMode();
 
 		}
 

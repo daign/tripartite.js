@@ -5,7 +5,7 @@ var GEOMETRY = {
 		triangle1.swapPoint( triangle2, pointGroup );
 
 		if ( !testSwap ) {
-			VISUALISATION.scene.updateSwapLine(
+			PAGES.SIMULATION.visualisation.updateSwapLine(
 				triangle1.points[ pointGroup ].getVector(),
 				triangle2.points[ pointGroup ].getVector()
 			);

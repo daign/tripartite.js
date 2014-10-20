@@ -6,7 +6,7 @@ GEOMETRY.PointControl = {
 	storePermanent: new GEOMETRY.PointStorePermanent(),
 
 	activate: function ( i ) {
-		VISUALISATION.scene.removeAll();
+		PAGES.SIMULATION.visualisation.removeAll();
 		TRIANGLES.clear();
 		this.set.removeMeshes();
 

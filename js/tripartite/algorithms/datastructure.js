@@ -38,7 +38,7 @@ ALGORITHMS.DATASTRUCTURE = {
 				}
 
 				// add lines to visualisation
-				if ( PAGES.SIMULATION.visualEnabled ) {
+				if ( PAGES.SIMULATION.visualisation.enabled ) {
 
 					for ( var g = 0; g < conns.length; g++ ) {
 						for ( var i = 0; i < conns[ g ].length; i++ ) {
@@ -47,11 +47,11 @@ ALGORITHMS.DATASTRUCTURE = {
 							lineGeometry.computeLineDistances();
 
 							var line = new THREE.Line( lineGeometry, VISUALISATION.MATERIALS.lineMaterials[ g ], THREE.LinePieces );
-							VISUALISATION.scene.lines[ g ].add( line );
+							PAGES.SIMULATION.visualisation.lines[ g ].add( line );
 						}
 					}
 
-					VISUALISATION.applyGabrielMode();
+					PAGES.SIMULATION.visualisation.applyGabrielMode();
 					PAGES.INFOBOX.gabrielSelect.setActivation( true );
 
 				}

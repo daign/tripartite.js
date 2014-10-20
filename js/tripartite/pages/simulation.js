@@ -1,9 +1,7 @@
 PAGES.SIMULATION = {
 
-	visible: false,
-	visualEnabled: undefined,
-
 	init: function () {
+
 		this.node = document.createElement( 'div' );
 		this.node.setAttribute( 'class', 'page' );
 		this.node.id = 'simulation';
@@ -15,29 +13,33 @@ PAGES.SIMULATION = {
 
 		var self = this;
 
-		var onSwitch = function ( r ) {
-			self.visible = r;
-			self.canvas.style.display = self.visualEnabled ? 'block' : 'none';
-			onWindowResize();
+		var onSwitch = function ( v ) {
+			if ( !v ) {
+				self.visualisation.enabled = false;
+				self.canvas.style.display = 'none';
+			}
 		};
 		PAGES.add( this.node, 'simulation', onSwitch );
 
-		VISUALISATION.init( this.canvas );
+		this.visualisation = new VISUALISATION( this.canvas );
 		PAGES.INFOBOX.init();
 
-		function onWindowResize() {
-			if ( self.visible && self.visualEnabled ) {
-				VISUALISATION.scene.resize();
-			}
-		}
-		window.addEventListener( 'resize', onWindowResize, false );
+	},
+
+	setEnabled: function ( parameters ) {
+
+		PAGES.INFOBOX.setVisualEnabled( parameters.visual );
+		PAGES.INFOSTATS.setProgressDiagramEnabled( parameters.progressDiagram );
+		this.visualisation.enabled = parameters.visual;
+		this.visualisation.resize();
+		this.canvas.style.display = ( parameters.visual ? 'block' : 'none' );
 
 	},
 
 	update: function () {
-		if ( this.visible && this.visualEnabled ) {
-			VISUALISATION.update();
-		}
+
+		this.visualisation.update();
+
 	}
 
 };

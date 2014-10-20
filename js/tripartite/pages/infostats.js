@@ -4,6 +4,7 @@ PAGES.INFOSTATS = {
 	record: undefined,
 	phaseChange: undefined,
 
+	progressDiagramEnabled: undefined,
 	ctx: undefined,
 	canvasWidth: 300,
 	canvasHeight: 100,
@@ -52,16 +53,19 @@ PAGES.INFOSTATS = {
 		this.statsDiv1 = document.createElement( 'div' );
 		this.node.appendChild( this.statsDiv1 );
 
+		this.selectDiv = document.createElement( 'div' );
+		this.node.appendChild( this.selectDiv );
+
 		var selectText = document.createElement( 'span' );
 		selectText.innerHTML = 'second value: ';
 		selectText.style.color = '#36a';
-		this.node.appendChild( selectText );
+		this.selectDiv.appendChild( selectText );
 
 		var onSelect = function ( event ) {
 			self.secondValue = self.select.get();
 			self.updateChart();
 		};
-		this.select = new PAGES.SELECT( this.node, false, 7, onSelect, [
+		this.select = new PAGES.SELECT( this.selectDiv, false, 7, onSelect, [
 			[ 'area',              'area' ],
 			[ 'longestEdges',      'longest edges' ],
 			[ 'maximumAngles',     'maximum angles' ],
@@ -72,9 +76,21 @@ PAGES.INFOSTATS = {
 			[ 'intersectiontests', 'intersectiontests' ]
 		] );
 
+		this.statsHr = document.createElement( 'hr' );
+		this.node.appendChild( this.statsHr );
+
 		this.statsDiv2 = document.createElement( 'div' );
 		this.statsDiv2.style.color = '#36a';
 		this.node.appendChild( this.statsDiv2 );
+
+	},
+
+	setProgressDiagramEnabled: function ( b ) {
+
+		this.progressDiagramEnabled = b;
+		this.statsCanvas.style.display = ( b ? 'block' : 'none' );
+		this.selectDiv.style.display = ( b ? 'block' : 'none' );
+		this.statsHr.style.display = ( b ? 'block' : 'none' );
 
 	},
 
@@ -91,16 +107,27 @@ PAGES.INFOSTATS = {
 
 	update: function () {
 
-		for ( var x in this.data ) {
-			var v = this.data[ x ].get();
-			this.data[ x ].values.push( v );
-			if ( v > this.data[ x ].max ) {
-				this.data[ x ].max = v;
-			}
-		}
+		if ( this.progressDiagramEnabled ) {
 
-		this.updateText();
-		this.updateChart();
+			for ( var x in this.data ) {
+				var v = this.data[ x ].get();
+				this.data[ x ].values.push( v );
+				if ( v > this.data[ x ].max ) {
+					this.data[ x ].max = v;
+				}
+			}
+			this.updateText();
+			this.updateChart();
+
+		} else {
+
+			for ( var x in this.data ) {
+				var v = this.data[ x ].get();
+				this.data[ x ].values = [ v ];
+			}
+			this.updateText();
+
+		}
 
 	},
 
@@ -116,8 +143,7 @@ PAGES.INFOSTATS = {
 			  'intersections: '     + getLast( 'intersections'     )
 		);
 		this.statsDiv2.innerHTML = (
-			  '<hr>'
-			+ 'swaps: '             + getLast( 'swaps'             ) + '<br>'
+			  'swaps: '             + getLast( 'swaps'             ) + '<br>'
 			+ 'testswaps: '         + getLast( 'testswaps'         ) + '<br>'
 			+ 'intersectiontests: ' + getLast( 'intersectiontests' )
 		);

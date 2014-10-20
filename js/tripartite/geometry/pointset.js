@@ -44,7 +44,7 @@ GEOMETRY.PointSet.prototype = {
 	buildMeshes: function ( materials ) {
 		this.points.forEach( function ( point ) {
 			var mesh = point.buildMesh( materials );
-			VISUALISATION.scene.points.add( mesh );
+			PAGES.SIMULATION.visualisation.points.add( mesh );
 		} );
 	},
 
