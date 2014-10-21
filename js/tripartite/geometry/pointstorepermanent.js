@@ -14,6 +14,14 @@ GEOMETRY.PointStorePermanent.prototype = {
 
 	get: function ( i ) {
 		return null;
+	},
+
+	getLength: function () {
+		return this.entries.length;
+	},
+
+	forEach: function ( f ) {
+		this.entries.forEach( f );
 	}
 
 };
