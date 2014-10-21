@@ -1,18 +1,19 @@
-PAGES.EDITOR = {
+EDITOR = {
 
 	init: function () {
+
+		var self = this;
+
 		this.node = document.createElement( 'div' );
 		this.node.setAttribute( 'class', 'page' );
 		this.node.id = 'editor';
-		this.node.style.overflow = 'auto';
 		document.body.appendChild( this.node );
 
 		PAGES.add( this.node, 'editor', function () {} );
 
-		var listDiv = document.createElement( 'div' );
-		listDiv.setAttribute( 'class', 'halfbox left' );
-		listDiv.style.width = '20%';
-		this.node.appendChild( listDiv );
+		this.listDiv = document.createElement( 'div' );
+		this.listDiv.setAttribute( 'class', 'halfbox left' );
+		this.node.appendChild( this.listDiv );
 
 		var backButton = document.createElement( 'input' );
 		backButton.type = 'button';
@@ -21,7 +22,7 @@ PAGES.EDITOR = {
 			PAGES.show( 'settings' );
 		};
 		backButton.addEventListener( 'click', goBack, false );
-		listDiv.appendChild( backButton );
+		this.listDiv.appendChild( backButton );
 
 		var addPointSetButton = document.createElement( 'input' );
 		addPointSetButton.type = 'button';
@@ -30,17 +31,35 @@ PAGES.EDITOR = {
 			;
 		};
 		addPointSetButton.addEventListener( 'click', addPointSet, false );
-		listDiv.appendChild( addPointSetButton );
+		this.listDiv.appendChild( addPointSetButton );
 
-		listDiv.appendChild( document.createElement( 'br' ) );
-		listDiv.appendChild( document.createTextNode( 'List' ) );
+		var listNode = document.createElement( 'div' );
+		this.listDiv.appendChild( listNode );
+		this.setList = new EDITOR.PointSetList( listNode, POINTS.storePermanent );
 
-		var viewDiv = document.createElement( 'div' );
-		viewDiv.setAttribute( 'class', 'halfbox right' );
-		viewDiv.style.width = '70%';
-		this.node.appendChild( viewDiv );
+		this.viewDiv = document.createElement( 'div' );
+		this.viewDiv.setAttribute( 'class', 'halfbox right' );
+		this.node.appendChild( this.viewDiv );
 
-		viewDiv.innerHTML = 'View';
+		this.viewDiv.innerHTML = 'View';
+
+		window.addEventListener( 'resize', function () { self.resize(); }, false );
+		this.resize();
+
+	},
+
+	resize: function () {
+
+		var width = window.innerWidth - 86;
+		var height = window.innerHeight - 64;
+
+		var listWidth = 200;
+		this.listDiv.style.width = listWidth + 'px';
+		this.listDiv.style.height = height + 'px';
+		this.setList.resize( listWidth-6, height-39 );
+
+		this.viewDiv.style.width = ( width - listWidth ) + 'px';
+		this.viewDiv.style.height = height + 'px';
 
 	}
 

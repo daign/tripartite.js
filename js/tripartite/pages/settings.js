@@ -68,7 +68,7 @@ PAGES.SETTINGS = {
 		this.menu1pointsRadio2.setAttribute( 'class', 'radioinput' );
 		//this.menu1.appendChild( this.menu1pointsRadio2 );
 		this.menu1pointsLabel2 = document.createElement( 'label' );
-		this.menu1pointsLabel2.innerHTML = '(selection empty)';
+		this.menu1pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu1pointsLabel2.htmlFor = this.menu1pointsRadio2.id;
 		//this.menu1.appendChild( this.menu1pointsLabel2 );
 
@@ -206,7 +206,7 @@ PAGES.SETTINGS = {
 		this.menu2pointsRadio2.setAttribute( 'class', 'radioinput' );
 		//this.menu2.appendChild( this.menu2pointsRadio2 );
 		this.menu2pointsLabel2 = document.createElement( 'label' );
-		this.menu2pointsLabel2.innerHTML = '(selection empty)';
+		this.menu2pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu2pointsLabel2.htmlFor = this.menu2pointsRadio2.id;
 		//this.menu2.appendChild( this.menu2pointsLabel2 );
 
