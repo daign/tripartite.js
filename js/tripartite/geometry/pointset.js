@@ -84,8 +84,39 @@ GEOMETRY.PointSet.prototype = {
 	},
 
 	parseFromFile: function ( text ) {
-		// TODO
-		return false;
+
+		var self = this;
+		var returnValue = true;
+		var pattern1 = /\]\s*,\s*\[/;
+		var pattern2 = /[^\d.-]/g;
+
+		var groups = text.split( '\n' );
+		if ( groups.length < 3 ) { returnValue = false; }
+		groups.forEach( function ( groupText, groupIndex ) {
+
+			if ( groupIndex < 3 ) {
+
+				var points = groupText.split( pattern1 );
+				points.forEach( function ( pointText ) {
+
+					var coords = pointText.split( ',' );
+					if ( coords.length !== 3 ) { returnValue = false; return; }
+					var x = parseFloat( coords[ 0 ].replace( pattern2, '' ) );
+					var y = parseFloat( coords[ 1 ].replace( pattern2, '' ) );
+					var z = parseFloat( coords[ 2 ].replace( pattern2, '' ) );
+
+					var point = new GEOMETRY.Point( new THREE.Vector3( x, y, z ) );
+					point.group = groupIndex;
+					self.points.push( point );
+
+				} );
+
+			}
+
+		} );
+
+		return returnValue;
+
 	}
 
 };
