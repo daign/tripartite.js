@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg	xmlns="http://www.w3.org/2000/svg"
+		version="1.1"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		viewBox="0,0,60,20">
+
+	<title>Buttons</title>
+
+	<style>
+		.bgRed { fill: #f55; }
+		.bgGreen { fill: #5c3; }
+		.bgBlue { fill: #39d; }
+		.icon { fill: #eee; stroke: #eee; stroke-width: 0.5px; stroke-linejoin: round; }
+		.iconLine { fill: none; stroke: #eee; stroke-width: 1px; stroke-linejoin: round; stroke-linecap: round; }
+		.redLine { fill: none; stroke: #f55; stroke-width: 0.8px; stroke-linecap: round; }
+	</style>
+
+	<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgRed" />
+	<rect x="21" y="1" rx="4" ry="4" width="18" height="18" class="bgGreen" />
+	<rect x="41" y="1" rx="4" ry="4" width="18" height="18" class="bgBlue" />
+
+	<path d="M 5,8 l 10,0 -2,8 -6,0 Z" class="icon" />
+	<path d="M 5,5 l 4,0 0,-1 2,0 0,1 4,0 0,1 -10,0 Z" class="icon" transform="rotate(10,10,5)" />
+	<path d="M 7,9.5 l 1,5" class="redLine" />
+	<path d="M 10,9.5 l 0,5" class="redLine" />
+	<path d="M 13,9.5 l -1,5" class="redLine" />
+
+	<path d="M 28,4 l 4,0 0,6 4,0 -6,6 -6,-6 4,0 Z" class="icon" />
+
+	<path d="M 45,6 l 7,0 0,10 -7,0 0,-10" class="iconLine" />
+	<path d="M 48,6 l 0,-2 7,0 0,10 -3,0" class="iconLine" />
+	<path d="M 47,9 l 3,0" class="iconLine" />
+	<path d="M 47,11 l 3,0" class="iconLine" />
+	<path d="M 47,13 l 2,0" class="iconLine" />
+
+</svg>
+

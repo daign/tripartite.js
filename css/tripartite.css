@@ -113,13 +113,22 @@ label {
 	overflow: hidden;
 }
 .listEntryBox {
+	position: relative;
 	vertical-align: top;
 	height: 40px;
 	display: inline-block;
 	border: 1px solid #999;
 	background: linear-gradient( #eee, #ddd );
+}
+.listEntryText {
+	margin: 2px;
 	color: #444;
 	font-size: 12px;
+}
+.listEntryButton {
+	position: absolute;
+	top: 18px;
+	cursor: pointer;
 }
 .viewNode {
 	position: absolute;

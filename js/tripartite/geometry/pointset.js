@@ -73,6 +73,12 @@ GEOMETRY.PointSet.prototype = {
 			sz += this.points[ i ].coords.z;
 		}
 		return new THREE.Vector3( sx/l, sy/l, sz/l );
+	},
+
+	clone: function () {
+		var pointSet = new GEOMETRY.PointSet();
+		pointSet.points = this.getCopyOfPointsArray();
+		return pointSet;
 	}
 
 };

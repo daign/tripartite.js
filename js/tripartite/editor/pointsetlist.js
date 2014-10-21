@@ -22,11 +22,11 @@ EDITOR.PointSetList.prototype = {
 
 		var self = this;
 
-		this.store.forEach( function ( pointSet, i ) {
-			if ( self.entries[ i ] === undefined ) {
-				self.entries[ i ] = new EDITOR.PointSetListEntry( self.node )
+		this.store.forEach( function ( pointSet, index ) {
+			if ( self.entries[ index ] === undefined ) {
+				self.entries[ index ] = new EDITOR.PointSetListEntry( self.node )
 			}
-			self.entries[ i ].set( pointSet );
+			self.entries[ index ].set( index );
 		} );
 
 		if ( this.store.getLength() < this.entries.length ) {
