@@ -77,8 +77,15 @@ GEOMETRY.PointSet.prototype = {
 
 	clone: function () {
 		var pointSet = new GEOMETRY.PointSet();
-		pointSet.points = this.getCopyOfPointsArray();
+		this.points.forEach( function ( point ) {
+			pointSet.points.push( point.clone() );
+		} );
 		return pointSet;
+	},
+
+	parseFromFile: function ( text ) {
+		// TODO
+		return false;
 	}
 
 };

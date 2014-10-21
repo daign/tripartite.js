@@ -31,6 +31,10 @@ GEOMETRY.Point.prototype = {
 	removeMesh: function () {
 		this.mesh = undefined;
 		this.geometry = undefined;
+	},
+
+	clone: function () {
+		return new GEOMETRY.Point( this.coords.clone() );
 	}
 
 };
