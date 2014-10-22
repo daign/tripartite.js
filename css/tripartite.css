@@ -109,25 +109,39 @@ label {
 }
 .listEntry {
 	width: 179px;
-	height: 42px;
+	height: 48px;
 	overflow: hidden;
 }
 .listEntryBox {
 	position: relative;
 	vertical-align: top;
-	height: 40px;
+	height: 46px;
 	display: inline-block;
 	border: 1px solid #999;
 	background: linear-gradient( #eee, #ddd );
 }
+.listEntryEdit {
+	border: 0px solid #000;
+	background: none;
+	margin-left: 4px;
+	width: 137px;
+	color: #444;
+	font-size: 12px;
+	font-weight: bold;
+}
+.listEntryEdit:focus {
+	background: #fff;
+}
 .listEntryText {
-	margin: 2px;
+	position: absolute;
+	top: 26px;
+	left: 4px;
 	color: #444;
 	font-size: 12px;
 }
 .listEntryButton {
 	position: absolute;
-	top: 18px;
+	top: 24px;
 	cursor: pointer;
 }
 .viewNode {
@@ -151,6 +165,6 @@ label {
 .dialogBox {
 	position: absolute;
 	top: 0px;
-	width: 400px;
+	width: 500px;
 }
 

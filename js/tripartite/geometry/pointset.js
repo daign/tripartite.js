@@ -1,5 +1,6 @@
 GEOMETRY.PointSet = function () {
 
+	this.name = '';
 	this.points = [];
 
 };
@@ -80,6 +81,7 @@ GEOMETRY.PointSet.prototype = {
 		this.points.forEach( function ( point ) {
 			pointSet.points.push( point.clone() );
 		} );
+		pointSet.name = this.name;
 		return pointSet;
 	},
 
@@ -117,6 +119,11 @@ GEOMETRY.PointSet.prototype = {
 
 		return returnValue;
 
+	},
+
+	exportToFile: function () {
+		//TODO
+		return 'pointSet';
 	}
 
 };

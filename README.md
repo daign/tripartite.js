@@ -24,4 +24,5 @@ Licensed under [MIT License](https://github.com/daign/tripartite.js/blob/master/
 
 Dependencies:
 * [three.js](https://github.com/mrdoob/three.js)
+* [FileSaver.js](https://github.com/eligrey/FileSaver.js)
 

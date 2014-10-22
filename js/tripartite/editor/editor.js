@@ -90,7 +90,15 @@ EDITOR = {
 
 		this.addDialog.resize( window.innerWidth, window.innerHeight );
 
-	}
+	},
+
+	getRandomPointSetName: ( function () {
+		var number = 0;
+		return function () {
+			number++;
+			return 'RandomPointSet#' + number;
+		};
+	} )()
 
 };
 

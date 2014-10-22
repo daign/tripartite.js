@@ -72,6 +72,7 @@ EDITOR.AddDialog = function ( node ) {
 					var success = pointSet.parseFromFile( event.target.result );
 					if ( success ) {
 						self.parsedPointSet = pointSet;
+						self.parsedPointSet.name = file.name;
 						var n = pointSet.points.length;
 						self.parseInformation.innerHTML = 'parse status: successfully parsed ' + n + ' points';
 						self.setAddButtonState();
@@ -115,6 +116,7 @@ EDITOR.AddDialog = function ( node ) {
 		if ( self.sourceRadio1.checked ) {
 			var pointSet = new GEOMETRY.PointSet();
 			pointSet.generateRandom( parseInt( self.sel1.get() ) );
+			pointSet.name = EDITOR.getRandomPointSetName();
 			POINTS.storePermanent.entries.push( pointSet );
 			EDITOR.setList.update();
 			self.display( false );
@@ -136,7 +138,7 @@ EDITOR.AddDialog.prototype = {
 	resize: function ( width, height ) {
 		this.node.style.width  = width  + 'px';
 		this.node.style.height = height + 'px';
-		this.box.style.left = ( 0.5 * width - 200 ) + 'px';
+		this.box.style.left = ( 0.5 * width - 250 ) + 'px';
 	},
 
 	display: function ( b ) {
