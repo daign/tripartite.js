@@ -122,8 +122,20 @@ GEOMETRY.PointSet.prototype = {
 	},
 
 	exportToFile: function () {
-		//TODO
-		return 'pointSet';
+
+		var groups = [ [], [], [] ];
+		this.points.forEach( function ( point ) {
+			groups[ point.group ].push( point.toString() );
+		} );
+
+		var lines = [];
+		groups.forEach( function ( group ) {
+			lines.push( '[' + group.join( ', ' ) + ']' );
+		} );
+
+		var text = lines.join( '\n' );
+		return text;
+
 	}
 
 };

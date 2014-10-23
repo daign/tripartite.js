@@ -34,7 +34,13 @@ GEOMETRY.Point.prototype = {
 	},
 
 	clone: function () {
-		return new GEOMETRY.Point( this.coords.clone() );
+		var point = new GEOMETRY.Point( this.coords.clone() );
+		point.group = this.group;
+		return point;
+	},
+
+	toString: function () {
+		return ( '[' + this.coords.x + ', ' + this.coords.y + ', ' + this.coords.z + ']' );
 	}
 
 };
