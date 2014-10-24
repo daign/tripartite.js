@@ -19,9 +19,9 @@ PAGES.SETTINGS = {
 		};
 		PAGES.add( this.node, 'settings', onSwitch );
 
-		function onChange() {
+		var onChange = function () {
 			self.updateDescriptions();
-		}
+		};
 
 		var header = document.createElement( 'div' );
 		header.setAttribute( 'class', 'header' );
@@ -49,6 +49,7 @@ PAGES.SETTINGS = {
 		// points selection
 		this.menu1.appendChild( document.createTextNode( 'Points: ' ) );
 
+		// option for random point set
 		var menu1pointsRadio1 = document.createElement( 'input' );
 		menu1pointsRadio1.id = 'menu1pointsRadio1';
 		menu1pointsRadio1.type = 'radio';
@@ -56,22 +57,28 @@ PAGES.SETTINGS = {
 		menu1pointsRadio1.checked = true;
 		menu1pointsRadio1.setAttribute( 'class', 'radioinput' );
 		this.menu1.appendChild( menu1pointsRadio1 );
+		menu1pointsRadio1.addEventListener( 'change', onChange, false );
+
 		var menu1pointsLabel1 = document.createElement( 'label' );
 		menu1pointsLabel1.innerHTML = 'random 3x30';
 		menu1pointsLabel1.htmlFor = menu1pointsRadio1.id;
 		this.menu1.appendChild( menu1pointsLabel1 );
 
+		// option for custom point set
 		this.menu1pointsRadio2 = document.createElement( 'input' );
 		this.menu1pointsRadio2.id = 'menu1pointsRadio2';
 		this.menu1pointsRadio2.type = 'radio';
 		this.menu1pointsRadio2.name = 'menu1points';
 		this.menu1pointsRadio2.setAttribute( 'class', 'radioinput' );
 		this.menu1.appendChild( this.menu1pointsRadio2 );
+		this.menu1pointsRadio2.addEventListener( 'change', onChange, false );
+
 		this.menu1pointsLabel2 = document.createElement( 'label' );
 		this.menu1pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu1pointsLabel2.htmlFor = this.menu1pointsRadio2.id;
 		this.menu1.appendChild( this.menu1pointsLabel2 );
 
+		// editor button single mode
 		var menu1editorButton = document.createElement( 'input' );
 		menu1editorButton.type = 'button';
 		menu1editorButton.value = 'Editor';
@@ -144,13 +151,25 @@ PAGES.SETTINGS = {
 		this.menu1.appendChild( document.createElement( 'br' ) );
 
 		// start button
-		var start1 =  document.createElement( 'input' );
-		start1.type = 'button';
-		start1.value = 'Start';
+		this.start1 = document.createElement( 'input' );
+		this.start1.type = 'button';
+		this.start1.value = 'Start';
 		function start1fun() {
+
 			var triangleBuildFunction = self.sel1.get();
 			var swappingFunction = self.sel2.get();
 			var optimizationFunction = self.sel2b.get();
+
+			var iterations = undefined;
+			if ( self.menu1pointsRadio2.checked ) {
+				POINTS.useTemporary = false;
+				iterations = POINTS.storePermanent.getNumberOfSelected( 'singleSelected' );
+			} else {
+				POINTS.useTemporary = true;
+				iterations = 1;
+			}
+
+			if ( iterations === 0 ) { return; }
 
 			PAGES.SIMULATION.setEnabled( { visual: true, progressDiagram: true } );
 			PAGES.show( 'simulation' );
@@ -159,11 +178,6 @@ PAGES.SETTINGS = {
 			PAGES.INFOBOX.setSetUp( STATISTICS.startNewSetUp( triangleBuildFunction, swappingFunction, optimizationFunction ) );
 			PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );
 
-			if ( self.menu1pointsRadio2.checked ) {
-				POINTS.useTemporary = false;
-			} else {
-				POINTS.useTemporary = true;
-			}
 			POINTS.activate( 0, 'singleSelected' );
 
 			function onFinish() {
@@ -171,8 +185,8 @@ PAGES.SETTINGS = {
 			}
 			ALGORITHMS.run( triangleBuildFunction, swappingFunction, optimizationFunction, onFinish );
 		}
-		start1.addEventListener( 'click', start1fun, false );
-		this.menu1.appendChild( start1 );
+		this.start1.addEventListener( 'click', start1fun, false );
+		this.menu1.appendChild( this.start1 );
 
 
 		// settings for comparisons
@@ -188,6 +202,7 @@ PAGES.SETTINGS = {
 		// points selection
 		this.menu2.appendChild( document.createTextNode( 'Points: ' ) );
 
+		// option for random point sets
 		var menu2pointsRadio1 = document.createElement( 'input' );
 		menu2pointsRadio1.id = 'menu2pointsRadio1';
 		menu2pointsRadio1.type = 'radio';
@@ -195,28 +210,28 @@ PAGES.SETTINGS = {
 		menu2pointsRadio1.checked = true;
 		menu2pointsRadio1.setAttribute( 'class', 'radioinput' );
 		this.menu2.appendChild( menu2pointsRadio1 );
+		menu2pointsRadio1.addEventListener( 'change', onChange, false );
+
 		var menu2pointsLabel1 = document.createElement( 'label' );
 		menu2pointsLabel1.innerHTML = 'random 5x(3x30)';
 		menu2pointsLabel1.htmlFor = menu2pointsRadio1.id;
 		this.menu2.appendChild( menu2pointsLabel1 );
 
+		// option for custom point sets
 		this.menu2pointsRadio2 = document.createElement( 'input' );
 		this.menu2pointsRadio2.id = 'menu2pointsRadio2';
 		this.menu2pointsRadio2.type = 'radio';
 		this.menu2pointsRadio2.name = 'menu2points';
 		this.menu2pointsRadio2.setAttribute( 'class', 'radioinput' );
 		this.menu2.appendChild( this.menu2pointsRadio2 );
+		this.menu2pointsRadio2.addEventListener( 'change', onChange, false );
+
 		this.menu2pointsLabel2 = document.createElement( 'label' );
 		this.menu2pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu2pointsLabel2.htmlFor = this.menu2pointsRadio2.id;
 		this.menu2.appendChild( this.menu2pointsLabel2 );
 
-		var menu2pointsSwitch = function () {
-			self.updateDescriptions();
-		};
-		menu2pointsRadio1.addEventListener( 'change', menu2pointsSwitch, false );
-		this.menu2pointsRadio2.addEventListener( 'change', menu2pointsSwitch, false );
-
+		// editor button multiple mode
 		var menu2editorButton = document.createElement( 'input' );
 		menu2editorButton.type = 'button';
 		menu2editorButton.value = 'Editor';
@@ -280,10 +295,11 @@ PAGES.SETTINGS = {
 		this.sel8.node.style.height = '100px';
 
 		// start button
-		var start2 =  document.createElement( 'input' );
-		start2.type = 'button';
-		start2.value = 'Start';
+		this.start2 = document.createElement( 'input' );
+		this.start2.type = 'button';
+		this.start2.value = 'Start';
 		function start2fun() {
+
 			var triangleBuildAlgos = [];
 			var o1 = self.sel6.node.options;
 			for ( var i = 0; i < o1.length; i++ ) {
@@ -291,6 +307,7 @@ PAGES.SETTINGS = {
 					triangleBuildAlgos.push( o1[ i ].value );
 				}
 			}
+
 			var swappingAlgos = [];
 			var o2 = self.sel7.node.options;
 			for ( var i = 0; i < o2.length; i++ ) {
@@ -298,6 +315,7 @@ PAGES.SETTINGS = {
 					swappingAlgos.push( o2[ i ].value );
 				}
 			}
+
 			var optimizationAlgos = [];
 			var o3 = self.sel8.node.options;
 			for ( var i = 0; i < o3.length; i++ ) {
@@ -305,13 +323,6 @@ PAGES.SETTINGS = {
 					optimizationAlgos.push( o3[ i ].value );
 				}
 			}
-			if ( triangleBuildAlgos.length === 0 || swappingAlgos.length === 0 || optimizationAlgos.length === 0 ) {
-				return;
-			}
-
-			PAGES.SIMULATION.setEnabled( { visual: false, progressDiagram: false } );
-			PAGES.show( 'simulation' );
-			TIMECONTROL.setSpeed( 1 ).setPaused( false );
 
 			var iterations = undefined;
 			if ( self.menu2pointsRadio2.checked ) {
@@ -321,6 +332,17 @@ PAGES.SETTINGS = {
 				POINTS.useTemporary = true;
 				iterations = 5;
 			}
+
+			if (
+				   triangleBuildAlgos.length === 0
+				|| swappingAlgos.length === 0
+				|| optimizationAlgos.length === 0
+				|| iterations === 0
+			) { return; }
+
+			PAGES.SIMULATION.setEnabled( { visual: false, progressDiagram: false } );
+			PAGES.show( 'simulation' );
+			TIMECONTROL.setSpeed( 1 ).setPaused( false );
 
 			var tbi = -1;
 			var swi = -1;
@@ -358,8 +380,8 @@ PAGES.SETTINGS = {
 			doNext();
 
 		}
-		start2.addEventListener( 'click', start2fun, false );
-		this.menu2.appendChild( start2 );
+		this.start2.addEventListener( 'click', start2fun, false );
+		this.menu2.appendChild( this.start2 );
 		this.menu2.appendChild( document.createTextNode( '   ' ) );
 		this.start2help = document.createElement( 'span' );
 		this.start2help.setAttribute( 'class', 'description' );
@@ -375,6 +397,15 @@ PAGES.SETTINGS = {
 		this.sel1des.innerHTML = '(' + d1.description + ') [' + d1.shortcut + ']';
 		this.sel2des.innerHTML = '(' + d2.description + ') [' + d2.shortcut + ']';
 		this.sel2bdes.innerHTML = '(' + d3.description + ') [' + d3.shortcut + ']';
+
+		if (
+			   this.menu1pointsRadio2.checked
+			&& POINTS.storePermanent.getNumberOfSelected( 'singleSelected' ) === 0
+		) {
+			this.start1.disabled = true;
+		} else {
+			this.start1.disabled = false;
+		}
 
 		var s1 = 0;
 		var o1 = this.sel6.node.options;
@@ -399,8 +430,10 @@ PAGES.SETTINGS = {
 
 		var passes = s1 * s2 * s3 * iterations;
 		if ( passes === 0 ) {
+			this.start2.disabled = true;
 			this.start2help.innerHTML = '(0 passes) Please select at least one of each!';
 		} else {
+			this.start2.disabled = false;
 			this.start2help.innerHTML = '(' + passes + ' passes)';
 		}
 
