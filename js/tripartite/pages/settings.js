@@ -66,11 +66,11 @@ PAGES.SETTINGS = {
 		this.menu1pointsRadio2.type = 'radio';
 		this.menu1pointsRadio2.name = 'menu1points';
 		this.menu1pointsRadio2.setAttribute( 'class', 'radioinput' );
-		//this.menu1.appendChild( this.menu1pointsRadio2 );
+		this.menu1.appendChild( this.menu1pointsRadio2 );
 		this.menu1pointsLabel2 = document.createElement( 'label' );
 		this.menu1pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu1pointsLabel2.htmlFor = this.menu1pointsRadio2.id;
-		//this.menu1.appendChild( this.menu1pointsLabel2 );
+		this.menu1.appendChild( this.menu1pointsLabel2 );
 
 		var menu1editorButton = document.createElement( 'input' );
 		menu1editorButton.type = 'button';
@@ -81,7 +81,7 @@ PAGES.SETTINGS = {
 			PAGES.show( 'editor' );
 		};
 		menu1editorButton.addEventListener( 'click', menu1startEditor, false );
-		//this.menu1.appendChild( menu1editorButton );
+		this.menu1.appendChild( menu1editorButton );
 
 		// triangle build algorithm
 		this.menu1.appendChild( document.createElement( 'br' ) );
@@ -164,7 +164,7 @@ PAGES.SETTINGS = {
 			} else {
 				POINTS.useTemporary = true;
 			}
-			POINTS.activate( 0 );
+			POINTS.activate( 0, 'singleSelected' );
 
 			function onFinish() {
 				PAGES.INFOBOX.setPhase( 'finished' );
@@ -205,11 +205,11 @@ PAGES.SETTINGS = {
 		this.menu2pointsRadio2.type = 'radio';
 		this.menu2pointsRadio2.name = 'menu2points';
 		this.menu2pointsRadio2.setAttribute( 'class', 'radioinput' );
-		//this.menu2.appendChild( this.menu2pointsRadio2 );
+		this.menu2.appendChild( this.menu2pointsRadio2 );
 		this.menu2pointsLabel2 = document.createElement( 'label' );
 		this.menu2pointsLabel2.innerHTML = 'custom (none selected)';
 		this.menu2pointsLabel2.htmlFor = this.menu2pointsRadio2.id;
-		//this.menu2.appendChild( this.menu2pointsLabel2 );
+		this.menu2.appendChild( this.menu2pointsLabel2 );
 
 		var menu2pointsSwitch = function () {
 			self.updateDescriptions();
@@ -226,7 +226,7 @@ PAGES.SETTINGS = {
 			PAGES.show( 'editor' );
 		};
 		menu2editorButton.addEventListener( 'click', menu2startEditor, false );
-		//this.menu2.appendChild( menu2editorButton );
+		this.menu2.appendChild( menu2editorButton );
 
 		this.menu2.appendChild( document.createElement( 'br' ) );
 		var table1 = document.createElement( 'table' );
@@ -348,7 +348,7 @@ PAGES.SETTINGS = {
 						STATISTICS.startNewSetUp( triangleBuildAlgos[ tbi ], swappingAlgos[ swi ], optimizationAlgos[ omi ] )
 					);
 				}
-				POINTS.activate( psi );
+				POINTS.activate( psi, 'multipleSelected' );
 				ai++;
 
 				PAGES.INFOSTATS.setRecord( STATISTICS.startNewRecord() );

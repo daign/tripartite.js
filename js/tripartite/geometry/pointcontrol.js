@@ -5,7 +5,7 @@ GEOMETRY.PointControl = {
 	storeTemporary: new GEOMETRY.PointStoreTemporary(),
 	storePermanent: new GEOMETRY.PointStorePermanent(),
 
-	activate: function ( i ) {
+	activate: function ( i, mode ) {
 		PAGES.SIMULATION.visualisation.removeAll();
 		TRIANGLES.clear();
 		this.set.removeMeshes();
@@ -13,7 +13,7 @@ GEOMETRY.PointControl = {
 		if ( this.useTemporary ) {
 			this.set = this.storeTemporary.get( i );
 		} else {
-			this.set = this.storePermanent.get( i );
+			this.set = this.storePermanent.get( i, mode );
 		}
 		this.set.buildMeshes( VISUALISATION.MATERIALS.pointMaterials );
 		ALGORITHMS.DATASTRUCTURE.resetVisited();

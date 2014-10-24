@@ -51,6 +51,7 @@ PAGES.INFOSTATS = {
 		this.ctx = this.statsCanvas.getContext( '2d' );
 
 		this.statsDiv1 = document.createElement( 'div' );
+		this.statsDiv1.style.marginTop = '8px';
 		this.node.appendChild( this.statsDiv1 );
 
 		this.selectDiv = document.createElement( 'div' );

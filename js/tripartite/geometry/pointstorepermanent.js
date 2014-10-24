@@ -23,18 +23,17 @@ GEOMETRY.PointStorePermanent.prototype = {
 	},
 
 	getNumberOfSelected: function ( value ) {
-		var count = 0;
-		this.entries.forEach( function ( entry ) {
-			if ( entry[ value ] ) {
-				count++;
-			}
+		var selected = this.entries.filter( function ( entry ) {
+			return entry[ value ];
 		} );
-		return count;
+		return selected.length;
 	},
 
-	get: function ( i ) {
-		//TODO
-		return null;
+	get: function ( i, value ) {
+		var selected = this.entries.filter( function ( entry ) {
+			return entry[ value ];
+		} );
+		return selected[ i ].pointSet;
 	}
 
 };

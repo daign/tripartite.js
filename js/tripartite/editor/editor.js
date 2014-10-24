@@ -16,7 +16,6 @@ EDITOR = {
 				var mn = POINTS.storePermanent.getNumberOfSelected( 'multipleSelected' );
 				PAGES.SETTINGS.menu2pointsLabel2.innerHTML = 'custom (' + ( mn > 0 ? mn : 'none' ) + ' selected)';
 				PAGES.SETTINGS.updateDescriptions();
-				console.log( sn, mn );
 			}
 		};
 		PAGES.add( this.node, 'editor', onSwitch );
