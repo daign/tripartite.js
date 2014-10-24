@@ -29,14 +29,17 @@ EDITOR.AddDialog = function ( node ) {
 	this.sourceRadio1.addEventListener( 'change', function () { self.setAddButtonState(); }, false );
 
 	var sourceLabel1 = document.createElement( 'label' );
-	sourceLabel1.innerHTML = 'Random: ';
+	sourceLabel1.innerHTML = 'Random: 3x ';
 	sourceLabel1.htmlFor = this.sourceRadio1.id;
 	this.box.appendChild( sourceLabel1 );
-	this.sel1 = new PAGES.SELECT( this.box, false, 0, null, [
-		[ '10', '3x10' ],
-		[ '30', '3x30' ],
-		[ '60', '3x60' ]
-	] );
+	this.pointNumber = document.createElement( 'input' );
+	this.pointNumber.type = 'number';
+	this.pointNumber.min = 2;
+	this.pointNumber.max = 100;
+	this.pointNumber.step = 1;
+	this.pointNumber.value = 10;
+	this.box.appendChild( this.pointNumber );
+	this.box.appendChild( document.createTextNode( ' points (2..100)' ) );
 
 	this.box.appendChild( document.createElement( 'br' ) );
 	this.sourceRadio2 = document.createElement( 'input' );
@@ -114,8 +117,12 @@ EDITOR.AddDialog = function ( node ) {
 	this.addButton.value = 'Add';
 	var onAdd = function () {
 		if ( self.sourceRadio1.checked ) {
+			var number = parseInt( self.pointNumber.value );
+			number = Math.max( 2, Math.min( 100, number ) );
+			if ( isNaN( number ) ) { return; }
+
 			var pointSet = new GEOMETRY.PointSet();
-			pointSet.generateRandom( parseInt( self.sel1.get() ) );
+			pointSet.generateRandom( number );
 			pointSet.name = EDITOR.getRandomPointSetName();
 			POINTS.storePermanent.addPointSet( pointSet );
 			EDITOR.setList.update();
