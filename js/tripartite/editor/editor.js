@@ -9,7 +9,17 @@ EDITOR = {
 		this.node.id = 'editor';
 		document.body.appendChild( this.node );
 
-		PAGES.add( this.node, 'editor', function () {} );
+		var onSwitch = function ( visible ) {
+			if ( !visible ) {
+				var sn = POINTS.storePermanent.getNumberOfSelected( 'singleSelected' );
+				PAGES.SETTINGS.menu1pointsLabel2.innerHTML = 'custom (' + ( sn > 0 ? sn : 'none' ) + ' selected)';
+				var mn = POINTS.storePermanent.getNumberOfSelected( 'multipleSelected' );
+				PAGES.SETTINGS.menu2pointsLabel2.innerHTML = 'custom (' + ( mn > 0 ? mn : 'none' ) + ' selected)';
+				PAGES.SETTINGS.updateDescriptions();
+				console.log( sn, mn );
+			}
+		};
+		PAGES.add( this.node, 'editor', onSwitch );
 
 		this.listDiv = document.createElement( 'div' );
 		this.listDiv.setAttribute( 'class', 'halfbox left' );
@@ -35,7 +45,7 @@ EDITOR = {
 
 		var listNode = document.createElement( 'div' );
 		this.listDiv.appendChild( listNode );
-		this.setList = new EDITOR.PointSetList( listNode, POINTS.storePermanent );
+		this.setList = new EDITOR.PointSetList( listNode );
 
 		this.viewDiv = document.createElement( 'div' );
 		this.viewDiv.setAttribute( 'class', 'halfbox right' );

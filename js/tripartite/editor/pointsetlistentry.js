@@ -14,6 +14,28 @@ EDITOR.PointSetListEntry = function ( parent ) {
 	this.inputBox.style.width = '30px';
 	this.node.appendChild( this.inputBox );
 
+	this.radioInput = document.createElement( 'input' );
+	this.radioInput.type = 'radio';
+	this.radioInput.name = 'singlePointSetSelect';
+	this.radioInput.style.display = 'none';
+	this.radioInput.setAttribute( 'class', 'listEntryInput' );
+	this.inputBox.appendChild( this.radioInput );
+	var onSingleSelect = function () {
+		self.store.deselectAll( 'singleSelected' );
+		self.store.entries[ self.index ].singleSelected = self.radioInput.checked;
+	};
+	this.radioInput.addEventListener( 'change', onSingleSelect, false );
+
+	this.checkboxInput = document.createElement( 'input' );
+	this.checkboxInput.type = 'checkbox';
+	this.checkboxInput.style.display = 'none';
+	this.checkboxInput.setAttribute( 'class', 'listEntryInput' );
+	this.inputBox.appendChild( this.checkboxInput );
+	var onMultipleSelect = function () {
+		self.store.entries[ self.index ].multipleSelected = self.checkboxInput.checked;
+	};
+	this.checkboxInput.addEventListener( 'change', onMultipleSelect, false );
+
 	this.infoBox = document.createElement( 'div' );
 	this.infoBox.setAttribute( 'class', 'listEntryBox' );
 	this.infoBox.style.width = '145px';
@@ -26,7 +48,7 @@ EDITOR.PointSetListEntry = function ( parent ) {
 	this.infoBox.appendChild( this.nameEdit );
 
 	var onNameEdit = function () {
-		self.store.entries[ self.index ].name = self.nameEdit.value;
+		self.store.entries[ self.index ].pointSet.name = self.nameEdit.value;
 	};
 	this.nameEdit.addEventListener( 'change', onNameEdit, false );
 	this.nameEdit.addEventListener( 'click', function ( e ) { e.stopPropagation(); }, false );
@@ -44,8 +66,8 @@ EDITOR.PointSetListEntry = function ( parent ) {
 
 	var onDuplicate = function ( event ) {
 		event.stopPropagation();
-		var duplicate = self.store.entries[ self.index ].clone();
-		self.store.entries.push( duplicate );
+		var duplicate = self.store.entries[ self.index ].pointSet.clone();
+		self.store.addPointSet( duplicate );
 		EDITOR.setList.update();
 	};
 	this.duplicateButton.addEventListener( 'click', onDuplicate, false );
@@ -59,8 +81,8 @@ EDITOR.PointSetListEntry = function ( parent ) {
 
 	var onDownload = function ( event ) {
 		event.stopPropagation();
-		var text = self.store.entries[ self.index ].exportToFile();
-		var filename = self.store.entries[ self.index ].name;
+		var text = self.store.entries[ self.index ].pointSet.exportToFile();
+		var filename = self.store.entries[ self.index ].pointSet.name;
 		var blob = new Blob( [ text ], { type: 'text/plain;charset=utf-8' } );
 		saveAs( blob, filename );
 	};
@@ -75,7 +97,7 @@ EDITOR.PointSetListEntry = function ( parent ) {
 
 	var onDelete = function ( event ) {
 		event.stopPropagation();
-		self.store.entries[ self.index ].clear();
+		self.store.entries[ self.index ].pointSet.clear();
 		self.store.entries.splice( self.index, 1 );
 		EDITOR.setList.update();
 	};
@@ -83,6 +105,7 @@ EDITOR.PointSetListEntry = function ( parent ) {
 
 	var onClick = function () {
 		EDITOR.setList.deactivateAll();
+		self.store.entries[ self.index ].viewSelected = true;
 		self.activate( true );
 	};
 	this.infoBox.addEventListener( 'click', onClick, false );
@@ -93,11 +116,25 @@ EDITOR.PointSetListEntry.prototype = {
 
 	constructor: EDITOR.PointSetListEntry,
 
-	set: function ( index ) {
+	set: function ( index, selectMode ) {
 		this.index = index;
-		this.activate( false );
-		this.nameEdit.value = this.store.entries[ index ].name;
-		this.textDiv.innerHTML = this.store.entries[ index ].points.length + ' Points';
+		var entry = this.store.entries[ index ];
+
+		this.nameEdit.value = entry.pointSet.name;
+		this.textDiv.innerHTML = entry.pointSet.points.length + ' Points';
+
+		this.activate( entry.viewSelected );
+		this.radioInput.checked = entry.singleSelected;
+		this.checkboxInput.checked = entry.multipleSelected;
+
+		this.radioInput.style.display = 'none';
+		this.checkboxInput.style.display = 'none';
+		if ( selectMode === 'single' ) {
+			this.radioInput.style.display = 'block';
+		} else if ( selectMode === 'multiple' ) {
+			this.checkboxInput.style.display = 'block';
+		}
+
 		this.display( true );
 	},
 
@@ -106,7 +143,7 @@ EDITOR.PointSetListEntry.prototype = {
 	},
 
 	activate: function ( b ) {
-		this.infoBox.style.background = ( b ? 'linear-gradient( #9cf, #6ad )' : 'linear-gradient( #eee, #ddd )' );
+		this.infoBox.style.background = ( b ? 'linear-gradient( #adf, #7be )' : 'linear-gradient( #eee, #ddd )' );
 	}
 
 };

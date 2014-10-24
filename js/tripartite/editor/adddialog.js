@@ -117,11 +117,11 @@ EDITOR.AddDialog = function ( node ) {
 			var pointSet = new GEOMETRY.PointSet();
 			pointSet.generateRandom( parseInt( self.sel1.get() ) );
 			pointSet.name = EDITOR.getRandomPointSetName();
-			POINTS.storePermanent.entries.push( pointSet );
+			POINTS.storePermanent.addPointSet( pointSet );
 			EDITOR.setList.update();
 			self.display( false );
 		} else if ( self.sourceRadio2.checked && self.parsedPointSet !== null ) {
-			POINTS.storePermanent.entries.push( self.parsedPointSet.clone() );
+			POINTS.storePermanent.addPointSet( self.parsedPointSet.clone() );
 			EDITOR.setList.update();
 			self.display( false );
 		}

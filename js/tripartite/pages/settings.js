@@ -77,6 +77,7 @@ PAGES.SETTINGS = {
 		menu1editorButton.value = 'Editor';
 		menu1editorButton.style.marginLeft = '10px';
 		var menu1startEditor = function () {
+			EDITOR.setList.setSelectMode( 'single' );
 			PAGES.show( 'editor' );
 		};
 		menu1editorButton.addEventListener( 'click', menu1startEditor, false );
@@ -221,6 +222,7 @@ PAGES.SETTINGS = {
 		menu2editorButton.value = 'Editor';
 		menu2editorButton.style.marginLeft = '10px';
 		var menu2startEditor = function () {
+			EDITOR.setList.setSelectMode( 'multiple' );
 			PAGES.show( 'editor' );
 		};
 		menu2editorButton.addEventListener( 'click', menu2startEditor, false );
@@ -314,7 +316,7 @@ PAGES.SETTINGS = {
 			var iterations = undefined;
 			if ( self.menu2pointsRadio2.checked ) {
 				POINTS.useTemporary = false;
-				iterations = POINTS.storePermanent.getNumberOfSelected();
+				iterations = POINTS.storePermanent.getNumberOfSelected( 'multipleSelected' );
 			} else {
 				POINTS.useTemporary = true;
 				iterations = 5;
@@ -392,7 +394,7 @@ PAGES.SETTINGS = {
 
 		var iterations = 5;
 		if ( this.menu2pointsRadio2.checked ) {
-			iterations = POINTS.storePermanent.getNumberOfSelected();
+			iterations = POINTS.storePermanent.getNumberOfSelected( 'multipleSelected' );
 		}
 
 		var passes = s1 * s2 * s3 * iterations;

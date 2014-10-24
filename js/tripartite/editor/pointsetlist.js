@@ -1,10 +1,12 @@
-EDITOR.PointSetList = function ( node, store ) {
+EDITOR.PointSetList = function ( node ) {
 
 	this.node = node;
 	this.node.setAttribute( 'class', 'listNode' );
 
-	this.store = store;
+	this.store = POINTS.storePermanent;
 	this.entries = [];
+
+	this.selectMode = undefined;
 	this.update();
 
 };
@@ -22,12 +24,12 @@ EDITOR.PointSetList.prototype = {
 
 		var self = this;
 
-		this.store.forEach( function ( pointSet, index ) {
-			if ( self.entries[ index ] === undefined ) {
-				self.entries[ index ] = new EDITOR.PointSetListEntry( self.node )
+		for ( var i = 0; i < this.store.getLength(); i++ ) {
+			if ( self.entries[ i ] === undefined ) {
+				self.entries[ i ] = new EDITOR.PointSetListEntry( self.node )
 			}
-			self.entries[ index ].set( index );
-		} );
+			self.entries[ i ].set( i, self.selectMode );
+		}
 
 		if ( this.store.getLength() < this.entries.length ) {
 			for( var j = this.store.getLength(); j < this.entries.length; j++ ) {
@@ -38,9 +40,15 @@ EDITOR.PointSetList.prototype = {
 	},
 
 	deactivateAll: function () {
+		this.store.deselectAll( 'viewSelected' );
 		this.entries.forEach( function ( entry ) {
 			entry.activate( false );
 		} );
+	},
+
+	setSelectMode: function ( m ) {
+		this.selectMode = m;
+		this.update();
 	}
 
 };

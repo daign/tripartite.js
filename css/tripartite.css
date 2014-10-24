@@ -120,6 +120,10 @@ label {
 	border: 1px solid #999;
 	background: linear-gradient( #eee, #ddd );
 }
+.listEntryInput {
+	margin-top: 17px;
+	margin-left: 9px;
+}
 .listEntryEdit {
 	border: 0px solid #000;
 	background: none;

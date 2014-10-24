@@ -8,20 +8,33 @@ GEOMETRY.PointStorePermanent.prototype = {
 
 	constructor: GEOMETRY.PointStorePermanent,
 
-	getNumberOfSelected: function () {
-		return 0;
+	addPointSet: function ( ps ) {
+		this.entries.push( { pointSet: ps, singleSelected: false, multipleSelected: false, viewSelected: false } );
 	},
 
-	get: function ( i ) {
-		return null;
+	deselectAll: function ( value ) {
+		this.entries.forEach( function ( entry ) {
+			entry[ value ] = false;
+		} );
 	},
 
 	getLength: function () {
 		return this.entries.length;
 	},
 
-	forEach: function ( f ) {
-		this.entries.forEach( f );
+	getNumberOfSelected: function ( value ) {
+		var count = 0;
+		this.entries.forEach( function ( entry ) {
+			if ( entry[ value ] ) {
+				count++;
+			}
+		} );
+		return count;
+	},
+
+	get: function ( i ) {
+		//TODO
+		return null;
 	}
 
 };
