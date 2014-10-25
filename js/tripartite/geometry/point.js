@@ -1,8 +1,8 @@
-GEOMETRY.Point = function ( coords ) {
+GEOMETRY.Point = function ( coords, group ) {
 
 	this.coords = coords;
+	this.group = group;
 
-	this.group = undefined;
 	this.triangle = undefined;
 	this.mesh = undefined;
 
@@ -34,9 +34,7 @@ GEOMETRY.Point.prototype = {
 	},
 
 	clone: function () {
-		var point = new GEOMETRY.Point( this.coords.clone() );
-		point.group = this.group;
-		return point;
+		return new GEOMETRY.Point( this.coords.clone(), this.group );
 	},
 
 	toString: function () {

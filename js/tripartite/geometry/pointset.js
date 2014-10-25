@@ -29,9 +29,7 @@ GEOMETRY.PointSet.prototype = {
 				var x = ( floats ) ? randomFloat() : randomInt();
 				var y = ( floats ) ? randomFloat() : randomInt();
 				var z = ( floats ) ? randomFloat() : randomInt();
-				var point = new GEOMETRY.Point( new THREE.Vector3( x, y, z ) );
-				point.group = gi;
-				this.points.push( point );
+				this.points.push( new GEOMETRY.Point( new THREE.Vector3( x, y, z ), gi ) );
 			}
 		}
 
@@ -107,9 +105,7 @@ GEOMETRY.PointSet.prototype = {
 					var y = parseFloat( coords[ 1 ].replace( pattern2, '' ) );
 					var z = parseFloat( coords[ 2 ].replace( pattern2, '' ) );
 
-					var point = new GEOMETRY.Point( new THREE.Vector3( x, y, z ) );
-					point.group = groupIndex;
-					self.points.push( point );
+					self.points.push( new GEOMETRY.Point( new THREE.Vector3( x, y, z ), groupIndex ) );
 
 				} );
 
