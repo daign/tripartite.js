@@ -121,7 +121,7 @@ EDITOR.PointSetListEntry.prototype = {
 		var entry = this.store.entries[ index ];
 
 		this.nameEdit.value = entry.pointSet.name;
-		if ( entry.pointSet.isValid() ) {
+		if ( entry.isValid ) {
 			this.textDiv.style.color = '#444';
 			this.textDiv.style.fontWeight = 'normal';
 			this.textDiv.innerHTML = entry.pointSet.points.length + ' Points';
@@ -134,6 +134,8 @@ EDITOR.PointSetListEntry.prototype = {
 		this.activate( entry.viewSelected );
 		this.radioInput.checked = entry.singleSelected;
 		this.checkboxInput.checked = entry.multipleSelected;
+		this.radioInput.disabled = !entry.isValid;
+		this.checkboxInput.disabled = !entry.isValid;
 
 		this.radioInput.style.display = 'none';
 		this.checkboxInput.style.display = 'none';
