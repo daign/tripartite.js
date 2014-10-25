@@ -136,6 +136,44 @@ GEOMETRY.PointSet.prototype = {
 		var text = lines.join( '\n' );
 		return text;
 
+	},
+
+	isValid: function () {
+		return ( this.hasEqualSizedGroups() && !this.hasDoublePoints() );
+	},
+
+	hasEqualSizedGroups: function () {
+
+		var n = this.points.length;
+		if ( n%3 !== 0 ) { return false; }
+
+		var gl = n/3;
+
+		for ( var g = 0; g < 3; g++ ) {
+			var grouped = this.points.filter( function ( point ) {
+				return ( point.group === g );
+			} );
+			if ( grouped.length !== gl ) {
+				return false;
+			}
+		}
+
+		return true;
+
+	},
+
+	hasDoublePoints: function () {
+
+		for ( var i = 0; i < this.points.length; i++ ) {
+			for ( var j = i+1; j < this.points.length; j++ ) {
+				if ( this.points[ i ].equals( this.points[ j ] ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+
 	}
 
 };

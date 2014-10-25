@@ -41,6 +41,10 @@ GEOMETRY.Point.prototype = {
 
 	toString: function () {
 		return ( '[' + this.coords.x + ', ' + this.coords.y + ', ' + this.coords.z + ']' );
+	},
+
+	equals: function ( p ) {
+		return this.coords.equals( p.coords );
 	}
 
 };

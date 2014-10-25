@@ -38,6 +38,7 @@ EDITOR.AddDialog = function ( node ) {
 	this.pointNumber.max = 100;
 	this.pointNumber.step = 1;
 	this.pointNumber.value = 10;
+	this.pointNumber.style.width = '60px';
 	this.box.appendChild( this.pointNumber );
 	this.box.appendChild( document.createTextNode( ' points (2..100)' ) );
 
