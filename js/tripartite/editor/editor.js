@@ -64,7 +64,7 @@ EDITOR = {
 		this.viewDiv.appendChild( viewNode3 );
 
 		var viewNode4 = document.createElement( 'div' );
-		this.view4 = new EDITOR.View( viewNode4 );
+		this.view4 = new EDITOR.View3D( viewNode4 );
 		this.viewDiv.appendChild( viewNode4 );
 
 		var dialogDiv = document.createElement( 'div' );

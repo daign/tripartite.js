@@ -6,6 +6,12 @@ VISUALISATION.MATERIALS = {
 		new THREE.MeshBasicMaterial( { color: 0x006600 } )
 	],
 
+	pointMaterialsEditor: [
+		new THREE.MeshBasicMaterial( { color: 0xcc0000 } ),
+		new THREE.MeshBasicMaterial( { color: 0xffcc00 } ),
+		new THREE.MeshBasicMaterial( { color: 0x006600 } )
+	],
+
 	lineMaterials: [
 		new THREE.LineBasicMaterial( { color: 0xcc0000, linewidth: 1 } ),
 		new THREE.LineBasicMaterial( { color: 0xffcc00, linewidth: 1 } ),
