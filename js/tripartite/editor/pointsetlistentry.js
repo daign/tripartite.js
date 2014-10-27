@@ -155,7 +155,9 @@ EDITOR.PointSetListEntry.prototype = {
 	activate: function ( b ) {
 		this.infoBox.style.background = ( b ? 'linear-gradient( #adf, #7be )' : 'linear-gradient( #eee, #ddd )' );
 		if ( b ) {
-			EDITOR.view4.renderPointSet( this.store.entries[ this.index ].pointSet );
+			var pointSet = this.store.entries[ this.index ].pointSet;
+			EDITOR.view3.setPointSet( pointSet );
+			EDITOR.view4.renderPointSet( pointSet );
 		}
 	}
 

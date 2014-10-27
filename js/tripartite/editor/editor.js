@@ -60,7 +60,7 @@ EDITOR = {
 		this.viewDiv.appendChild( viewNode2 );
 
 		var viewNode3 = document.createElement( 'div' );
-		this.view3 = new EDITOR.View( viewNode3 );
+		this.view3 = new EDITOR.ViewInfos( viewNode3 );
 		this.viewDiv.appendChild( viewNode3 );
 
 		var viewNode4 = document.createElement( 'div' );

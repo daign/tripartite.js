@@ -61,6 +61,13 @@ GEOMETRY.PointSet.prototype = {
 		return this.points.slice();
 	},
 
+	getGroupSize: function ( g ) {
+		var grouped = this.points.filter( function ( point ) {
+			return ( point.group === g );
+		} );
+		return grouped.length;
+	},
+
 	computeCenter: function () {
 		var l = this.points.length;
 		var sx = 0;

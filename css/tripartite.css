@@ -152,6 +152,7 @@ label {
 	position: absolute;
 	background: #000;
 	border: 1px solid #666;
+	overflow: hidden;
 }
 .dialogNode {
 	position: absolute;
