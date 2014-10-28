@@ -30,7 +30,9 @@ EDITOR.ViewInfos.prototype = {
 
 	},
 
-	setPointSet: function ( pointSet ) {
+	loadPointSet: function () {
+
+		var pointSet = EDITOR.PointSetModifier.pointSet;
 
 		this.list.style.display = 'block';
 

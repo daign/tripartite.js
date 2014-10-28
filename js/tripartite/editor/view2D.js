@@ -1,13 +1,15 @@
 EDITOR.View2D = function ( node, direction ) {
 
 	this.direction = direction;
+	this.width = undefined;
+	this.height = undefined;
 
 	this.node = node;
 	this.node.setAttribute( 'class', 'viewNode' );
 
 	this.NS = 'http://www.w3.org/2000/svg';
 	this.context = document.createElementNS( this.NS, 'svg' );
-	this.context.setAttribute( 'viewBox', '0,0,100,100' );
+	this.context.setAttribute( 'viewBox', '-1,-1,102,102' );
 	this.node.appendChild( this.context );
 
 	this.group = document.createElementNS( this.NS, 'g' );
@@ -29,6 +31,9 @@ EDITOR.View2D.prototype = {
 
 	resize: function ( width, height, left, top ) {
 
+		this.width = width;
+		this.height = height;
+
 		this.node.style.width  = width  + 'px';
 		this.node.style.height = height + 'px';
 		this.node.style.left   = left   + 'px';
@@ -39,35 +44,89 @@ EDITOR.View2D.prototype = {
 
 	},
 
-	setPointSet: function ( pointSet ) {
+	loadPointSet: function () {
 
 		var self = this;
 		var indices = [ 0, 0, 0 ];
 
-		pointSet.forEach( function ( point ) {
+		EDITOR.PointSetModifier.forEach( function ( modifier ) {
 
-			var g = point.group;
-			var index = indices[ g ];
+			if ( modifier.active ) {
 
-			var x = point.coords.x;
-			var y = ( ( self.direction === 'top' ) ? point.coords.z : point.coords.y );
+				var point = modifier.point;
+				var g = point.group;
+				var index = indices[ g ];
+				var circle = undefined;
 
-			if ( self.points[ g ].length <= index ) {
-				var circle = document.createElementNS( self.NS, 'circle' );
-				circle.setAttribute( 'cx', 0 );
-				circle.setAttribute( 'cy', 0 );
-				circle.setAttribute( 'r', 1 );
-				circle.style.fill = self.colors[ g ];
-				circle.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
-				self.group.appendChild( circle );
-				self.points[ g ].push( circle );
-			} else {
-				var circle = self.points[ g ][ index ];
-				circle.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
-				circle.style.display = 'block';
+				if ( self.points[ g ].length <= index ) {
+					circle = document.createElementNS( self.NS, 'circle' );
+					circle.setAttribute( 'cx', 0 );
+					circle.setAttribute( 'cy', 0 );
+					circle.setAttribute( 'r', 1 );
+					circle.style.fill = self.colors[ g ];
+					self.group.appendChild( circle );
+					self.points[ g ].push( circle );
+				} else {
+					circle = self.points[ g ][ index ];
+					circle.style.display = 'block';
+				}
+
+				var setPosition = function () {
+					var x = point.coords.x;
+					var y = ( ( self.direction === 'top' ) ? point.coords.z : point.coords.y );
+					circle.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
+				};
+				setPosition();
+				modifier.registerListener( setPosition );
+
+				var vector0 = new THREE.Vector2();
+				var vectorT = new THREE.Vector2();
+				var offset = new THREE.Vector3();
+				var beginDrag = function ( event ) {
+
+					event.preventDefault();
+					event.stopPropagation();
+
+					vector0.setFromEvent( event );
+					modifier.snap();
+
+					var cancelSelect = function ( event ) {
+						event.preventDefault();
+						event.stopPropagation();
+					};
+
+					var continueDrag = function ( event ) {
+						event.preventDefault();
+						event.stopPropagation();
+						vectorT.setFromEvent( event );
+						vectorT.sub( vector0 );
+						offset.x = vectorT.x * 100 / self.height;
+						if ( self.direction === 'top' ) {
+							offset.z = vectorT.y * 100 / self.height;
+							offset.y = 0;
+						} else {
+							offset.y = vectorT.y * 100 / self.height;
+							offset.z = 0;
+						}
+						modifier.drag( offset );
+					};
+
+					var endDrag = function () {
+						document.removeEventListener( 'selectstart', cancelSelect, false );
+						document.removeEventListener( 'mousemove',   continueDrag, false );
+						document.removeEventListener( 'mouseup',     endDrag, false );
+					};
+
+					document.addEventListener( 'selectstart', cancelSelect, false );
+					document.addEventListener( 'mousemove',   continueDrag, false );
+					document.addEventListener( 'mouseup',     endDrag, false );
+
+				};
+				circle.addEventListener( 'mousedown',  beginDrag, false );
+
+				indices[ g ]++;
+
 			}
-
-			indices[ g ]++;
 
 		} );
 

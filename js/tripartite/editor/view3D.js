@@ -63,28 +63,39 @@ EDITOR.View3D.prototype = {
 
 	},
 
-	setPointSet: function ( pointSet ) {
+	loadPointSet: function () {
 
 		var self = this;
 		var indices = [ 0, 0, 0 ];
 
-		pointSet.forEach( function ( point ) {
+		EDITOR.PointSetModifier.forEach( function ( modifier ) {
 
-			var g = point.group;
-			var index = indices[ g ];
+			if ( modifier.active ) {
 
-			if ( self.points[ g ].children.length <= index ) {
-				var geometry = new THREE.SphereGeometry( 1, 16, 16 );
-				var mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ g ] );
-				mesh.position = point.coords;
-				self.points[ g ].add( mesh );
-			} else {
-				var mesh = self.points[ g ].children[ index ];
-				mesh.position = point.coords;
-				mesh.visible = true;
+				var point = modifier.point;
+				var g = point.group;
+				var index = indices[ g ];
+				var mesh = undefined;
+
+				if ( self.points[ g ].children.length <= index ) {
+					var geometry = new THREE.SphereGeometry( 1, 16, 16 );
+					mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ g ] );
+					self.points[ g ].add( mesh );
+				} else {
+					mesh = self.points[ g ].children[ index ];
+					mesh.visible = true;
+				}
+
+				var setPosition = function () {
+					mesh.position = point.coords;
+					self.render();
+				};
+				setPosition();
+				modifier.registerListener( setPosition );
+
+				indices[ g ]++;
+
 			}
-
-			indices[ g ]++;
 
 		} );
 
