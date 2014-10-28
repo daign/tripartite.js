@@ -52,11 +52,11 @@ EDITOR = {
 		this.node.appendChild( this.viewDiv );
 
 		var viewNode1 = document.createElement( 'div' );
-		this.view1 = new EDITOR.View( viewNode1 );
+		this.view1 = new EDITOR.View2D( viewNode1, 'top' );
 		this.viewDiv.appendChild( viewNode1 );
 
 		var viewNode2 = document.createElement( 'div' );
-		this.view2 = new EDITOR.View( viewNode2 );
+		this.view2 = new EDITOR.View2D( viewNode2, 'front' );
 		this.viewDiv.appendChild( viewNode2 );
 
 		var viewNode3 = document.createElement( 'div' );

@@ -154,6 +154,15 @@ label {
 	border: 1px solid #666;
 	overflow: hidden;
 }
+.viewCaption {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 4px;
+	pointer-events: none;
+	color: #666;
+	font-size: 12px;
+}
 .dialogNode {
 	position: absolute;
 	top: 0px;

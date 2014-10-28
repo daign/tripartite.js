@@ -26,8 +26,19 @@ EDITOR.View3D = function ( node ) {
 	controls.addEventListener( 'change', render );
 	controls.update();
 
-	this.points = new THREE.Object3D();
-	scene.add( this.points );
+	this.points = [
+		new THREE.Object3D(),
+		new THREE.Object3D(),
+		new THREE.Object3D()
+	];
+	this.points.forEach( function ( element ) {
+		scene.add( element );
+	} );
+
+	var viewCaption = document.createElement( 'div' );
+	viewCaption.setAttribute( 'class', 'viewCaption' );
+	viewCaption.innerHTML = 'perspective';
+	this.node.appendChild( viewCaption );
 
 };
 
@@ -52,19 +63,38 @@ EDITOR.View3D.prototype = {
 
 	},
 
-	renderPointSet: function ( pointSet ) {
-
-		while ( this.points.children.length > 0 ) {
-			this.points.remove( this.points.children[ this.points.children.length-1 ] );
-		}
+	setPointSet: function ( pointSet ) {
 
 		var self = this;
+		var indices = [ 0, 0, 0 ];
 
 		pointSet.forEach( function ( point ) {
-			var geometry = new THREE.SphereGeometry( 0.5, 16, 16 );
-			var mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ point.group ] );
-			mesh.position = point.coords;
-			self.points.add( mesh );
+
+			var g = point.group;
+			var index = indices[ g ];
+
+			if ( self.points[ g ].children.length <= index ) {
+				var geometry = new THREE.SphereGeometry( 1, 16, 16 );
+				var mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ g ] );
+				mesh.position = point.coords;
+				self.points[ g ].add( mesh );
+			} else {
+				var mesh = self.points[ g ].children[ index ];
+				mesh.position = point.coords;
+				mesh.visible = true;
+			}
+
+			indices[ g ]++;
+
+		} );
+
+		this.points.forEach( function ( element, index ) {
+
+			while ( indices[ index ] < element.children.length ) {
+				element.children[ indices[ index ] ].visible = false;
+				indices[ index ]++;
+			}
+
 		} );
 
 		this.render();
