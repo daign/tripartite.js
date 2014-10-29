@@ -1,6 +1,16 @@
 GEOMETRY.Triangle = function ( points ) {
 
 	this.points = points;
+	this.points.sort( function ( a, b ) {
+		if ( a.group > b.group ) {
+			return 1;
+		} else if ( a.group < b.group ) {
+			return -1;
+		} else {
+			return 0;
+		}
+	} );
+	if ( !this.isValid() ) { console.warn( 'triangle with wrong point group constellation' ); }
 
 	this.math = new THREE.Triangle();
 	this.updateMath();
@@ -13,6 +23,16 @@ GEOMETRY.Triangle = function ( points ) {
 GEOMETRY.Triangle.prototype = {
 
 	constructor: GEOMETRY.Triangle,
+
+	isValid: function () {
+
+		return (
+			   this.points[ 0 ].group === 0
+			&& this.points[ 1 ].group === 1
+			&& this.points[ 2 ].group === 2
+		);
+
+	},
 
 	clone: function () {
 
