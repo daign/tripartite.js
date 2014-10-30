@@ -54,18 +54,22 @@ EDITOR = {
 		var viewNode1 = document.createElement( 'div' );
 		this.view1 = new EDITOR.View2D( viewNode1, 'top' );
 		this.viewDiv.appendChild( viewNode1 );
+		EDITOR.PointSetModifier.registerSetListener( this.view1.loadPointSet, this.view1 );
 
 		var viewNode2 = document.createElement( 'div' );
 		this.view2 = new EDITOR.View2D( viewNode2, 'front' );
 		this.viewDiv.appendChild( viewNode2 );
+		EDITOR.PointSetModifier.registerSetListener( this.view2.loadPointSet, this.view2 );
 
 		var viewNode3 = document.createElement( 'div' );
 		this.view3 = new EDITOR.ViewInfos( viewNode3 );
 		this.viewDiv.appendChild( viewNode3 );
+		EDITOR.PointSetModifier.registerSetListener( this.view3.loadPointSet, this.view3 );
 
 		var viewNode4 = document.createElement( 'div' );
 		this.view4 = new EDITOR.View3D( viewNode4 );
 		this.viewDiv.appendChild( viewNode4 );
+		EDITOR.PointSetModifier.registerSetListener( this.view4.loadPointSet, this.view4 );
 
 		var dialogDiv = document.createElement( 'div' );
 		this.addDialog = new EDITOR.AddDialog( dialogDiv );

@@ -38,6 +38,7 @@ EDITOR.PointModifier.prototype = {
 			this.listeners.forEach( function ( callback ) {
 				callback();
 			} );
+			EDITOR.PointSetModifier.onChange();
 		}
 	}
 

@@ -156,10 +156,6 @@ EDITOR.PointSetListEntry.prototype = {
 		this.infoBox.style.background = ( b ? 'linear-gradient( #adf, #7be )' : 'linear-gradient( #eee, #ddd )' );
 		if ( b ) {
 			EDITOR.PointSetModifier.set( this.store.entries[ this.index ].pointSet );
-			EDITOR.view1.loadPointSet();
-			EDITOR.view2.loadPointSet();
-			EDITOR.view3.loadPointSet();
-			EDITOR.view4.loadPointSet();
 		}
 	}
 

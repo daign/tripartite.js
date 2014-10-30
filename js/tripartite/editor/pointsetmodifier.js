@@ -3,10 +3,14 @@ EDITOR.PointSetModifier = {
 	pointSet: undefined,
 	pointModifiers: [],
 
+	setListeners: [],
+	changeListeners: [],
+
 	set: function ( pointSet ) {
 
 		var self = this;
 		this.pointSet = pointSet;
+		this.changeListeners = [];
 
 		this.pointModifiers.forEach( function ( modifier ) {
 			modifier.deactivate();
@@ -22,10 +26,34 @@ EDITOR.PointSetModifier = {
 			}
 		} );
 
+		this.onSet();
+
 	},
 
 	forEach: function ( f ) {
 		this.pointModifiers.forEach( f );
+	},
+
+	registerSetListener: function ( callback, context ) {
+		this.setListeners.push( function () {
+			callback.apply( context );
+		} );
+	},
+
+	registerChangeListener: function ( callback ) {
+		this.changeListeners.push( callback );
+	},
+
+	onSet: function () {
+		this.setListeners.forEach( function ( callback ) {
+			callback();
+		} );
+	},
+
+	onChange: function () {
+		this.changeListeners.forEach( function ( callback ) {
+			callback();
+		} );
 	}
 
 };
