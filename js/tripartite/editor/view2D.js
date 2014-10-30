@@ -15,7 +15,7 @@ EDITOR.View2D = function ( node, direction ) {
 	this.group = document.createElementNS( this.NS, 'g' );
 	this.context.appendChild( this.group );
 
-	this.points = [ [], [], [] ];
+	this.circles = [];
 	this.colors = [ '#cc0000', '#ffcc00', '#006600' ];
 
 	var viewCaption = document.createElement( 'div' );
@@ -47,7 +47,7 @@ EDITOR.View2D.prototype = {
 	loadPointSet: function () {
 
 		var self = this;
-		var indices = [ 0, 0, 0 ];
+		var index = 0;
 
 		EDITOR.PointSetModifier.forEach( function ( modifier ) {
 
@@ -55,89 +55,43 @@ EDITOR.View2D.prototype = {
 
 				var point = modifier.point;
 				var g = point.group;
-				var index = indices[ g ];
-				var circle = undefined;
 
-				if ( self.points[ g ].length <= index ) {
-					circle = document.createElementNS( self.NS, 'circle' );
-					circle.setAttribute( 'cx', 0 );
-					circle.setAttribute( 'cy', 0 );
-					circle.setAttribute( 'r', 1 );
-					circle.style.fill = self.colors[ g ];
-					self.group.appendChild( circle );
-					self.points[ g ].push( circle );
-				} else {
-					circle = self.points[ g ][ index ];
-					circle.style.display = 'block';
-				}
+				var circle = self.getCircle( index );
+				circle.modifier = modifier;
+				circle.node.style.fill = self.colors[ g ];
 
 				var setPosition = function () {
 					var x = point.coords.x;
 					var y = ( ( self.direction === 'top' ) ? point.coords.z : point.coords.y );
-					circle.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
+					circle.node.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
 				};
 				setPosition();
 				modifier.registerListener( setPosition );
 
-				var vector0 = new THREE.Vector2();
-				var vectorT = new THREE.Vector2();
-				var offset = new THREE.Vector3();
-				var beginDrag = function ( event ) {
-
-					event.preventDefault();
-					event.stopPropagation();
-
-					vector0.setFromEvent( event );
-					modifier.snap();
-
-					var cancelSelect = function ( event ) {
-						event.preventDefault();
-						event.stopPropagation();
-					};
-
-					var continueDrag = function ( event ) {
-						event.preventDefault();
-						event.stopPropagation();
-						vectorT.setFromEvent( event );
-						vectorT.sub( vector0 );
-						offset.x = vectorT.x * 100 / self.height;
-						if ( self.direction === 'top' ) {
-							offset.z = vectorT.y * 100 / self.height;
-							offset.y = 0;
-						} else {
-							offset.y = vectorT.y * 100 / self.height;
-							offset.z = 0;
-						}
-						modifier.drag( offset );
-					};
-
-					var endDrag = function () {
-						document.removeEventListener( 'selectstart', cancelSelect, false );
-						document.removeEventListener( 'mousemove',   continueDrag, false );
-						document.removeEventListener( 'mouseup',     endDrag, false );
-					};
-
-					document.addEventListener( 'selectstart', cancelSelect, false );
-					document.addEventListener( 'mousemove',   continueDrag, false );
-					document.addEventListener( 'mouseup',     endDrag, false );
-
-				};
-				circle.addEventListener( 'mousedown',  beginDrag, false );
-
-				indices[ g ]++;
+				index++;
 
 			}
 
 		} );
 
-		this.points.forEach( function ( array, index ) {
+		while ( index < this.circles.length ) {
+			this.circles[ index ].node.style.display = 'none';
+			index++;
+		}
 
-			while ( indices[ index ] < array.length ) {
-				array[ indices[ index ] ].style.display = 'none';
-				indices[ index ]++;
-			}
+	},
 
-		} );
+	getCircle: function ( index ) {
+
+		if ( this.circles.length <= index ) {
+			var circle = new EDITOR.View2DCircle( this );
+			this.circles.push( circle );
+			return circle;
+		} else {
+			var circle = this.circles[ index ];
+			circle.node.style.display = 'block';
+			return circle;
+		}
 
 	}
 
