@@ -119,23 +119,31 @@ EDITOR.PointSetListEntry.prototype = {
 	set: function ( index, selectMode ) {
 		this.index = index;
 		var entry = this.store.entries[ index ];
+		var self = this;
 
 		this.nameEdit.value = entry.pointSet.name;
-		if ( entry.isValid ) {
-			this.textDiv.style.color = '#444';
-			this.textDiv.style.fontWeight = 'normal';
-			this.textDiv.innerHTML = entry.pointSet.points.length + ' Points';
-		} else {
-			this.textDiv.style.color = '#f55';
-			this.textDiv.style.fontWeight = 'bold';
-			this.textDiv.innerHTML = 'INVALID';
-		}
+
+		var update = function () {
+			entry.update();
+			if ( entry.isValid ) {
+				self.textDiv.style.color = '#444';
+				self.textDiv.style.fontWeight = 'normal';
+				self.textDiv.innerHTML = entry.pointSet.points.length + ' Points';
+			} else {
+				self.textDiv.style.color = '#f55';
+				self.textDiv.style.fontWeight = 'bold';
+				self.textDiv.innerHTML = 'INVALID';
+			}
+
+			self.radioInput.disabled = !entry.isValid;
+			self.checkboxInput.disabled = !entry.isValid;
+		};
+		this.update = update;
+		update();
 
 		this.activate( entry.viewSelected );
 		this.radioInput.checked = entry.singleSelected;
 		this.checkboxInput.checked = entry.multipleSelected;
-		this.radioInput.disabled = !entry.isValid;
-		this.checkboxInput.disabled = !entry.isValid;
 
 		this.radioInput.style.display = 'none';
 		this.checkboxInput.style.display = 'none';
@@ -156,6 +164,7 @@ EDITOR.PointSetListEntry.prototype = {
 		this.infoBox.style.background = ( b ? 'linear-gradient( #adf, #7be )' : 'linear-gradient( #eee, #ddd )' );
 		if ( b ) {
 			EDITOR.PointSetModifier.set( this.store.entries[ this.index ].pointSet );
+			EDITOR.PointSetModifier.registerChangeListener( this.update, this );
 		}
 	}
 

@@ -33,23 +33,29 @@ EDITOR.ViewInfos.prototype = {
 	loadPointSet: function () {
 
 		var pointSet = EDITOR.PointSetModifier.pointSet;
-
+		var self = this;
 		this.list.style.display = 'block';
 
-		this.groupSize.innerHTML = (
-			  pointSet.points.length + ' points ('
-			+ pointSet.getGroupSize( 0 ) + ' red,'
-			+ pointSet.getGroupSize( 1 ) + ' yellow,'
-			+ pointSet.getGroupSize( 2 ) + ' green)'
-		);
+		var update = function () {
 
-		this.groupSizeValid.innerHTML = (
-			pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
-		);
+			self.groupSize.innerHTML = (
+				  pointSet.points.length + ' points ('
+				+ pointSet.getGroupSize( 0 ) + ' red,'
+				+ pointSet.getGroupSize( 1 ) + ' yellow,'
+				+ pointSet.getGroupSize( 2 ) + ' green)'
+			);
 
-		this.doublePoints.innerHTML = (
-			pointSet.hasDoublePoints() ? 'does contain double points (invalid)' : 'all points are distinct'
-		);
+			self.groupSizeValid.innerHTML = (
+				pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
+			);
+
+			self.doublePoints.innerHTML = (
+				pointSet.hasDoublePoints() ? 'does contain double points (invalid)' : 'all points are distinct'
+			);
+
+		};
+		update();
+		EDITOR.PointSetModifier.registerChangeListener( update, window );
 
 	}
 

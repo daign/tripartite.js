@@ -40,8 +40,10 @@ EDITOR.PointSetModifier = {
 		} );
 	},
 
-	registerChangeListener: function ( callback ) {
-		this.changeListeners.push( callback );
+	registerChangeListener: function ( callback, context ) {
+		this.changeListeners.push( function () {
+			callback.apply( context );
+		} );
 	},
 
 	onSet: function () {
