@@ -177,6 +177,32 @@ GEOMETRY.PointSet.prototype = {
 
 		return false;
 
+	},
+
+	removeDoublePoints: function () {
+
+		for ( var i = 0; i < this.points.length; i++ ) {
+			for ( var j = i+1; j < this.points.length; j++ ) {
+				if (
+					   this.points[ i ] !== undefined
+					&& this.points[ j ] !== undefined
+					&& this.points[ i ].equals( this.points[ j ] )
+				) {
+					this.points[ j ].removeMesh();
+					this.points[ j ] = undefined;
+				}
+			}
+		}
+
+		var index = 0;
+		while ( index < this.points.length ) {
+			if ( this.points[ index ] === undefined ) {
+				this.points.splice( index, 1 );
+			} else {
+				index++;
+			}
+		}
+
 	}
 
 };

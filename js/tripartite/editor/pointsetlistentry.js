@@ -137,13 +137,13 @@ EDITOR.PointSetListEntry.prototype = {
 
 			self.radioInput.disabled = !entry.isValid;
 			self.checkboxInput.disabled = !entry.isValid;
+			self.radioInput.checked = entry.singleSelected;
+			self.checkboxInput.checked = entry.multipleSelected;
 		};
 		this.update = update;
 		update();
 
 		this.activate( entry.viewSelected );
-		this.radioInput.checked = entry.singleSelected;
-		this.checkboxInput.checked = entry.multipleSelected;
 
 		this.radioInput.style.display = 'none';
 		this.checkboxInput.style.display = 'none';

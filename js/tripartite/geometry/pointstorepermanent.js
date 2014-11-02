@@ -17,6 +17,10 @@ GEOMETRY.PointStorePermanent.prototype = {
 			viewSelected: false,
 			update: function () {
 				this.isValid = ps.isValid();
+				if ( !this.isValid ) {
+					this.singleSelected = false;
+					this.multipleSelected = false;
+				}
 			}
 		} );
 	},

@@ -15,6 +15,20 @@ EDITOR.ViewInfos = function ( node ) {
 	this.doublePoints = document.createElement( 'li' );
 	this.list.appendChild( this.doublePoints );
 
+	var doublePointsList = document.createElement( 'ul' );
+	this.list.appendChild( doublePointsList );
+	var doublePoints2 = document.createElement( 'li' );
+	doublePointsList.appendChild( doublePoints2 );
+	this.doublePointsButton = document.createElement( 'input' );
+	this.doublePointsButton.type = 'button';
+	this.doublePointsButton.value = 'Remove double points';
+	var onRemoveDoublePoints = function () {
+		EDITOR.PointSetModifier.pointSet.removeDoublePoints();
+		EDITOR.PointSetModifier.set( EDITOR.PointSetModifier.pointSet );
+	};
+	this.doublePointsButton.addEventListener( 'click', onRemoveDoublePoints, false );
+	doublePoints2.appendChild( this.doublePointsButton );
+
 };
 
 EDITOR.ViewInfos.prototype = {
@@ -49,9 +63,13 @@ EDITOR.ViewInfos.prototype = {
 				pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
 			);
 
-			self.doublePoints.innerHTML = (
-				pointSet.hasDoublePoints() ? 'does contain double points (invalid)' : 'all points are distinct'
-			);
+			if ( pointSet.hasDoublePoints() ) {
+				self.doublePoints.innerHTML = 'does contain double points (invalid)';
+				self.doublePointsButton.disabled = false;
+			} else {
+				self.doublePoints.innerHTML = 'all points are distinct';
+				self.doublePointsButton.disabled = true;
+			}
 
 		};
 		update();
