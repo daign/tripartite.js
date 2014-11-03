@@ -181,4 +181,15 @@ label {
 	top: 0px;
 	width: 500px;
 }
+.dot2D {
+	fill: #ccc;
+	pointer-events: none;
+}
+.handle2D {
+	fill: #ccf;
+	fill-opacity: 0.0;
+}
+.handle2D:hover {
+	fill-opacity: 0.2;
+}
 

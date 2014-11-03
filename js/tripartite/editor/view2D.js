@@ -15,7 +15,7 @@ EDITOR.View2D = function ( node, direction ) {
 	this.group = document.createElementNS( this.NS, 'g' );
 	this.context.appendChild( this.group );
 
-	this.circles = [];
+	this.points = [];
 	this.colors = [ '#cc0000', '#ffcc00', '#006600' ];
 
 	var viewCaption = document.createElement( 'div' );
@@ -56,14 +56,14 @@ EDITOR.View2D.prototype = {
 				var point = modifier.point;
 				var g = point.group;
 
-				var circle = self.getCircle( index );
-				circle.modifier = modifier;
-				circle.node.style.fill = self.colors[ g ];
+				var point2D = self.get2DPoint( index );
+				point2D.modifier = modifier;
+				point2D.setColor( self.colors[ g ] );
 
 				var setPosition = function () {
 					var x = point.coords.x;
 					var y = ( ( self.direction === 'top' ) ? point.coords.z : point.coords.y );
-					circle.node.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
+					point2D.node.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
 				};
 				setPosition();
 				modifier.registerListener( setPosition );
@@ -74,23 +74,23 @@ EDITOR.View2D.prototype = {
 
 		} );
 
-		while ( index < this.circles.length ) {
-			this.circles[ index ].node.style.display = 'none';
+		while ( index < this.points.length ) {
+			this.points[ index ].node.style.display = 'none';
 			index++;
 		}
 
 	},
 
-	getCircle: function ( index ) {
+	get2DPoint: function ( index ) {
 
-		if ( this.circles.length <= index ) {
-			var circle = new EDITOR.View2DCircle( this );
-			this.circles.push( circle );
-			return circle;
+		if ( this.points.length <= index ) {
+			var point2D = new EDITOR.View2DPoint( this );
+			this.points.push( point2D );
+			return point2D;
 		} else {
-			var circle = this.circles[ index ];
-			circle.node.style.display = 'block';
-			return circle;
+			var point2D = this.points[ index ];
+			point2D.node.style.display = 'block';
+			return point2D;
 		}
 
 	}

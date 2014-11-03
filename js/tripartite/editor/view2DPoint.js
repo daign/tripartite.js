@@ -1,15 +1,26 @@
-EDITOR.View2DCircle = function ( view ) {
+EDITOR.View2DPoint = function ( view ) {
 
 	this.modifier = undefined;
 	this.view = view;
 
 	this.NS = 'http://www.w3.org/2000/svg';
 
-	this.node = document.createElementNS( this.NS, 'circle' );
-	this.node.setAttribute( 'cx', 0 );
-	this.node.setAttribute( 'cy', 0 );
-	this.node.setAttribute( 'r', 1 );
+	this.node = document.createElementNS( this.NS, 'g' );
 	this.view.group.appendChild( this.node );
+
+	this.pointHandle = document.createElementNS( this.NS, 'circle' );
+	this.pointHandle.setAttribute( 'cx', 0 );
+	this.pointHandle.setAttribute( 'cy', 0 );
+	this.pointHandle.setAttribute( 'r', 3 );
+	this.pointHandle.setAttribute( 'class', 'handle2D' );
+	this.node.appendChild( this.pointHandle );
+
+	this.pointDot = document.createElementNS( this.NS, 'circle' );
+	this.pointDot.setAttribute( 'cx', 0 );
+	this.pointDot.setAttribute( 'cy', 0 );
+	this.pointDot.setAttribute( 'r', 1 );
+	this.pointDot.setAttribute( 'class', 'dot2D' );
+	this.node.appendChild( this.pointDot );
 
 	var self = this;
 	var vector0 = new THREE.Vector2();
@@ -55,13 +66,19 @@ EDITOR.View2DCircle = function ( view ) {
 		document.addEventListener( 'mouseup',     endDrag,      false );
 
 	};
-	this.node.addEventListener( 'mousedown', beginDrag, false );
+	this.pointHandle.addEventListener( 'mousedown', beginDrag, false );
 
 };
 
-EDITOR.View2DCircle.prototype = {
+EDITOR.View2DPoint.prototype = {
 
-	constructor: EDITOR.View2DCircle
+	constructor: EDITOR.View2DPoint,
+
+	setColor: function ( color ) {
+
+		this.pointDot.style.fill = color;
+
+	}
 
 };
 
