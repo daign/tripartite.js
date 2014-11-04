@@ -48,32 +48,41 @@ EDITOR.ViewInfos.prototype = {
 
 		var pointSet = EDITOR.PointSetModifier.pointSet;
 		var self = this;
-		this.list.style.display = 'block';
 
-		var update = function () {
+		if ( pointSet !== null ) {
 
-			self.groupSize.innerHTML = (
-				  pointSet.points.length + ' points ('
-				+ pointSet.getGroupSize( 0 ) + ' red,'
-				+ pointSet.getGroupSize( 1 ) + ' yellow,'
-				+ pointSet.getGroupSize( 2 ) + ' green)'
-			);
+			this.list.style.display = 'block';
 
-			self.groupSizeValid.innerHTML = (
-				pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
-			);
+			var update = function () {
 
-			if ( pointSet.hasDoublePoints() ) {
-				self.doublePoints.innerHTML = 'does contain double points (invalid)';
-				self.doublePointsButton.disabled = false;
-			} else {
-				self.doublePoints.innerHTML = 'all points are distinct';
-				self.doublePointsButton.disabled = true;
-			}
+				self.groupSize.innerHTML = (
+					  pointSet.points.length + ' points ('
+					+ pointSet.getGroupSize( 0 ) + ' red,'
+					+ pointSet.getGroupSize( 1 ) + ' yellow,'
+					+ pointSet.getGroupSize( 2 ) + ' green)'
+				);
 
-		};
-		update();
-		EDITOR.PointSetModifier.registerChangeListener( update, window );
+				self.groupSizeValid.innerHTML = (
+					pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
+				);
+
+				if ( pointSet.hasDoublePoints() ) {
+					self.doublePoints.innerHTML = 'does contain double points (invalid)';
+					self.doublePointsButton.disabled = false;
+				} else {
+					self.doublePoints.innerHTML = 'all points are distinct';
+					self.doublePointsButton.disabled = true;
+				}
+
+			};
+			update();
+			EDITOR.PointSetModifier.registerChangeListener( update, window );
+
+		} else {
+
+			this.list.style.display = 'none';
+
+		}
 
 	}
 

@@ -98,8 +98,11 @@ EDITOR.PointSetListEntry = function ( parent ) {
 	var onDelete = function ( event ) {
 		event.stopPropagation();
 		self.store.entries[ self.index ].pointSet.clear();
-		self.store.entries.splice( self.index, 1 );
+		var x = self.store.entries.splice( self.index, 1 )[ 0 ];
 		EDITOR.setList.update();
+		if ( x.viewSelected ) {
+			EDITOR.PointSetModifier.set( null );
+		}
 	};
 	this.deleteButton.addEventListener( 'click', onDelete, false );
 

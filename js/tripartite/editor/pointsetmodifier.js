@@ -16,15 +16,17 @@ EDITOR.PointSetModifier = {
 			modifier.deactivate();
 		} );
 
-		pointSet.forEach( function ( point, index ) {
-			if ( self.pointModifiers[ index ] === undefined ) {
-				var modifier = new EDITOR.PointModifier();
-				modifier.set( point );
-				self.pointModifiers.push( modifier );
-			} else {
-				self.pointModifiers[ index ].set( point );
-			}
-		} );
+		if ( pointSet !== null ) {
+			pointSet.forEach( function ( point, index ) {
+				if ( self.pointModifiers[ index ] === undefined ) {
+					var modifier = new EDITOR.PointModifier();
+					modifier.set( point );
+					self.pointModifiers.push( modifier );
+				} else {
+					self.pointModifiers[ index ].set( point );
+				}
+			} );
+		}
 
 		this.onSet();
 
