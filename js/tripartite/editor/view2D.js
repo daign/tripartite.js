@@ -68,6 +68,11 @@ EDITOR.View2D.prototype = {
 				setPosition();
 				modifier.registerListener( setPosition );
 
+				modifier.registerDestructor( function () {
+					point2D.setVisibility( false );
+					point2D.modifier = undefined;
+				} );
+
 				index++;
 
 			}
@@ -75,7 +80,7 @@ EDITOR.View2D.prototype = {
 		} );
 
 		while ( index < this.points.length ) {
-			this.points[ index ].node.style.display = 'none';
+			this.points[ index ].setVisibility( false );
 			index++;
 		}
 
@@ -89,7 +94,7 @@ EDITOR.View2D.prototype = {
 			return point2D;
 		} else {
 			var point2D = this.points[ index ];
-			point2D.node.style.display = 'block';
+			point2D.setVisibility( true );
 			return point2D;
 		}
 

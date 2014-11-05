@@ -78,6 +78,12 @@ EDITOR.View2DPoint.prototype = {
 
 		this.pointDot.style.fill = color;
 
+	},
+
+	setVisibility: function ( b ) {
+
+		this.node.style.display = ( b ? 'block' : 'none' );
+
 	}
 
 };

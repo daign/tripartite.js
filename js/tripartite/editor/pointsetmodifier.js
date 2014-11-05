@@ -58,6 +58,26 @@ EDITOR.PointSetModifier = {
 		this.changeListeners.forEach( function ( callback ) {
 			callback();
 		} );
+	},
+
+	removeDoublePoints: function () {
+
+		for ( var i = 0; i < this.pointModifiers.length; i++ ) {
+			for ( var j = i+1; j < this.pointModifiers.length; j++ ) {
+				if (
+					   this.pointModifiers[ i ].active
+					&& this.pointModifiers[ j ].active
+					&& this.pointModifiers[ i ].point.equals( this.pointModifiers[ j ].point )
+				) {
+					var point = this.pointModifiers[ j ].point;
+					this.pointModifiers[ j ].deactivate();
+					this.pointSet.removePoint( point );
+				}
+			}
+		}
+
+		this.onChange();
+
 	}
 
 };

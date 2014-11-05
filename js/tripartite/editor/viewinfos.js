@@ -23,8 +23,7 @@ EDITOR.ViewInfos = function ( node ) {
 	this.doublePointsButton.type = 'button';
 	this.doublePointsButton.value = 'Remove double points';
 	var onRemoveDoublePoints = function () {
-		EDITOR.PointSetModifier.pointSet.removeDoublePoints();
-		EDITOR.PointSetModifier.set( EDITOR.PointSetModifier.pointSet );
+		EDITOR.PointSetModifier.removeDoublePoints();
 	};
 	this.doublePointsButton.addEventListener( 'click', onRemoveDoublePoints, false );
 	doublePoints2.appendChild( this.doublePointsButton );

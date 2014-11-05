@@ -3,6 +3,7 @@ EDITOR.PointModifier = function () {
 	this.active = false;
 	this.point = undefined;
 	this.listeners = [];
+	this.destructors = [];
 	this.snapshot = new THREE.Vector3();
 
 };
@@ -20,9 +21,17 @@ EDITOR.PointModifier.prototype = {
 		this.listeners.push( callback );
 	},
 
+	registerDestructor: function ( callback ) {
+		this.destructors.push( callback );
+	},
+
 	deactivate: function () {
 		this.active = false;
 		this.point = undefined;
+		this.destructors.forEach( function ( callback ) {
+			callback();
+		} );
+		this.destructors = [];
 		this.listeners = [];
 	},
 
