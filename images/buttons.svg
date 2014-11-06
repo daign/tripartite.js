@@ -4,7 +4,7 @@
 <svg	xmlns="http://www.w3.org/2000/svg"
 		version="1.1"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
-		viewBox="0,0,60,20">
+		viewBox="0,0,80,40">
 
 	<title>Buttons</title>
 
@@ -12,28 +12,85 @@
 		.bgRed { fill: #f55; }
 		.bgGreen { fill: #5c3; }
 		.bgBlue { fill: #39d; }
+		.bgGrey { fill: #666; }
+		.bgWhite { fill: #eee; }
 		.icon { fill: #eee; stroke: #eee; stroke-width: 0.5px; stroke-linejoin: round; }
 		.iconLine { fill: none; stroke: #eee; stroke-width: 1px; stroke-linejoin: round; stroke-linecap: round; }
 		.redLine { fill: none; stroke: #f55; stroke-width: 0.8px; stroke-linecap: round; }
 	</style>
 
-	<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgRed" />
-	<rect x="21" y="1" rx="4" ry="4" width="18" height="18" class="bgGreen" />
-	<rect x="41" y="1" rx="4" ry="4" width="18" height="18" class="bgBlue" />
+	<!-- Delete -->
+	<g>
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgRed" />
+		<path d="M 5,8 l 10,0 -2,8 -6,0 Z" class="icon" />
+		<path d="M 5,5 l 4,0 0,-1 2,0 0,1 4,0 0,1 -10,0 Z" class="icon" transform="rotate(10,10,5)" />
+		<path d="M 7,9.5 l 1,5" class="redLine" />
+		<path d="M 10,9.5 l 0,5" class="redLine" />
+		<path d="M 13,9.5 l -1,5" class="redLine" />
+	</g>
 
-	<path d="M 5,8 l 10,0 -2,8 -6,0 Z" class="icon" />
-	<path d="M 5,5 l 4,0 0,-1 2,0 0,1 4,0 0,1 -10,0 Z" class="icon" transform="rotate(10,10,5)" />
-	<path d="M 7,9.5 l 1,5" class="redLine" />
-	<path d="M 10,9.5 l 0,5" class="redLine" />
-	<path d="M 13,9.5 l -1,5" class="redLine" />
+	<!-- Download -->
+	<g transform="translate(20,0)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGreen" />
+		<path d="M 8,4 l 4,0 0,6 4,0 -6,6 -6,-6 4,0 Z" class="icon" />
+	</g>
 
-	<path d="M 28,4 l 4,0 0,6 4,0 -6,6 -6,-6 4,0 Z" class="icon" />
+	<!-- Duplicate -->
+	<g transform="translate(40,0)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgBlue" />
+		<path d="M 5,6 l 7,0 0,10 -7,0 0,-10" class="iconLine" />
+		<path d="M 8,6 l 0,-2 7,0 0,10 -3,0" class="iconLine" />
+		<path d="M 7,9 l 3,0" class="iconLine" />
+		<path d="M 7,11 l 3,0" class="iconLine" />
+		<path d="M 7,13 l 2,0" class="iconLine" />
+	</g>
 
-	<path d="M 45,6 l 7,0 0,10 -7,0 0,-10" class="iconLine" />
-	<path d="M 48,6 l 0,-2 7,0 0,10 -3,0" class="iconLine" />
-	<path d="M 47,9 l 3,0" class="iconLine" />
-	<path d="M 47,11 l 3,0" class="iconLine" />
-	<path d="M 47,13 l 2,0" class="iconLine" />
+	<!-- Eye -->
+	<g transform="translate(60,0)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGrey" />
+		<path d="M 3,10 q 7,-9,14,0 -7,9,-14,0 z" class="icon" />
+		<circle cx="10" cy="10" r="4" class="bgGrey" />
+		<circle cx="10" cy="10" r="3" class="bgWhite" />
+		<circle cx="10" cy="10" r="2" class="bgGrey" />
+		<path d="M 10,10 l -4,-2 2,-2 z" class="icon" />
+	</g>
+
+	<!-- Move -->
+	<g transform="translate(0,20)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGrey" />
+		<path d="M 10,3 l 2.5,2.5 -2,0 0,4 4,0 0,-2 2.5,2.5 -2.5,2.5 0,-2 -4,0 0,4 2,0 -2.5,2.5 -2.5,-2.5 2,0 0,-4 -4,0 0,2 -2.5,-2.5 2.5,-2.5 0,2 4,0 0,-4 -2,0 Z" class="icon" />
+	</g>
+
+	<!-- Pen -->
+	<g transform="translate(20,20)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGrey" />
+		<g transform="rotate(26.5,10,10)">
+			<path d="M 8,3 l 4,0 0,10 -2,4 -2,-4 0,-10" class="iconLine" />
+			<path d="M 8,5 l 4,0" class="iconLine" />
+			<path d="M 8,13 l 4,0" class="iconLine" />
+		</g>
+	</g>
+
+	<!-- Eraser -->
+	<g transform="translate(40,20)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGrey" />
+		<path d="M 4,9 l 8,-3 4,2 0,3 -8,3 -4,-2 0,-3" class="iconLine" />
+		<path d="M 4,9 l 4,2 0,3" class="iconLine" />
+		<path d="M 8,11 l 8,-3" class="iconLine" />
+		<path d="M 10,6.75 l 4,2 0,3" class="iconLine" />
+		<path d="M 12,6 l 4,2 0,3 -2,0.75 0,-3 -4,-2 Z" class="icon" />
+	</g>
+
+	<!-- Bucket -->
+	<g transform="translate(60,20)">
+		<rect x="1" y="1" rx="4" ry="4" width="18" height="18" class="bgGrey" />
+		<circle cx="10.5" cy="11" r="1" class="icon" />
+		<path d="M 10.5,11 l 0,-4.5 a 1,3,180,0,0,-2,0 l 0,0.5" class="iconLine" />
+		<g transform="rotate(26.5,10,10)">
+			<path d="M 5.5,14 l 0,-6 8,0 0,6 a 2,2,90,0,1,-2,2 l -4,0 a 2,2,90,0,1,-2,-2" class="iconLine" />
+			<path d="M 13.5,8 l 3,6 0,-2 q 0,-8,-7,-4 Z" class="icon" />
+		</g>
+	</g>
 
 </svg>
 
