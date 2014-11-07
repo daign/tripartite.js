@@ -148,6 +148,20 @@ label {
 	top: 24px;
 	cursor: pointer;
 }
+.toolbar {
+	position: absolute;
+	width: 30px;
+	left: 10px;
+	top: 10px;
+}
+.toolbarButton {
+	width: 28px;
+	height: 28px;
+	border: 1px solid #666;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-bottom: 2px;
+}
 .viewNode {
 	position: absolute;
 	background: #000;

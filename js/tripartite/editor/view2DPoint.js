@@ -31,39 +31,50 @@ EDITOR.View2DPoint = function ( view ) {
 		event.preventDefault();
 		event.stopPropagation();
 
-		vector0.setFromEvent( event );
-		self.modifier.snap();
+		if ( EDITOR.TOOLBAR.mode === 'ERASE' ) {
 
-		var cancelSelect = function ( event ) {
-			event.preventDefault();
-			event.stopPropagation();
-		};
+			var point = self.modifier.point;
+			self.modifier.deactivate();
+			EDITOR.PointSetModifier.pointSet.removePoint( point );
+			EDITOR.PointSetModifier.onChange();
 
-		var continueDrag = function ( event ) {
-			event.preventDefault();
-			event.stopPropagation();
-			vectorT.setFromEvent( event );
-			vectorT.sub( vector0 );
-			offset.x = vectorT.x * 100 / self.view.height;
-			if ( self.view.direction === 'top' ) {
-				offset.z = vectorT.y * 100 / self.view.height;
-				offset.y = 0;
-			} else {
-				offset.y = vectorT.y * 100 / self.view.height;
-				offset.z = 0;
-			}
-			self.modifier.drag( offset );
-		};
+		} else {
 
-		var endDrag = function () {
-			document.removeEventListener( 'selectstart', cancelSelect, false );
-			document.removeEventListener( 'mousemove',   continueDrag, false );
-			document.removeEventListener( 'mouseup',     endDrag,      false );
-		};
+			vector0.setFromEvent( event );
+			self.modifier.snap();
 
-		document.addEventListener( 'selectstart', cancelSelect, false );
-		document.addEventListener( 'mousemove',   continueDrag, false );
-		document.addEventListener( 'mouseup',     endDrag,      false );
+			var cancelSelect = function ( event ) {
+				event.preventDefault();
+				event.stopPropagation();
+			};
+
+			var continueDrag = function ( event ) {
+				event.preventDefault();
+				event.stopPropagation();
+				vectorT.setFromEvent( event );
+				vectorT.sub( vector0 );
+				offset.x = vectorT.x * 100 / self.view.height;
+				if ( self.view.direction === 'top' ) {
+					offset.z = vectorT.y * 100 / self.view.height;
+					offset.y = 0;
+				} else {
+					offset.y = vectorT.y * 100 / self.view.height;
+					offset.z = 0;
+				}
+				self.modifier.drag( offset );
+			};
+
+			var endDrag = function () {
+				document.removeEventListener( 'selectstart', cancelSelect, false );
+				document.removeEventListener( 'mousemove',   continueDrag, false );
+				document.removeEventListener( 'mouseup',     endDrag,      false );
+			};
+
+			document.addEventListener( 'selectstart', cancelSelect, false );
+			document.addEventListener( 'mousemove',   continueDrag, false );
+			document.addEventListener( 'mouseup',     endDrag,      false );
+
+		}
 
 	};
 	this.pointHandle.addEventListener( 'mousedown', beginDrag, false );

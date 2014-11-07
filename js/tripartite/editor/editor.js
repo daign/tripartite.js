@@ -51,6 +51,10 @@ EDITOR = {
 		this.viewDiv.style.background = '#aaa';
 		this.node.appendChild( this.viewDiv );
 
+		var toolbarNode = document.createElement( 'div' );
+		EDITOR.TOOLBAR.setNode( toolbarNode );
+		this.viewDiv.appendChild( toolbarNode );
+
 		var viewNode1 = document.createElement( 'div' );
 		this.view1 = new EDITOR.View2D( viewNode1, 'top' );
 		this.viewDiv.appendChild( viewNode1 );
@@ -94,12 +98,14 @@ EDITOR = {
 		this.viewDiv.style.width = viewWidth + 'px';
 		this.viewDiv.style.height = height + 'px';
 
-		var nw = Math.max( 100, 0.5 * viewWidth - 7 );
+		EDITOR.TOOLBAR.resize( height );
+
+		var nw = Math.max( 100, 0.5 * viewWidth - 27 );
 		var nh = Math.max( 100, 0.5 * height - 7 );
-		this.view1.resize( nw, nh,    10,    10 );
-		this.view2.resize( nw, nh, nw+22,    10 );
-		this.view3.resize( nw, nh,    10, nh+22 );
-		this.view4.resize( nw, nh, nw+22, nh+22 );
+		this.view1.resize( nw, nh,    50,    10 );
+		this.view2.resize( nw, nh, nw+62,    10 );
+		this.view3.resize( nw, nh,    50, nh+22 );
+		this.view4.resize( nw, nh, nw+62, nh+22 );
 
 		this.addDialog.resize( window.innerWidth, window.innerHeight );
 
