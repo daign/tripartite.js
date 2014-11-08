@@ -149,7 +149,7 @@ GEOMETRY.PointSet.prototype = {
 	},
 
 	isValid: function () {
-		return ( this.hasEqualSizedGroups() && !this.hasDoublePoints() );
+		return ( this.hasEqualSizedGroups() && this.hasEnoughPoints() && !this.hasDoublePoints() );
 	},
 
 	hasEqualSizedGroups: function () {
@@ -170,6 +170,14 @@ GEOMETRY.PointSet.prototype = {
 
 		return true;
 
+	},
+
+	hasEnoughPoints: function () {
+		return (
+			   this.getGroupSize( 0 ) >= 2
+			&& this.getGroupSize( 1 ) >= 2
+			&& this.getGroupSize( 2 ) >= 2
+		);
 	},
 
 	hasDoublePoints: function () {

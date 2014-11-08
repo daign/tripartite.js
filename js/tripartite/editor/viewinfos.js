@@ -12,6 +12,8 @@ EDITOR.ViewInfos = function ( node ) {
 	this.list.appendChild( this.groupSize );
 	this.groupSizeValid = document.createElement( 'li' );
 	this.list.appendChild( this.groupSizeValid );
+	this.enoughPoints = document.createElement( 'li' );
+	this.list.appendChild( this.enoughPoints );
 	this.doublePoints = document.createElement( 'li' );
 	this.list.appendChild( this.doublePoints );
 
@@ -63,6 +65,10 @@ EDITOR.ViewInfos.prototype = {
 
 				self.groupSizeValid.innerHTML = (
 					pointSet.hasEqualSizedGroups() ? 'groups are equal sized' : 'groups are NOT equal sized (invalid)'
+				);
+
+				self.enoughPoints.innerHTML = (
+					pointSet.hasEnoughPoints() ? '2 or more points in every group' : 'less than 2 points in some groups (invalid)'
 				);
 
 				if ( pointSet.hasDoublePoints() ) {
