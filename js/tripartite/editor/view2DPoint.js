@@ -38,6 +38,8 @@ EDITOR.View2DPoint = function ( view ) {
 			EDITOR.PointSetModifier.pointSet.removePoint( point );
 			EDITOR.PointSetModifier.onChange();
 
+		} else if ( EDITOR.TOOLBAR.mode === 'DRAW' ) {
+
 		} else {
 
 			vector0.setFromEvent( event );

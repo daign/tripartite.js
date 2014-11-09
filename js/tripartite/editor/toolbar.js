@@ -39,6 +39,9 @@ EDITOR.TOOLBAR = {
 		this.tools.push( new ToolBarButton( 'tool-move.png', function () {
 			self.mode = 'MOVE';
 		} ).setActivation( true ) );
+		this.tools.push( new ToolBarButton( 'tool-pen.png', function () {
+			self.mode = 'DRAW';
+		} ) );
 		this.tools.push( new ToolBarButton( 'tool-eraser.png', function () {
 			self.mode = 'ERASE';
 		} ) );

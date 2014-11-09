@@ -12,6 +12,23 @@ EDITOR.View2D = function ( node, direction ) {
 	this.context.setAttribute( 'viewBox', '-1,-1,102,102' );
 	this.node.appendChild( this.context );
 
+	this.background = document.createElementNS( this.NS, 'rect' );
+	this.background.setAttribute( 'x', '-1' );
+	this.background.setAttribute( 'y', '-1' );
+	this.background.setAttribute( 'width', '102' );
+	this.background.setAttribute( 'height', '102' );
+	this.context.appendChild( this.background );
+
+	var onMouseDown = function ( event ) {
+		if ( EDITOR.TOOLBAR.mode === 'DRAW' && EDITOR.PointSetModifier.pointSet !== null ) {
+			var x = 0; // TODO: calculate these somehow from event data
+			var y = 0;
+			var z = 0;
+			EDITOR.PointSetModifier.addPoint( x, y, z );
+		}
+	};
+	this.background.addEventListener( 'mousedown', onMouseDown, false );
+
 	this.group = document.createElementNS( this.NS, 'g' );
 	this.context.appendChild( this.group );
 
