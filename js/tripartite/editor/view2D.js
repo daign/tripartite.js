@@ -19,12 +19,19 @@ EDITOR.View2D = function ( node, direction ) {
 	this.background.setAttribute( 'height', '102' );
 	this.context.appendChild( this.background );
 
+	var self = this;
 	var onMouseDown = function ( event ) {
 		if ( EDITOR.TOOLBAR.mode === 'DRAW' && EDITOR.PointSetModifier.pointSet !== null ) {
-			var x = 0; // TODO: calculate these somehow from event data
-			var y = 0;
-			var z = 0;
-			EDITOR.PointSetModifier.addPoint( x, y, z );
+			var minMeasure = Math.min( self.width, self.height );
+			var eventX = ( event.layerX || event.offsetX );
+			var eventY = ( event.layerY || event.offsetY );
+			var viewX = Math.max( 0, Math.min( 100, ( ( eventX - 0.5 * (self.width  - minMeasure) ) * 102 / minMeasure ) - 1 ) );
+			var viewY = Math.max( 0, Math.min( 100, ( ( eventY - 0.5 * (self.height - minMeasure) ) * 102 / minMeasure ) - 1 ) );
+			if ( self.direction === 'top' ) {
+				EDITOR.PointSetModifier.addPoint( viewX, 50, viewY );
+			} else {
+				EDITOR.PointSetModifier.addPoint( viewX, viewY, 50 );
+			}
 		}
 	};
 	this.background.addEventListener( 'mousedown', onMouseDown, false );
