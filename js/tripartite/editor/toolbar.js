@@ -47,6 +47,9 @@ EDITOR.TOOLBAR = {
 		this.tools.push( new ToolBarButton( 'tool-pen.png', function () {
 			self.mode = 'DRAW';
 		} ) );
+		this.tools.push( new ToolBarButton( 'tool-bucket.png', function () {
+			self.mode = 'FILL';
+		} ) );
 		this.tools.push( new ToolBarButton( 'tool-eraser.png', function () {
 			self.mode = 'ERASE';
 		} ) );

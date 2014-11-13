@@ -85,16 +85,15 @@ EDITOR.View2D.prototype = {
 			if ( modifier.active ) {
 
 				var point = modifier.point;
-				var g = point.group;
 
 				var point2D = self.get2DPoint( index );
 				point2D.modifier = modifier;
-				point2D.setColor( self.colors[ g ] );
 
 				var setPosition = function () {
 					var x = point.coords.x;
 					var y = ( ( self.direction === 'top' ) ? point.coords.z : point.coords.y );
 					point2D.node.setAttribute( 'transform', 'translate(' + x + ',' + y + ')' );
+					point2D.setColor( self.colors[ point.group ] );
 				};
 				setPosition();
 				modifier.registerListener( setPosition );

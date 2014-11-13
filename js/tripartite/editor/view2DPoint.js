@@ -40,6 +40,10 @@ EDITOR.View2DPoint = function ( view ) {
 
 		} else if ( EDITOR.TOOLBAR.mode === 'DRAW' ) {
 
+		} else if ( EDITOR.TOOLBAR.mode === 'FILL' ) {
+
+			self.modifier.setColor( EDITOR.TOOLBAR.color );
+
 		} else {
 
 			vector0.setFromEvent( event );

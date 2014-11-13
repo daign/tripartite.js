@@ -26,14 +26,8 @@ EDITOR.View3D = function ( node ) {
 	controls.addEventListener( 'change', render );
 	controls.update();
 
-	this.points = [
-		new THREE.Object3D(),
-		new THREE.Object3D(),
-		new THREE.Object3D()
-	];
-	this.points.forEach( function ( element ) {
-		scene.add( element );
-	} );
+	this.points = new THREE.Object3D();
+	scene.add( this.points );
 
 	var viewCaption = document.createElement( 'div' );
 	viewCaption.setAttribute( 'class', 'viewCaption' );
@@ -66,47 +60,42 @@ EDITOR.View3D.prototype = {
 	loadPointSet: function () {
 
 		var self = this;
-		var indices = [ 0, 0, 0 ];
+		var index = 0;
 
 		EDITOR.PointSetModifier.forEach( function ( modifier ) {
 
 			if ( modifier.active ) {
 
 				var point = modifier.point;
-				var g = point.group;
-				var index = indices[ g ];
 				var mesh = undefined;
 
-				if ( self.points[ g ].children.length <= index ) {
+				if ( self.points.children.length <= index ) {
 					var geometry = new THREE.SphereGeometry( 1, 16, 16 );
-					mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ g ] );
-					self.points[ g ].add( mesh );
+					mesh = new THREE.Mesh( geometry, VISUALISATION.MATERIALS.pointMaterialsEditor[ point.group ] );
+					self.points.add( mesh );
 				} else {
-					mesh = self.points[ g ].children[ index ];
+					mesh = self.points.children[ index ];
 					mesh.visible = true;
 				}
 
 				var setPosition = function () {
 					mesh.position = point.coords;
+					mesh.material = VISUALISATION.MATERIALS.pointMaterialsEditor[ point.group ];
 					self.render();
 				};
 				setPosition();
 				modifier.registerListener( setPosition );
 
-				indices[ g ]++;
+				index++;
 
 			}
 
 		} );
 
-		this.points.forEach( function ( element, index ) {
-
-			while ( indices[ index ] < element.children.length ) {
-				element.children[ indices[ index ] ].visible = false;
-				indices[ index ]++;
-			}
-
-		} );
+		while ( index < this.points.children.length ) {
+			this.points.children[ index ].visible = false;
+			index++;
+		}
 
 		this.render();
 

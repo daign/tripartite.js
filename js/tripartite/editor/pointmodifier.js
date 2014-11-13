@@ -49,6 +49,16 @@ EDITOR.PointModifier.prototype = {
 			} );
 			EDITOR.PointSetModifier.onChange();
 		}
+	},
+
+	setColor: function ( color ) {
+
+		this.point.group = color;
+		this.listeners.forEach( function ( callback ) {
+			callback();
+		} );
+		EDITOR.PointSetModifier.onChange();
+
 	}
 
 };
