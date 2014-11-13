@@ -25,8 +25,8 @@ EDITOR.View2D = function ( node, direction ) {
 			var minMeasure = Math.min( self.width, self.height );
 			var eventX = ( event.layerX || event.offsetX );
 			var eventY = ( event.layerY || event.offsetY );
-			var viewX = Math.max( 0, Math.min( 100, ( ( eventX - 0.5 * (self.width  - minMeasure) ) * 102 / minMeasure ) - 1 ) );
-			var viewY = Math.max( 0, Math.min( 100, ( ( eventY - 0.5 * (self.height - minMeasure) ) * 102 / minMeasure ) - 1 ) );
+			var viewX = Math.max( 0, Math.min( 100, ( 102*eventX - 51*self.width + 50*minMeasure ) / minMeasure ) );
+			var viewY = Math.max( 0, Math.min( 100, ( 102*eventY - 51*self.height + 50*minMeasure ) / minMeasure ) );
 			if ( self.direction === 'top' ) {
 				EDITOR.PointSetModifier.addPoint( viewX, 50, viewY );
 			} else {
