@@ -5,6 +5,9 @@ EDITOR.TOOLBAR = {
 	tools: [],
 	listeners: [],
 
+	color: 0,
+	colors: [],
+
 	setNode: function ( node ) {
 
 		this.node = node;
@@ -48,6 +51,38 @@ EDITOR.TOOLBAR = {
 			self.mode = 'ERASE';
 		} ) );
 
+		var spacer = document.createElement( 'div' );
+		spacer.setAttribute( 'class', 'toolbarSpacer' );
+		this.node.appendChild( spacer );
+
+		var ColorButton = function ( colorID ) {
+			this.div = document.createElement( 'div' );
+			this.div.setAttribute( 'class', 'toolbarColor' );
+			var colorCodes = [ '#cc0000', '#ffcc00', '#006600' ];
+			this.div.style.background = colorCodes[ colorID ];
+			this.setActivation( false );
+			self.node.appendChild( this.div );
+
+			var buttonSelf = this;
+			this.div.addEventListener( 'click', function () {
+				self.deactivateAllColors();
+				buttonSelf.setActivation( true );
+				self.color = colorID;
+			}, false );
+		};
+		ColorButton.prototype = {
+			constructor: ColorButton,
+			setActivation: function ( b ) {
+				this.div.style.borderColor = ( b ? '#fff' : '#999' );
+				this.div.style.opacity = ( b ? 1 : 0.6 );
+				return this;
+			}
+		};
+
+		this.colors.push( new ColorButton( 0 ).setActivation( true ) );
+		this.colors.push( new ColorButton( 1 ) );
+		this.colors.push( new ColorButton( 2 ) );
+
 	},
 
 	resize: function ( height ) {
@@ -57,6 +92,12 @@ EDITOR.TOOLBAR = {
 	deactivateAll: function () {
 		this.tools.forEach( function ( tool ) {
 			tool.setActivation( false );
+		} );
+	},
+
+	deactivateAllColors: function () {
+		this.colors.forEach( function ( color ) {
+			color.setActivation( false );
 		} );
 	},
 

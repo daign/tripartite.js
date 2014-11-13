@@ -82,7 +82,7 @@ EDITOR.PointSetModifier = {
 
 	addPoint: function ( x, y, z ) {
 
-		var group = 0; // TODO: input for user to choose point color needed
+		var group = EDITOR.TOOLBAR.color;
 		var point = new GEOMETRY.Point( new THREE.Vector3( x, y, z ), group );
 		this.pointSet.points.push( point );
 

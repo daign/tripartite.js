@@ -162,6 +162,17 @@ label {
 	cursor: pointer;
 	margin-bottom: 2px;
 }
+.toolbarSpacer {
+	width: 28px;
+	height: 18px;
+}
+.toolbarColor {
+	margin: 4px;
+	width: 18px;
+	height: 18px;
+	border: 2px solid #999;
+	border-radius: 20px;
+}
 .viewNode {
 	position: absolute;
 	background: #000;
