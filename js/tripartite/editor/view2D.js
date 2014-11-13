@@ -1,5 +1,7 @@
 EDITOR.View2D = function ( node, direction ) {
 
+	var self = this;
+
 	this.direction = direction;
 	this.width = undefined;
 	this.height = undefined;
@@ -17,9 +19,14 @@ EDITOR.View2D = function ( node, direction ) {
 	this.background.setAttribute( 'y', '-1' );
 	this.background.setAttribute( 'width', '102' );
 	this.background.setAttribute( 'height', '102' );
+	this.background.setAttribute( 'class', 'viewBackground' );
+	this.background.style.display = 'none';
 	this.context.appendChild( this.background );
 
-	var self = this;
+	EDITOR.TOOLBAR.addListener( function () {
+		self.background.style.display = ( EDITOR.TOOLBAR.mode === 'DRAW' ? 'block' : 'none' );
+	} );
+
 	var onMouseDown = function ( event ) {
 		if ( EDITOR.TOOLBAR.mode === 'DRAW' && EDITOR.PointSetModifier.pointSet !== null ) {
 			var minMeasure = Math.min( self.width, self.height );

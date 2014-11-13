@@ -3,6 +3,7 @@ EDITOR.TOOLBAR = {
 	node: undefined,
 	mode: 'MOVE',
 	tools: [],
+	listeners: [],
 
 	setNode: function ( node ) {
 
@@ -26,6 +27,7 @@ EDITOR.TOOLBAR = {
 				self.deactivateAll();
 				buttonSelf.setActivation( true );
 				callback();
+				self.callListeners();
 			}, false );
 		};
 		ToolBarButton.prototype = {
@@ -55,6 +57,16 @@ EDITOR.TOOLBAR = {
 	deactivateAll: function () {
 		this.tools.forEach( function ( tool ) {
 			tool.setActivation( false );
+		} );
+	},
+
+	addListener: function ( callback ) {
+		this.listeners.push( callback );
+	},
+
+	callListeners: function () {
+		this.listeners.forEach( function ( callback ) {
+			callback();
 		} );
 	}
 

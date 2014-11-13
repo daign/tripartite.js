@@ -177,6 +177,10 @@ label {
 	color: #666;
 	font-size: 12px;
 }
+.viewBackground {
+	fill: #111;
+	cursor: url(../images/tool-pen.png) 7 24, auto;
+}
 .dialogNode {
 	position: absolute;
 	top: 0px;
