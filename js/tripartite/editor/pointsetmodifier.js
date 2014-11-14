@@ -86,12 +86,25 @@ EDITOR.PointSetModifier = {
 		var point = new GEOMETRY.Point( new THREE.Vector3( x, y, z ), group );
 		this.pointSet.points.push( point );
 
-		var modifier = new EDITOR.PointModifier(); // TODO: reuse if unused PointModifiers available
+		var modifier = this.getNextEmptyModifier();
 		modifier.set( point );
-		this.pointModifiers.push( modifier );
 
 		this.onSet(); // TODO: find solution to add point to view without rebuilding the whole view
 		this.onChange();
+
+	},
+
+	getNextEmptyModifier: function () {
+
+		for ( var i = 0; i < this.pointModifiers.length; i++ ) {
+			if ( !this.pointModifiers[ i ].active ) {
+				return this.pointModifiers[ i ];
+			}
+		}
+
+		var modifier = new EDITOR.PointModifier();
+		this.pointModifiers.push( modifier );
+		return modifier;
 
 	}
 
