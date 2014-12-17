@@ -112,8 +112,8 @@ PAGES.SETTINGS = {
 			[ 'strategySwapIntersecting',           'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',        'Strategy Swap Intersecting BFS' ],
 			[ 'strategySwapIntersectingPartnerBFS', 'Strategy Swap Intersecting Partner BFS' ],
-			[ 'aStarRandomNeighbors',               'A Star Random Neighbors' ],
-			[ 'aStarIntersectingNeighbors',         'A Star Intersecting Neighbors' ],
+			[ 'bestFirstRandomNeighbors',           'Best First Search Random Neighbors' ],
+			[ 'bestFirstIntersectingNeighbors',     'Best First Search Intersecting Neighbors' ],
 			[ 'randomSwap',                         'Random' ],
 			[ 'none',                               'None' ]
 		] );
@@ -274,8 +274,8 @@ PAGES.SETTINGS = {
 			[ 'strategySwapIntersecting',           'Strategy Swap Intersecting' ],
 			[ 'strategySwapIntersectingBFS',        'Strategy Swap Intersecting BFS' ],
 			[ 'strategySwapIntersectingPartnerBFS', 'Strategy Swap Intersecting Partner BFS' ],
-		//  [ 'aStarRandomNeighbors',               'A Star Random Neighbors' ],
-			[ 'aStarIntersectingNeighbors',         'A Star Intersecting Neighbors' ]
+		//  [ 'bestFirstRandomNeighbors',           'Best First Search Random Neighbors' ],
+			[ 'bestFirstIntersectingNeighbors',     'Best First Search Intersecting Neighbors' ]
 		] );
 		this.sel7.node.style.height = '100px';
 

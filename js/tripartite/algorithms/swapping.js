@@ -235,9 +235,9 @@ ALGORITHMS.SWAPPING = {
 		}
 	},
 
-	aStarRandomNeighbors: {
-		description: 'Swapping with A star search, choosing neighbors randomly',
-		shortcut: 's.AR',
+	bestFirstRandomNeighbors: {
+		description: 'Swapping with best first search, choosing neighbors randomly',
+		shortcut: 's.BR',
 		initialise: function () {
 			TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
 			TRIANGLES.storeCurrent();
@@ -278,9 +278,9 @@ ALGORITHMS.SWAPPING = {
 
 	},
 
-	aStarIntersectingNeighbors: {
-		description: 'Swapping with A star search, choosing neighbors from intersections',
-		shortcut: 's.AI',
+	bestFirstIntersectingNeighbors: {
+		description: 'Swapping with best first search, choosing neighbors from intersections',
+		shortcut: 's.BI',
 		initialise: function () {
 			TRIANGLES.store.setHashingFunction( ALGORITHMS.HASHING.countingHash.get );
 			TRIANGLES.storeCurrent();
